@@ -18,7 +18,7 @@ class CreateAudiosTable extends Migration
             $table->bigInteger('course_id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->string('file_audio');
+            $table->string('file_audio')->nullable();
             $table->timestamps();
         });
     }

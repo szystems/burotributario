@@ -131,7 +131,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label for="">{{ __('Name') }}</label>
-                                                <input type="text" class="form-control border px-2 " name="name" value="{{ old('name') }}" >
+                                                <input type="text" class="form-control border px-2 " name="name" value="{{ old('name') }}"  required>
                                                 @if ($errors->has('name'))
                                                     <span class="help-block opacity-7">
                                                             <strong>
@@ -155,7 +155,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label for="">{{ __('Video') }}</label>
-                                                <input type="file" name="file_video" class="form-control border">
+                                                <input type="file" name="file_video" class="form-control border" required>
                                                 @if ($errors->has('file_video'))
                                                     <span class="help-block opacity-7">
                                                             <strong>
@@ -277,7 +277,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label for="">{{ __('Name') }}</label>
-                                                <input type="text" class="form-control border px-2 " name="name" value="{{ old('name') }}" >
+                                                <input type="text" class="form-control border px-2 " name="name" value="{{ old('name') }}" required>
                                                 @if ($errors->has('name'))
                                                     <span class="help-block opacity-7">
                                                             <strong>
@@ -301,7 +301,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label for="">{{ __('Audio') }}</label>
-                                                <input type="file" name="file_audio" class="form-control border">
+                                                <input type="file" name="file_audio" class="form-control border" required>
                                                 @if ($errors->has('file_audio'))
                                                     <span class="help-block opacity-7">
                                                             <strong>

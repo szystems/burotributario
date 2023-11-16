@@ -27,7 +27,7 @@ class AudioFormRequest extends FormRequest
             'name'=>'required',
             'description'=>'nullable',
             'image'=>'mimes:jpg,jpeg,bmp,png|max:3000',
-            'file_audio'=>'required|mimetypes:audio/mp3,audio/mp4,audio/mpeg,audio/mpeg4,audio/aac,audio/wav',
+            'file_audio'=>'mimetypes:audio/mp3,audio/mp4,audio/mpeg,audio/mpeg4,audio/aac,audio/wav',
         ];
     }
 }

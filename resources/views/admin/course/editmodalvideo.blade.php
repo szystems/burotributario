@@ -16,7 +16,7 @@
 
                 <div class="col-md-12 mb-3">
                     <label for="">{{ __('Name') }}</label>
-                    <input type="text" class="form-control border px-2 " name="name" value="{{ $video->name }}">
+                    <input type="text" class="form-control border px-2 " name="name" value="{{ $video->name }}" required>
                     @if ($errors->has('name'))
                         <span class="help-block opacity-7">
                                 <strong>

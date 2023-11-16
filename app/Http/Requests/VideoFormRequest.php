@@ -27,7 +27,7 @@ class VideoFormRequest extends FormRequest
             'name'=>'required',
             'description'=>'nullable',
             'image'=>'mimes:jpg,jpeg,bmp,png|max:3000',
-            'file_video'=>'required|mimetypes:video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv',
+            'file_video'=>'mimetypes:video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv',
         ];
     }
 }
