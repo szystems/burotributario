@@ -86,6 +86,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('delete-course/{id}', [CourseController::class, 'destroy']);
 
     //Admin Video
+    Route::get('add-video/{id}', [VideoController::class, 'add']);
     Route::post('insert-video', [VideoController::class, 'insert']);
     Route::put('update-video/{id}', [VideoController::class, 'update']);
     Route::get('delete-video/{id}', [VideoController::class, 'destroy']);

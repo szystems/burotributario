@@ -32,6 +32,13 @@ class VideoController extends Controller
         $video->save();
 
         return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
+        // return \response()->json(['success'=>'Video Added Succesfully']);
+    }
+
+    public function add($id)
+    {
+        $course = Course::find($id);
+        return view('admin.course.addvideo', compact('course'));
     }
 
     public function update(VideoFormRequest $request, $id)

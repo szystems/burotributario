@@ -1,5 +1,25 @@
 @extends('layouts.admin')
 
+<style>
+
+    .progress {
+        position:relative;
+        width:50%;
+        background-color: #c9cfc9;
+    }
+    .bar {
+        background-color: #00ff00;
+        width:0%;
+        height:20px;
+    }
+    .percent {
+        position:absolute;
+        display:inline-block;
+        left:50%;
+        color: #040608;
+    }
+</style>
+
 @section('content')
     <div class="row">
 
@@ -117,6 +137,13 @@
                         </div>
 
                         <div class="card-body p-4 pt-5">
+                            <a href="{{ url('add-video/'.$course->id) }}" class="btn btn-success">
+                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Video') }}
+                            </a>
+
+                        </div>
+
+                        {{-- <div class="card-body p-4 pt-5">
 
                             <p>
                                 <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -125,7 +152,7 @@
                             </p>
                             <div class="collapse" id="collapseExample">
                                 <div class="card card-body">
-                                    <form action="{{ url('insert-video') }}" method="POST" enctype="multipart/form-data">
+                                    <form class="formvideo" action="{{ url('insert-video') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
 
@@ -163,6 +190,11 @@
                                                             </strong>
                                                     </span>
                                                 @endif
+                                                <br>
+                                                <div class="col-md-12 mb-3 progress">
+                                                    <div class="bar"></div>
+                                                    <div class="percent">0%</div>
+                                                </div>
                                             </div>
 
                                             <div class="col-md-12 mb-3" >
@@ -176,7 +208,7 @@
                             </div>
 
 
-                        </div>
+                        </div> --}}
 
                         <div class="card-body p-4 pt-5">
                             @if ($videos->count() == 0)
@@ -226,7 +258,7 @@
                                                     <td class="align-middle text-center text-sm"><strong>{{ $created_at }}</strong></td>
                                                     <td class="align-middle text-sm">
                                                         {{-- <a href="{{ url('show-video/'.$inscription->id) }}" type="button" class="btn btn-info"><i class="material-icons">visibility</i></a> --}}
-                                                        {{-- <a href="{{ url('edit-video/'.$video->id) }}" type="button" class="btn btn-warning"><i class="material-icons">edit</i></a> --}}
+                                                        {{-- <a href="{{ url('add-video/'.$video->id) }}" type="button" class="btn btn-success"><i class="material-icons">edit</i></a> --}}
                                                         <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#editModalVideo-{{ $video->id }}">
                                                             <i class="material-icons">edit</i>
                                                         </button>
@@ -399,4 +431,37 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            var bar = $(".bar");
+            var percent = $(".percent");
+
+            $('form').ajaxForm({
+
+                beforeSend:function(){
+                    var percenVal = '0%';
+                    bar.width(percenVal);
+                    percent.html(percenVal);
+                },
+                uploadProgress:function(event, position, total, percentComplete){
+                    var percenVal = percentComplete+'%';
+                    bar.width(percenVal);
+                    percent.html(percenVal);
+                },
+
+                complete:function(res){
+                    console.log(res);
+                    alert("Archivo subido exitosamente!")
+                }
+            });
+        });
+
+    </script>
+
+
     @endsection
