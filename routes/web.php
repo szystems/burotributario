@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\CategoryCourseController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\AudioController;
 
 //user
 use App\Http\Controllers\Frontend\FrontendController;
@@ -84,16 +86,14 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('delete-course/{id}', [CourseController::class, 'destroy']);
 
     //Admin Video
-    Route::post('insert-video', [CourseController::class, 'insertvideo']);
-    Route::get('edit-video/{id}',[CourseController::class,'editvideo']);
-    Route::put('update-video/{id}', [CourseController::class, 'updatevideo']);
-    Route::get('delete-video/{id}', [CourseController::class, 'destroyvideo']);
+    Route::post('insert-video', [VideoController::class, 'insert']);
+    Route::put('update-video/{id}', [VideoController::class, 'update']);
+    Route::get('delete-video/{id}', [VideoController::class, 'destroy']);
 
     //Admin Audio
-    Route::post('insert-audio', [CourseController::class, 'insertaudio']);
-    Route::get('edit-audio/{id}',[CourseController::class,'editaudio']);
-    Route::put('update-audio/{id}', [CourseController::class, 'updateaudio']);
-    Route::get('delete-audio/{id}', [CourseController::class, 'destroyaudio']);
+    Route::post('insert-audio', [AudioController::class, 'insert']);
+    Route::put('update-audio/{id}', [AudioController::class, 'update']);
+    Route::get('delete-audio/{id}', [AudioController::class, 'destroy']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);

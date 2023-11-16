@@ -160,29 +160,37 @@ class CourseController extends Controller
 
     public function destroy($id)
     {
+
         $course = Course::find($id);
-        $course->status = 0;
-        $course->update();
-        return redirect('index-courses')->with('status',__('Course Deleted Successfully'));
-    }
-
-    public function insertvideo(VideoFormRequest $request)
-    {
-        $video = new Video();
-        if($request->hasFile('file_video'))
-        {
-            $file = $request->file('file_video');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
-            $file->move('assets/uploads/videos',$filename);
-            $video->file_video = $filename;
+        $path = 'assets/uploads/courses/'.$course->image;
+        if(File::exists($path))
+            {
+                File::delete($path);
+            }
+        //borrar videos
+        $videos = Video::where('course_id',$course->id)->get();
+        foreach ($videos as $video){
+            $path = 'assets/uploads/videos/'.$video->file_video;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $video->delete();
         }
+        //borrar audios
+        $audios = Audio::where('course_id',$course->id)->get();
+        foreach ($audios as $audio){
+            $path = 'assets/uploads/audios/'.$audio->file_audio;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $audio->delete();
+        }
+        //borrar curso
+        $course->delete();
 
-        $video->course_id = $request->input('course_id');
-        $video->name = $request->input('name');
-        $video->description = $request->input('description');
-        $video->save();
 
-        return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
+        return redirect('index-courses')->with('status',__('Course Deleted Successfully'));
     }
 }

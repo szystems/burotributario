@@ -10,6 +10,7 @@
         </div>
         <form action="{{ url('update-video/'.$video->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="modal-body" align="center">
                 <br>
 
@@ -37,7 +38,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="">{{ __('Change Video') }}</label>
-                    <input type="file" name="image" class="form-control border">
+                    <input type="file" name="file_video" class="form-control border">
                 </div>
                 @if ($video->file_video)
                 <div class="col-md-9 mb-3">
@@ -52,9 +53,9 @@
 
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="inscription_id" value="{{ $video->id }}">
+                <input type="hidden" name="course_id" value="{{ $course->id }}">
                 <button type="button" class="btn bg-gradient-info" data-bs-dismiss="modal"><i class="material-icons">close</i> {{ __('Cancel') }}</button>
-                <button type="submit" class="btn btn-success"><i class="material-icons">payments</i> {{ __('Save') }}</button>
+                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
             </div>
         </form>
       </div>

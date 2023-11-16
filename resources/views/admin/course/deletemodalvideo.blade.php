@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn bg-gradient-info" data-bs-dismiss="modal"><i class="material-icons">close</i> {{ __('Cancel') }}</button>
-          <a href="{{ url('delete-course/'.$course->id) }}" type="button" class="btn bg-gradient-danger"><i class="material-icons">delete</i> {{ __('Delete') }}</a>
+          <a href="{{ url('delete-video/'.$video->id) }}" type="button" class="btn bg-gradient-danger"><i class="material-icons">delete</i> {{ __('Delete') }}</a>
         </div>
       </div>
     </div>

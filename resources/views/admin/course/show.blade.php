@@ -19,6 +19,15 @@
                 </div>
                 <div class="card-body p-3 pt-2">
                     <h4><u>{{ __('Show') }} {{ __('Course') }}</u></h4>
+                    @if (count($errors)>0)
+                        <div class="alert alert-danger text-white" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                      <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div>
                         <a href="{{ url('edit-course/'.$course->id) }}" type="button" class="btn btn-warning"><i class="material-icons">edit</i></a>
                         <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $course->id }}">
@@ -303,6 +312,7 @@
                                             </div>
 
                                             <div class="col-md-12 mb-3" >
+                                                <input type="hidden" name="course_id" value="{{ $course->id }}">
                                                 <button type="submit" class="btn btn-info float-end"><i class="material-icons">save</i> {{ __('Save') }}</button>
                                             </div>
 
@@ -342,7 +352,11 @@
                                                         <div class="d-flex px-2 py-1">
                                                             @if ($audio->file_audio)
                                                                 <div>
-                                                                    <img src="{{ asset('assets/uploads/videos/'.$audio->file_video) }}" class="avatar avatar-sm me-3">
+                                                                    <audio controls>
+                                                                        <source src="{{ asset('assets/uploads/audios/'.$audio->file_audio) }}" type="audio/ogg">
+                                                                        <source src="{{ asset('assets/uploads/ausios/'.$audio->file_audio) }}" type="audio/mpeg">
+                                                                        Your browser does not support the audio element.
+                                                                    </audio>
                                                                 </div>
                                                             @endif
                                                         <div class="d-flex flex-column justify-content-center">
@@ -354,7 +368,10 @@
                                                     <td class="align-middle text-center text-sm"><strong>{{ $created_at }}</strong></td>
                                                     <td class="align-middle text-sm">
                                                         {{-- <a href="{{ url('show-video/'.$inscription->id) }}" type="button" class="btn btn-info"><i class="material-icons">visibility</i></a> --}}
-                                                        <a href="{{ url('edit-audio/'.$audio->id) }}" type="button" class="btn btn-warning"><i class="material-icons">edit</i></a>
+                                                        {{-- <a href="{{ url('edit-audio/'.$audio->id) }}" type="button" class="btn btn-warning"><i class="material-icons">edit</i></a> --}}
+                                                        <button type="button" class="btn bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#editModalAudio-{{ $audio->id }}">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
                                                         <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#deleteModalAudio-{{ $audio->id }}">
                                                             <i class="material-icons">delete</i>
                                                         </button>
@@ -362,6 +379,7 @@
                                                     </td>
                                                 </tr>
                                             @include('admin.course.deletemodalaudio')
+                                            @include('admin.course.editmodalaudio')
                                             @endforeach
                                         </tbody>
                                     </table>
