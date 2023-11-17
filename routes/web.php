@@ -88,11 +88,14 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     //Admin Video
     Route::get('add-video/{id}', [VideoController::class, 'add']);
     Route::post('insert-video', [VideoController::class, 'insert']);
+    Route::get('edit-video/{id}',[VideoController::class,'edit']);
     Route::put('update-video/{id}', [VideoController::class, 'update']);
     Route::get('delete-video/{id}', [VideoController::class, 'destroy']);
 
     //Admin Audio
+    Route::get('add-audio/{id}', [AudioController::class, 'add']);
     Route::post('insert-audio', [AudioController::class, 'insert']);
+    Route::get('edit-audio/{id}',[AudioController::class,'edit']);
     Route::put('update-audio/{id}', [AudioController::class, 'update']);
     Route::get('delete-audio/{id}', [AudioController::class, 'destroy']);
 

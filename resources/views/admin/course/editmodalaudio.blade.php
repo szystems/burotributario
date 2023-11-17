@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="exampleModalLabel"><i class="material-icons opacity-10">hearing</i> {{ __('Edit') }} {{ __('Audio') }}</h5>
+          <h5 class="modal-title font-weight-normal" id="exampleModalLabel"><i class="material-icons opacity-10">hearing</i> {{ __('Edit') }} {{ __('Info') }}</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -36,7 +36,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="col-md-12 mb-3">
+                {{-- <div class="col-md-12 mb-3">
                     <label for="">{{ __('Change Audio') }}</label>
                     <input type="file" name="file_audio" class="form-control border">
                     @if ($errors->has('file_audio'))
@@ -49,14 +49,13 @@
                 </div>
                 @if ($audio->file_audio)
                 <div class="col-md-12 mb-3">
-                    {{-- <label for="">{{ __('Image') }}</label> --}}
                     <audio width="320" height="240" controls>
                         <source src="{{ asset('assets/uploads/audios/'.$audio->file_audio) }}" type="audio/mp4">
                         <source src="{{ asset('assets/uploads/audios/'.$audio->file_audio) }}" type="audio/ogg">
                         {{ __('Your browser does not support the audio tag.') }}
                     </audio>
                 </div>
-                @endif
+                @endif --}}
 
             </div>
             <div class="modal-footer">

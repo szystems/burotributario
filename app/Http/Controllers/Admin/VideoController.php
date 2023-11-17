@@ -11,6 +11,7 @@ use App\Http\Requests\VideoFormRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Validator;
 
 class VideoController extends Controller
 {
@@ -19,6 +20,8 @@ class VideoController extends Controller
         $video = new Video();
         if($request->hasFile('file_video'))
         {
+
+
             $file = $request->file('file_video');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
@@ -31,8 +34,8 @@ class VideoController extends Controller
         $video->description = $request->input('description');
         $video->save();
 
-        return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
-        // return \response()->json(['success'=>'Video Added Succesfully']);
+        // return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
+        return response()->json(['success'=>'Video Added Succesfully']);
     }
 
     public function add($id)
@@ -41,11 +44,21 @@ class VideoController extends Controller
         return view('admin.course.addvideo', compact('course'));
     }
 
+    public function edit($id)
+    {
+        $video = Video::find($id);
+        $course = Course::find($video->course_id);
+        return view('admin.course.editvideo', compact('course','video'));
+    }
+
     public function update(VideoFormRequest $request, $id)
     {
+
         $video = Video::find($id);
         if($request->hasFile('file_video'))
         {
+
+
             $path = 'assets/uploads/videos/'.$video->file_video;
             if(File::exists($path))
             {
@@ -61,14 +74,24 @@ class VideoController extends Controller
         $video->description = $request->input('description');
         $video->update();
 
-        return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video updated Successfully'));
+        // if ($request->input('editmodal') == 1) {
+            return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video updated Successfully'));
+        // } else {
+        //     return response()->json(['success'=>'Video edited Succesfully']);
+        // }
+
     }
 
     public function destroy($id)
     {
         $video = Video::find($id);
         $course = Course::find($video->course_id);
-        $video->delete();
+        $path = 'assets/uploads/videos/'.$video->file_video;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $video->delete();
         return redirect('show-course/'.$course->id)->with('status', __('Video Deleted Successfully'));
     }
 }

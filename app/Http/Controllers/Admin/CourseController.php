@@ -15,6 +15,7 @@ use App\Http\Requests\AudioFormRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Validator;
 
 class CourseController extends Controller
 {
