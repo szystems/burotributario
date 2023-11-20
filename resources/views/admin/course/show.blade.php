@@ -13,12 +13,12 @@
 
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Courses') }}</h4>
+                        <h4 class="mb-0">{{ __('Cursos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Show') }} {{ __('Course') }}</u></h4>
+                    <h4><u>{{ __('Ver') }} {{ __('Curso') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -37,11 +37,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3 mb-3">
-                            <label for=""><strong>{{ __('Name') }}</strong></label>
+                            <label for=""><strong>{{ __('Nombre') }}</strong></label>
                             <p>{{ $course->name }}</p>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for=""><strong>{{ __('Course Category') }}</strong></label>
+                            <label for=""><strong>{{ __('Categoría de Curso') }}</strong></label>
                             <p>{{ $course->category_courses->name }}</p>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -52,7 +52,7 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="show"
                                     {{ $course->show == 1 ? 'checked' : '' }} disabled>
-                                <label class="form-check-label" for="flexSwitchCheckDefault"><strong>{{ __('Hide/Show') }}</strong></label>
+                                <label class="form-check-label" for="flexSwitchCheckDefault"><strong>{{ __('Esconder/Mostrar') }}</strong></label>
                             </div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="popular"
@@ -60,12 +60,12 @@
                                 <label class="form-check-label" for="flexSwitchCheckDefault"><strong>Popular</strong></label>
                             </div>
                             @if ($course->file_pdf)
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="material-icons opacity-10">picture_as_pdf</i> {{ __('Show PDF') }}</button><br>
-                                <a href="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}" type="button" class="btn btn-primary" target="blank__"><i class="material-icons opacity-10">download</i> {{ __('Download') }} {{ __('PDF') }}</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="material-icons opacity-10">picture_as_pdf</i> {{ __('Mostrar PDF') }}</button><br>
+                                <a href="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}" type="button" class="btn btn-primary" target="blank__"><i class="material-icons opacity-10">download</i> {{ __('Descargar') }} {{ __('PDF') }}</a>
                             @endif
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for=""><strong>{{ __('Description') }}</strong></label>
+                            <label for=""><strong>{{ __('Descripción') }}</strong></label>
                             <textarea rows="6" class="form-control border px-2" readonly>{{ $course->description }}</textarea>
                         </div>
 
@@ -82,7 +82,7 @@
                                         <embed src="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}#zoom=100" frameborder="0" width="100%" height="600px">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +91,8 @@
 
                         @if ($course->image)
                             <div class="col-md-8 mb-3">
-                                <label for=""><strong>{{ __('Image') }}</strong></label><br>
-                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/' . $course->image) }}" alt="Course Image">
+                                <label for=""><strong>{{ __('Imagen') }}</strong></label><br>
+                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/' . $course->image) }}" alt="Curso Imagen">
                             </div>
                         @endif
                     </div>
@@ -118,7 +118,7 @@
 
                         <div class="card-body p-4 pt-5">
                             <a href="{{ url('add-video/'.$course->id) }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Video') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Video') }}
                             </a>
 
                         </div>
@@ -194,7 +194,7 @@
                             @if ($videos->count() == 0)
                                 <div class="card-header p-4 position-relative mt-n4 mx-3 z-index-2">
                                     <div class="alert alert-primary text-white" role="alert">
-                                        <strong>{{ __('No videos added or found!') }}</strong>
+                                        <strong>{{ __('No se encontraron videos agregados!') }}</strong>
                                     </div>
                                 </div>
                             @else
@@ -203,8 +203,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Video') }}</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Description') }}</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Date') }}</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Descripción') }}</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Fecha') }}</th>
                                                 <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><i class="material-icons">format_list_bulleted</i></th>
                                             </tr>
                                         </thead>
@@ -276,7 +276,7 @@
 
                         <div class="card-body p-4 pt-5">
                             <a href="{{ url('add-audio/'.$course->id) }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Audio') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Audio') }}
                             </a>
 
                         </div>
@@ -347,7 +347,7 @@
                             @if ($audios->count() == 0)
                                 <div class="card-header p-4 position-relative mt-n4 mx-3 z-index-2">
                                     <div class="alert alert-primary text-white" role="alert">
-                                        <strong>{{ __('No audios added or found!') }}</strong>
+                                        <strong>{{ __('No se encontraron audios agregados!') }}</strong>
                                     </div>
                                 </div>
                             @else
@@ -356,8 +356,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Audio') }}</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Description') }}</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Date') }}</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Descripción') }}</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Fecha') }}</th>
                                                 <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><i class="material-icons">format_list_bulleted</i></th>
                                             </tr>
                                         </thead>

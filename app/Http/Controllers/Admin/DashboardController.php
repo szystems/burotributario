@@ -70,7 +70,7 @@ class DashboardController extends Controller
         // $user->timezone = $request->input('timezone');
         $user->save();
 
-        return redirect('users')->with('status', __('User Added Successfully'));
+        return redirect('users')->with('status', __('Usuario agregado correctamente'));
     }
 
     public function edituser($id)
@@ -107,9 +107,9 @@ class DashboardController extends Controller
         $user->update();
 
         if (Auth::id() == $id) {
-            return redirect('show-user/'.$id)->with('status',__('User Updated Successfully'));
+            return redirect('show-user/'.$id)->with('status',__('Usuario actualizado correctamente'));
         }else{
-            return redirect('users')->with('status',__('User Updated Successfully'));
+            return redirect('users')->with('status',__('Usuario actualizado correctamente'));
         }
 
     }
@@ -130,7 +130,7 @@ class DashboardController extends Controller
         $user->status = 0;
         $user->email = $user->email.'-Deleted';
         $user->update();
-        return redirect('users')->with('status',__('User Deleted Successfully'));
+        return redirect('users')->with('status',__('Usuario eliminado correctamente'));
     }
 
     public function pdf(Request $request)

@@ -16,7 +16,7 @@
                         <div class="row align-items-end">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="firstname">{{ __('Email Address') }}</label>
+                                    <label for="firstname">{{ __('Email') }}</label>
                                     <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input type="checkbox" onclick="showpassword()">{{ __('Show Password') }}
+                                <input type="checkbox" onclick="showpassword()"> {{ __('Mostrar Password') }}
                             </div>
                             <div class="w-100"></div>
                             <div class="col-md-12">
@@ -44,19 +44,19 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Recordar mis datos') }}
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <p><button type="submit" class="btn btn-primary py-3 px-4 w-100"><font color="white"><strong>{{ __('Login') }}</strong></font></button></p>
                                 </div>
                                 <a class="btn btn-link" href="{{ route('register') }}">
-                                    {{ __('Create your account') }}
+                                    {{ __('Crear una cuenta') }}
                                 </a>
                                 <br>
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('¿Olvidaste tu contraseña?') }}
                                     </a>
                                 @endif
 

@@ -13,11 +13,11 @@
                     <form method="POST" action="{{ route('password.update') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
-                        <h3 class="mb-4 billing-heading">{{ __('Reset Password') }}</h3>
+                        <h3 class="mb-4 billing-heading">{{ __('Resetear Password') }}</h3>
                         <div class="row align-items-end">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="firstname">{{ __('Email Address') }}</label>
+                                    <label for="firstname">{{ __('Email') }}</label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="lastname">{{  __('Confirm Password') }}</label>
+                                    <label for="lastname">{{  __('Confirmar Contraseña') }}</label>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                                 <input type="checkbox" onclick="showpassword(); showpasswordconfirm()">{{ __('Show Password') }}
@@ -51,7 +51,7 @@
                                 <div class="form-group">
 
                                     <p><button type="submit" class="btn btn-primary py-3 px-4 w-100">
-                                            <font color="white"><strong>{{ __('Reset Password') }}</strong></font>
+                                            <font color="white"><strong>{{ __('Resetear Password') }}</strong></font>
                                         </button></p>
                                 </div>
 

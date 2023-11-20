@@ -12,7 +12,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Course Categories') }}</h4>
+                        <h4 class="mb-0">{{ __('Categorías de Cursos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <a href="{{ url('add-course-category') }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Course Category') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Categoría de Cursos') }}
                             </a>
 
                         </div>
@@ -31,10 +31,10 @@
                                     <thead>
                                         <tr>
 
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Category') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Description') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Image') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Hide/Show') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Imagen') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th>
                                         </tr>
@@ -47,7 +47,7 @@
                                             <td class="align-middle text-center text-sm">{{ $category->description }}</td>
                                             <td class="align-middle text-center text-sm">
                                                 @if ($category->image)
-                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="{{ $category->name }} image">
+                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="{{ $category->name }} imagen">
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center text-sm"><strong>
@@ -56,8 +56,8 @@
                                                 : ($category->show == '1' ? 'success'
                                                 : ""
                                                 ) }}">
-                                                    {{ $category->show == '0' ? __('Hiding')
-                                                    : ($category->show == '1' ? __('Showing')
+                                                    {{ $category->show == '0' ? __('Escondiendo')
+                                                    : ($category->show == '1' ? __('Mostrando')
                                                     : ""
                                                     ) }}
                                                 </span>

@@ -31,13 +31,13 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Courses') }}</h4>
+                        <h4 class="mb-0">{{ __('Cursos') }}</h4>
 
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Add') }} {{ __('Video') }}</u></h4>
+                    <h4><u>{{ __('Agregar') }} {{ __('Video') }}</u></h4>
                     <p><strong><u>{{ __('Course') }}:</u></strong> {{ $course->name }}</p>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
@@ -54,7 +54,7 @@
                         <div class="row">
 
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Name') }}</label>
+                                <label for="">{{ __('Nombre') }}</label>
                                 <input type="text" class="form-control border px-2 " name="name" value="{{ old('name') }}"  required>
                                 @if ($errors->has('name'))
                                     <span class="help-block opacity-7">
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Description') }}</label>
+                                <label for="">{{ __('Descripción') }}</label>
                                 <textarea name="description" cols="30" rows="5" class="form-control border px-2 " >{{ old('description') }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block opacity-7">
@@ -96,7 +96,7 @@
 
                             <div class="col-md-12 mb-3" >
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-                                <button type="submit" value="Submit" class="btn btn-info float-end"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" value="Submit" class="btn btn-info float-end"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
                             </div>
 
                         </div>

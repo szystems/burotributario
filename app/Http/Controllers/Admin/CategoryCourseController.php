@@ -73,7 +73,7 @@ class CategoryCourseController extends Controller
         $category->status = 1;
         $category->save();
 
-        return redirect('course-categories')->with('status', __('Course Category Added Successfully'));
+        return redirect('course-categories')->with('status', __('Curso de categoría agregado correctamente'));
     }
 
     public function edit($id)
@@ -119,7 +119,7 @@ class CategoryCourseController extends Controller
         $category->popular = $request->input('popular') == TRUE ? '1':'0';
         $category->update();
 
-        return redirect('course-categories')->with('status',__('Course Category Updated Successfully'));
+        return redirect('course-categories')->with('status',__('Curso de categoría actualizado correctamente'));
     }
 
     public function destroy($id)
@@ -127,6 +127,6 @@ class CategoryCourseController extends Controller
         $category = CategoryCourse::find($id);
         $category->status = 0;
         $category->update();
-        return redirect('course-categories')->with('status',__('Course Category Deleted Successfully'));
+        return redirect('course-categories')->with('status',__('Curso de categoría eliminado correctamente'));
     }
 }

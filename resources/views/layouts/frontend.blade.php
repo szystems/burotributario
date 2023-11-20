@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta charset="utf-8">
-    <title>Buro</title>
+    <title>Buro Tributario</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -46,7 +46,7 @@
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                     <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">{{ __('Our Office') }}</h6>
+                        <h6 class="font-weight-semi-bold mb-1">{{ __('Ubicación') }}</h6>
                         <small>7ª. Calle 3A-43 zona 11, Quetzaltenango.</small>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
                     <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">{{ __('Email Us') }}</h6>
+                        <h6 class="font-weight-semi-bold mb-1">{{ __('Email') }}</h6>
                         <small>eventos.buro@hotmail.com</small>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-2x fa-phone text-primary mr-3"></i>
                     <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">{{ __('Call Us') }}</h6>
+                        <h6 class="font-weight-semi-bold mb-1">{{ __('LLámanos') }}</h6>
                         <small>+502 5989 3119</small>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none" data-toggle="collapse" href="#navbar-vertical" style="height: 67px; padding: 0 30px;">
-                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>{{ __('Categories') }}</h5>
+                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>{{ __('Categorías') }}</h5>
                     <i class="fa fa-angle-down text-primary"></i>
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
@@ -118,10 +118,10 @@
 
                                 $config=DB::table('configs')->first();
                             @endphp --}}
-                            <a href="{{ url('/') }}" class="nav-item nav-link active">{{ __('Home') }}</a>
-                            <a href="about.html" class="nav-item nav-link">{{ __('About') }}</a>
-                            <a href="course.html" class="nav-item nav-link">{{ __('Courses') }}</a>
-                            <a href="teacher.html" class="nav-item nav-link">{{ __('Instructors') }}</a>
+                            <a href="{{ url('/') }}" class="nav-item nav-link active">{{ __('Inicio') }}</a>
+                            <a href="about.html" class="nav-item nav-link">{{ __('Nosotros') }}</a>
+                            <a href="course.html" class="nav-item nav-link">{{ __('Cursos') }}</a>
+                            <a href="teacher.html" class="nav-item nav-link">{{ __('Instructores') }}</a>
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -129,12 +129,12 @@
                                     <a href="single.html" class="dropdown-item">Noticias</a>
                                 </div>
                             </div> --}}
-                            <a href="contact.html" class="nav-item nav-link">{{ __('Contact') }}</a>
+                            <a href="contact.html" class="nav-item nav-link">{{ __('Contacto') }}</a>
 
                         </div>
 
 
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">{{ __('Subscribe') }}</a>
+                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">{{ __('Suscribirse') }}</a>
 
 
 
@@ -143,14 +143,14 @@
                             <div class="dropdown-menu dropdown-menu-right rounded-0 m-0">
                                 @if (Auth::guest())
                                     <a href="{{ route('login') }}" class="dropdown-item">{{ __('Login') }}</a>
-                                    <a href="{{ route('register') }}" class="dropdown-item">{{ __('Register') }}</a>
-                                    <a href="{{ route('password.request') }}" class="dropdown-item">{{ __('Forgot your password?') }}</a>
+                                    <a href="{{ route('register') }}" class="dropdown-item">{{ __('Registrarse') }}</a>
+                                    <a href="{{ route('password.request') }}" class="dropdown-item">{{ __('¿Olvidaste tu contraseña?') }}</a>
                                 @else
-                                    <a href="{{ url('my-account') }}" class="dropdown-item">{{ __('Account') }}</a>
+                                    <a href="{{ url('my-account') }}" class="dropdown-item">{{ __('Cuenta') }}</a>
                                     @if (Auth::user()->role_as == "1")
-                                        <a href="{{ url('dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
+                                        <a href="{{ url('dashboard') }}" class="dropdown-item">{{ __('Panel de Control') }}</a>
                                     @endif
-                                    <a href="javascript:; {{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item bg-secondary"><font color="red">{{ __('Logout') }}</font>  </a>
+                                    <a href="javascript:; {{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item bg-secondary"><font color="red">{{ __('Cerrar Sesión') }}</font>  </a>
                                     <form id="logout-form" action="{{ url('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -173,7 +173,7 @@
             <div class="col-lg-7 col-md-12">
                 <div class="row">
                     <div class="col-md-6 mb-5">
-                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Contact') }}</h5>
+                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Contacto') }}</h5>
                         <p><i class="fa fa-map-marker-alt mr-2"></i>7ª. Calle 3A-43 zona 11, Quetzaltenango.</p>
                         <p><i class="fa fa-phone-alt mr-2"></i>+502 5989 3119</p>
                         <p><i class="fa fa-envelope mr-2"></i>eventos.buro@hotmail.com</p>
@@ -187,19 +187,19 @@
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Home') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('About') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Courses') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructors') }}</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Inicio') }}</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Nosotros') }}</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Cursos') }}</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructores') }}</a>
                             {{-- <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Blog</a> --}}
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Contact') }}</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Contacto') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5 col-md-12 mb-5">
                 <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Subscribe') }}</h5>
-                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+                <p>Escoge el plan que mas se adecue a tus necesidades</p>
                 <div class="w-100">
                     <div class="input-group">
                         {{-- <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
@@ -219,7 +219,7 @@
                     <script>
                         document.write(new Date().getFullYear());
                     </script>
-                    {{ __('All rights reserved') }}
+                    {{ __('Todos los derechos reservados') }}
 
                 </p>
             </div>

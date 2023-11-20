@@ -31,12 +31,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Course') }}</h4>
+                        <h4 class="mb-0">{{ __('Curso') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Edit') }} {{ __('Video') }}</u></h4>
+                    <h4><u>{{ __('Editar') }} {{ __('Video') }}</u></h4>
                     <p><strong><u>{{ __('Course') }}:</u></strong> {{ $course->name }}</p>
                     <p><strong><u>{{ __('Video') }}:</u></strong> {{ $video->name }}</p>
                     @if (count($errors)>0)
@@ -76,7 +76,7 @@
                             </div> --}}
 
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Change Video') }}</label>
+                                <label for="">{{ __('Cambiar Video') }}</label>
                                 <input type="file" name="file_video" class="form-control border">
                                 @if ($errors->has('file_video'))
                                     <span class="help-block opacity-7">
@@ -106,7 +106,7 @@
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
                                 <textarea hidden name="description" cols="30" rows="5" class="form-control border px-2 ">{{ $video->description }}</textarea>
                                 <input hidden type="text" class="form-control border px-2 " name="name" value="{{ $video->name }}">
-                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
                             </div>
                         </div>
                     </form>

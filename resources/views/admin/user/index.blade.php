@@ -12,7 +12,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Users') }}</h4>
+                        <h4 class="mb-0">{{ __('Usuarios') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <a href="{{ url('add-user') }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('User') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Usuario') }}
                             </a>
 
                         </div>
@@ -30,9 +30,9 @@
                                 <table class="table table-sm align-products-center mb-0 table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="align-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Name') }}</th>
+                                            <th class="align-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Nombre') }}</th>
                                             {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Phone') }}</th> --}}
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Role') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Rol') }}</th>
                                             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><i class="material-icons">format_list_bulleted</i></th>
                                         </tr>
                                     </thead>

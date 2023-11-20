@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Users') }}</h4>
+                        <h4 class="mb-0">{{ __('Usuarios') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Add User') }}</u></h4>
+                    <h4><u>{{ __('Agregar Usuario') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -39,7 +39,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="">{{ __('Name') }}</label>
+                                <label for="">{{ __('Nombre') }}</label>
                                 <input type="text" class="form-control border px-2 " name="name">
                                 @if ($errors->has('name'))
                                     <span class="help-block opacity-7">
@@ -173,7 +173,7 @@
                             </div> --}}
 
                             <div class="col-md-12 mb-3" >
-                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Guardar') }}</button>
                             </div>
                         </div>
                     </form>

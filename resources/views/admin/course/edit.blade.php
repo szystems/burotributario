@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Course') }}</h4>
+                        <h4 class="mb-0">{{ __('Curso') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Edit') }} {{ __('Course') }}</u></h4>
+                    <h4><u>{{ __('Editar') }} {{ __('Curso') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -35,7 +35,7 @@
                                 @php
                                     $CourseCategory = \App\Models\CategoryCourse::find($course->category_course_id);
                                 @endphp
-                                <label for="">{{ __('Category') }}</label>
+                                <label for="">{{ __('Categoría de Curso') }}</label>
                                 <select class="form-select px-2" aria-label="Default select example" name="category_course_id">
                                     <option value="{{ $CourseCategory->id }}">{{ $CourseCategory->name }}</option>
                                     @foreach($filterCategories as $category)
@@ -44,7 +44,7 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Name') }}</label>
+                                <label for="">{{ __('Nombre') }}</label>
                                 <input type="text" class="form-control border px-2 " name="name" value="{{ $course->name }}">
                                 @if ($errors->has('name'))
                                     <span class="help-block opacity-7">
@@ -55,7 +55,7 @@
                                 @endif
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Description') }}</label>
+                                <label for="">{{ __('Descripción') }}</label>
                                 <textarea name="description" cols="30" rows="5" class="form-control border px-2 ">{{ $course->description }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block opacity-7">
@@ -68,7 +68,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="show" {{ $course->show == 1 ? 'checked':'' }}>
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ __('Hide/Show') }}</label>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ __('Esconder/Mostrar') }}</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -78,17 +78,17 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="">{{ __('Change Image') }}</label>
+                                <label for="">{{ __('Cambiar Imagen') }}</label>
                                 <input type="file" name="image" class="form-control border">
                             </div>
                             @if ($course->image)
                             <div class="col-md-9 mb-3">
                                 {{-- <label for="">{{ __('Image') }}</label> --}}
-                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="Category Image">
+                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="Curso Imagen">
                             </div>
                             @endif
                             <div class="col-md-3 mb-3">
-                                <label for="">{{ __('Change PDF') }}</label>
+                                <label for="">{{ __('Cambiar PDF') }}</label>
                                 <input type="file" name="file_pdf" class="form-control border">
                             </div>
                             @if ($course->file_pdf)
@@ -96,8 +96,8 @@
                                 <br>
                                 <!-- Trigger the modal with a button -->
                                 {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">{{ __('Show PDF') }}</button> --}}
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="material-icons opacity-10">picture_as_pdf</i> {{ __('Show PDF') }}</button>
-                                <a href="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}" type="button" class="btn btn-primary" target="blank__"><i class="material-icons opacity-10">download</i> {{ __('Download') }} {{ __('PDF') }}</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="material-icons opacity-10">picture_as_pdf</i> {{ __('Mostrar PDF') }}</button>
+                                <a href="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}" type="button" class="btn btn-primary" target="blank__"><i class="material-icons opacity-10">download</i> {{ __('Descargar') }} {{ __('PDF') }}</a>
 
                                 <!-- Modal -->
 
@@ -113,7 +113,7 @@
                                                 <embed src="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}#zoom=100" frameborder="0" width="100%" height="600px">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                             @endif
 
                             <div class="col-md-12 mb-3" >
-                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
                             </div>
                         </div>
                     </form>

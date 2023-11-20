@@ -6,8 +6,8 @@
         <div class="card-header pb-0 pt-3">
             <div class="float-start">
 
-                <h5 class="mt-3 mb-0">Bocacosta Coffee E-Shop</h5>
-                <p>{{ __('Settings') }}</p>
+                <h5 class="mt-3 mb-0">Buro</h5>
+                <p>{{ __('Configuración') }}</p>
             </div>
             <div class="float-end mt-4">
                 <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -68,7 +68,7 @@
             </div> --}}
             <hr class="horizontal dark my-sm-4">
             <a class="btn btn-outline-dark w-100"
-                href="{{ url('config') }}"><i class="material-icons py-2">settings</i> {{ __('Settings') }}</a>
+                href="{{ url('config') }}"><i class="material-icons py-2">settings</i> {{ __('Configuración') }}</a>
             {{-- <a class="btn bg-gradient-info w-100"
                 href="https://www.creative-tim.com/product/material-dashboard-pro">Free Download</a>
             <a class="btn btn-outline-dark w-100"
@@ -78,7 +78,7 @@
                 {{-- <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard"
                     data-icon="octicon-star" data-size="large" data-show-count="true"
                     aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a> --}}
-                <h6 class="mt-3">{{ __('Help') }}?</h6>
+                <h6 class="mt-3">{{ __('Ayuda') }}?</h6>
                 <a href="https://wa.me/50242153288"
                     class="btn btn-dark mb-0 me-2" target="_blank">
                     <i class="fab fa-whatsapp me-1" aria-hidden="true"></i>

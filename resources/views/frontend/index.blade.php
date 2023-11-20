@@ -149,8 +149,8 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Courses') }}</h5>
-                <h1>{{ __('Categories') }}</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
+                <h1>{{ __('Categorías') }}</h1>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -235,7 +235,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Courses') }}</h5>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
                 <h1>{{ __('Ultimos Cursos Agregados') }}</h1>
             </div>
             <div class="row">

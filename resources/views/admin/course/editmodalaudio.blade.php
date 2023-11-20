@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="exampleModalLabel"><i class="material-icons opacity-10">hearing</i> {{ __('Edit') }} {{ __('Info') }}</h5>
+          <h5 class="modal-title font-weight-normal" id="exampleModalLabel"><i class="material-icons opacity-10">hearing</i> {{ __('Editar') }} {{ __('Información') }}</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,7 +15,7 @@
                 <br>
 
                 <div class="col-md-12 mb-3">
-                    <label for="">{{ __('Name') }}</label>
+                    <label for="">{{ __('Nombre') }}</label>
                     <input type="text" class="form-control border px-2 " name="name" value="{{ $audio->name }}" required>
                     @if ($errors->has('name'))
                         <span class="help-block opacity-7">
@@ -26,7 +26,7 @@
                     @endif
                 </div>
                 <div class="col-md-12 mb-3">
-                    <label for="">{{ __('Description') }}</label>
+                    <label for="">{{ __('Descripción') }}</label>
                     <textarea name="description" cols="30" rows="5" class="form-control border px-2 ">{{ $audio->description }}</textarea>
                     @if ($errors->has('description'))
                         <span class="help-block opacity-7">
@@ -60,8 +60,8 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-                <button type="button" class="btn bg-gradient-info" data-bs-dismiss="modal"><i class="material-icons">close</i> {{ __('Cancel') }}</button>
-                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                <button type="button" class="btn bg-gradient-info" data-bs-dismiss="modal"><i class="material-icons">close</i> {{ __('Cancelar') }}</button>
+                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
             </div>
         </form>
       </div>

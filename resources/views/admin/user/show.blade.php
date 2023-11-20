@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Users') }}</h4>
+                        <h4 class="mb-0">{{ __('Usuarios') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Show') }} {{ __('User') }}</u></h4>
+                    <h4><u>{{ __('Ver') }} {{ __('Usuario') }}</u></h4>
                     <div>
                         {{-- <form action="{{ url('pdf-user') }}" method="GET" target="_blank">
                             <input type="hidden" name="ruser" value="{{ $user->id }}">
@@ -40,11 +40,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3 mb-3">
-                            <label for=""><strong>{{ __('Role') }}</strong></label>
+                            <label for=""><strong>{{ __('Rol') }}</strong></label>
                             <p>{{ $user->role_as == '0' ?'User' : 'Admin' }}</p>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for=""><strong>{{ __('Name') }}</strong></label>
+                            <label for=""><strong>{{ __('Nombre') }}</strong></label>
                             <p>{{ $user->name }}</p>
                         </div>
                         <div class="col-md-3 mb-3">

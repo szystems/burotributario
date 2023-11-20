@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('My Profile') }}</h5>
+                                            <h5 class="mb-0">{{ __('Mi Perfil') }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Course Categories') }}</h5>
+                                            <h5 class="mb-0">{{ __('Categorías de Cursos') }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Courses') }}</h5>
+                                            <h5 class="mb-0">{{ __('Cursos') }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -80,7 +80,7 @@
                                             {{-- <h6 class="text-center mb-0">Paypal</h6>
                                             <span class="text-xs">Freelance Payment</span> --}}
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Users') }}</h5>
+                                            <h5 class="mb-0">{{ __('Usuarios') }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -98,7 +98,7 @@
                                             {{-- <h6 class="text-center mb-0">Paypal</h6>
                                             <span class="text-xs">Freelance Payment</span> --}}
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Settings') }}</h5>
+                                            <h5 class="mb-0">{{ __('Configuración') }}</h5>
                                         </div>
                                     </a>
                                 </div>

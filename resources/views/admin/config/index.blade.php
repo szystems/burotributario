@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Settings') }}</h4>
+                        <h4 class="mb-0">{{ __('Configuración') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Settings') }}</u></h4>
+                    <h4><u>{{ __('Configuración') }}</u></h4>
                     <!-- .flash-message -->
                     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                         @if(Session::has('alert-' . $msg))
@@ -40,20 +40,20 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-3 mb-3">
-                                <label for="">{{ __('Currency') }}</label>
+                                <label for="">{{ __('Moneda') }}</label>
                                 <select class="form-select px-2" aria-label="Default select example" name="currency">
                                     <option selected value="{{ $config->currency }}">{{ $config->currency }}</option>
                                     <option value="USD $">USD ($)</option>
                                     <option value="GTQ Q">GTQ (Q)</option>
                                 </select>
-                                <label><font color="orange">{{ __('Choose the currency that will be displayed on the e-shop') }}</font></label>
+                                <label><font color="orange">{{ __('Escoge la moneda que se mostrara') }}</font></label>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="">Email</label>
                                 <div class="input-group input-group-dynamic mb-4">
                                     <input type="email" name="email" class="form-control" placeholder="emails@bocacostacoffee.com" aria-describedby="basic-addon1" value="{{ $config->email }}" required>
                                 </div>
-                                <label><font color="orange">{{ __('Write the email where you will receive all notifications') }}</font></label>
+                                <label><font color="orange">{{ __('Escribe el correo donde recibiras las notificaciones') }}</font></label>
                                 @if ($errors->has('email'))
                                     <span class="help-block opacity-7">
                                             <strong>
@@ -175,16 +175,16 @@
 
                             @if ($config->logo)
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Logo Image') }}</label>
-                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/logos/'.$config->logo) }}" alt="Logo Image">
+                                <label for="">{{ __('Logo Imagen') }}</label>
+                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/logos/'.$config->logo) }}" alt="Logo Imagen">
                             </div>
                             @endif
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Change Image') }}</label>
+                                <label for="">{{ __('Cambiar Imagen') }}</label>
                                 <input type="file" name="logo" class="form-control border">
                             </div>
                             <div class="col-md-12 mb-3" >
-                                <button type="submit" class="btn btn-primary"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-primary"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
                             </div>
                         </div>
                     </form>

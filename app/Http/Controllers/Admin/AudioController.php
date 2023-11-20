@@ -35,7 +35,7 @@ class AudioController extends Controller
         $audio->save();
 
         // return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
-        return response()->json(['success'=>'Audio Added Succesfully']);
+        return response()->json(['success'=>'Audio agregado correctamente']);
     }
 
     public function add($id)
@@ -75,7 +75,7 @@ class AudioController extends Controller
         $audio->update();
 
         // if ($request->input('editmodal') == 1) {
-            return redirect('show-course/'.$request->input('course_id'))->with('status', __('Audio updated Successfully'));
+            return redirect('show-course/'.$request->input('course_id'))->with('status', __('Audio actualizado correctamente'));
         // } else {
         //     return response()->json(['success'=>'Video edited Succesfully']);
         // }
@@ -92,6 +92,6 @@ class AudioController extends Controller
                 File::delete($path);
             }
             $audio->delete();
-        return redirect('show-course/'.$course->id)->with('status', __('Audio Deleted Successfully'));
+        return redirect('show-course/'.$course->id)->with('status', __('Audio eliminado correctamente'));
     }
 }

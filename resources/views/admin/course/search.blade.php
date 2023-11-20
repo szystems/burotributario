@@ -8,10 +8,10 @@
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for=""><strong>{{ __('Search') }} {{ __('Course') }}:</strong></label>
-                            <input class="form-select px-2" list="courseListOptions" placeholder="{{ __('Search') }}..." name="fcourse" value="{{ $queryCourse }}">
+                            <label for=""><strong>{{ __('Buscar') }} {{ __('Cusro') }}:</strong></label>
+                            <input class="form-select px-2" list="courseListOptions" placeholder="{{ __('Buscar') }}..." name="fcourse" value="{{ $queryCourse }}">
                             <datalist id="courseListOptions">
-                                <option value="">{{ __('All') }}</option>
+                                <option value="">{{ __('Todos') }}</option>
                                 @if ($queryCategory != null)
                                     <option selected value="{{ $queryCourse }}" >{{ $queryCourse }}</option>
                                 @endif
@@ -22,7 +22,7 @@
                             {{-- </select> --}}
                         </div>
                         <div class="col-md-2 mb-3">
-                            <label for="">{{ __('Course Category') }}</label>
+                            <label for="">{{ __('Categoría de Curso') }}</label>
                             <select class="form-select px-2" aria-label="Default select example" name="fcategory">
                                     @if ($queryCategory != null)
                                         @php
@@ -40,7 +40,7 @@
                             {{-- </select> --}}
                         </div>
                         <div class="col-md-2 mb-3" >
-                            <label for="">{{ __('Search') }}</label><br>
+                            <label for="">{{ __('Buscar') }}</label><br>
                             <button type="submit" class="btn btn-info"><i class="material-icons">search</i></button>
                         </div>
                     </div>

@@ -94,7 +94,7 @@ class CourseController extends Controller
         $course->save();
 
         // return redirect('index-courses')->with('status', __('Course Added Successfully'));
-        return redirect('show-course/'.$course->id)->with('status', __('Course Added Successfully'));
+        return redirect('show-course/'.$course->id)->with('status', __('Curso agregado correctamente'));
     }
 
     public function edit($id)
@@ -156,7 +156,7 @@ class CourseController extends Controller
         $course->popular = $request->input('popular') == TRUE ? '1':'0';
         $course->update();
 
-        return redirect('index-courses')->with('status',__('Course Updated Successfully'));
+        return redirect('index-courses')->with('status',__('Curso actualizado correctamente'));
     }
 
     public function destroy($id)
@@ -192,6 +192,6 @@ class CourseController extends Controller
         $course->delete();
 
 
-        return redirect('index-courses')->with('status',__('Course Deleted Successfully'));
+        return redirect('index-courses')->with('status',__('Curso eliminado correctamente'));
     }
 }

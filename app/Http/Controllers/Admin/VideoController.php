@@ -35,7 +35,7 @@ class VideoController extends Controller
         $video->save();
 
         // return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video Added Successfully'));
-        return response()->json(['success'=>'Video Added Succesfully']);
+        return response()->json(['success'=>'Video agregado correctamente']);
     }
 
     public function add($id)
@@ -75,7 +75,7 @@ class VideoController extends Controller
         $video->update();
 
         // if ($request->input('editmodal') == 1) {
-            return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video updated Successfully'));
+            return redirect('show-course/'.$request->input('course_id'))->with('status', __('Video actualizado correctamente'));
         // } else {
         //     return response()->json(['success'=>'Video edited Succesfully']);
         // }
@@ -92,6 +92,6 @@ class VideoController extends Controller
                 File::delete($path);
             }
             $video->delete();
-        return redirect('show-course/'.$course->id)->with('status', __('Video Deleted Successfully'));
+        return redirect('show-course/'.$course->id)->with('status', __('Video eliminado correctamente'));
     }
 }

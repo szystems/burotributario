@@ -26,7 +26,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Panel de Control') }}</span>
                 </a>
             </li>
             {{-- <li class="nav-item">
@@ -58,7 +58,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">category</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Course Categories') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Categorías de Cursos') }}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -66,7 +66,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">local_library</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Courses') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Cursos') }}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -74,7 +74,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">people_alt</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Users') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Usuarios') }}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -82,7 +82,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">settings</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Settings') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Configuración') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -93,7 +93,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('My Profile') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Mi Perfil') }}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -101,7 +101,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">logout</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Logout') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Cerrar Sesión') }}</span>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

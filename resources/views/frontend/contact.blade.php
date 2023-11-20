@@ -12,7 +12,7 @@
 
                     <div class="col-md-7 col-sm-12 text-center ftco-animate">
                         <h1 class="mb-3 mt-5 bread">{{ __('Contact') }}</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">{{ __('Home') }}</a></span> <span>{{ __('Contact') }}</span>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">{{ __('Home') }}</a></span> <span>{{ __('Contacto') }}</span>
                         </p>
                     </div>
 
@@ -27,13 +27,13 @@
                 <div class="col-md-4 contact-info ftco-animate">
                     <div class="row">
                         <div class="col-md-12 mb-4">
-                            <h2 class="h4">{{ __('Contact Information') }}</h2>
+                            <h2 class="h4">{{ __('Información de Contacto') }}</h2>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <p><span>{{ __('Address') }}:</span><strong> Portland, Oregon, USA</strong></p>
+                            <p><span>{{ __('Direccion') }}:</span><strong> 7ª. Calle 3A-43 zona 11, Quetzaltenango.</strong></p>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <p><span>{{ __('Phone') }}:</span> <a href="tel://15037440078">+1 503 744 0078</a></p>
+                            <p><span>{{ __('Teléfono') }}:</span> <a href="tel://59893119">+502 5989 3119</a></p>
                         </div>
                         <!-- <div class="col-md-12 mb-3">
                             <p><span>Email:</span> <a href="mailto:info@yoursite.com">	info@bocacostacoffee.com</a></p>
@@ -55,7 +55,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="{{ __('Name') }}" name="name" required>
+                                    <input type="text" class="form-control" placeholder="{{ __('Nombre') }}" name="name" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -65,13 +65,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="{{ __('Subject') }}" name="subject" required>
+                            <input type="text" class="form-control" placeholder="{{ __('Asunto') }}" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="contact_message" cols="30" rows="7" class="form-control" placeholder="{{ __('Message') }}" required></textarea>
+                            <textarea name="contact_message" cols="30" rows="7" class="form-control" placeholder="{{ __('Mensaje') }}" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="{{ __('Send Message') }}" class="btn btn-primary py-3 px-5">
+                            <input type="submit" value="{{ __('Enviar Mensaje') }}" class="btn btn-primary py-3 px-5">
                         </div>
                     </form>
                 </div>

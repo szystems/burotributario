@@ -12,7 +12,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Courses') }}</h4>
+                        <h4 class="mb-0">{{ __('Cursos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <a href="{{ url('add-course') }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Course') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Curso') }}
                             </a>
 
                         </div>
@@ -31,11 +31,11 @@
                                     <thead>
                                         <tr>
 
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Name') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Category') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Description') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Image') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Hide/Show') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Nombre') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Imagen') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th>
                                         </tr>
@@ -52,7 +52,7 @@
                                             <td class="align-middle text-center text-sm">{{ $course->description }}</td>
                                             <td class="align-middle text-center text-sm">
                                                 @if ($course->image)
-                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="{{ $course->name }} image">
+                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="{{ $course->name }} imagen">
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center text-sm"><strong>
@@ -61,8 +61,8 @@
                                                 : ($course->show == '1' ? 'success'
                                                 : ""
                                                 ) }}">
-                                                    {{ $course->show == '0' ? __('Hiding')
-                                                    : ($course->show == '1' ? __('Showing')
+                                                    {{ $course->show == '0' ? __('Escondiendo')
+                                                    : ($course->show == '1' ? __('Mostrando')
                                                     : ""
                                                     ) }}
                                                 </span>

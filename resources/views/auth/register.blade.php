@@ -12,11 +12,11 @@
                 <div class="col-xl-6 ftco-animate">
                     <form method="POST" action="{{ route('register') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
                         @csrf
-                        <h3 class="mb-4 billing-heading"> {{ __('Create an account') }}</h3>
+                        <h3 class="mb-4 billing-heading"> {{ __('Crear Cuenta') }}</h3>
                         <div class="row align-items-end">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="firstname">{{ __('Name') }}</label>
+                                    <label for="firstname">{{ __('Nombre') }}</label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="firstname">{{ __('Email Address') }}</label>
+                                    <label for="firstname">{{ __('Email') }}</label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="lastname">{{  __('Confirm Password') }}</label>
+                                    <label for="lastname">{{  __('Confirmar Contraseña') }}</label>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                                 <input type="checkbox" onclick="showpassword(); showpasswordconfirm()"> {{ __('Show Password') }}
@@ -74,14 +74,14 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                        <label class="custom-control-label" for="register-policy-2">{{ __('I agree to the') }} <a href="#">{{ __('privacy policy') }}</a> *</label>
+                                        <label class="custom-control-label" for="register-policy-2">{{ __('Estoy de acuerdo con los') }} <a href="#">{{ __('términos y condiciones') }}</a> *</label>
                                     </div><!-- End .custom-checkbox -->
                                     <p><button type="submit" class="btn btn-primary py-3 px-4 w-100">
-                                            <font color="white"><strong>{{ __('Register') }}</strong></font>
+                                            <font color="white"><strong>{{ __('Registrarse') }}</strong></font>
                                         </button></p>
                                 </div>
                                 <a class="btn btn-link" href="{{ route('login') }}">
-                                    {{ __('Already have an account? Log in') }}
+                                    {{ __('¿Ya tienes una cuenta? Entrar') }}
                                 </a>
 
                             </div>

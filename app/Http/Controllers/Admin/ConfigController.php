@@ -69,7 +69,7 @@ class ConfigController extends Controller
         // $config->advertisement_link = $request->input('advertisement_link');
         $config->update();
 
-        $request->session()->flash('alert-success', __('Settings updated correctly'));
+        $request->session()->flash('alert-success', __('Configuración actualizado correctamente'));
 
         return view('admin.config.index', \compact('config'));
     }

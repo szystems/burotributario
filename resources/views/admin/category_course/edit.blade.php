@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Course Categories') }}</h4>
+                        <h4 class="mb-0">{{ __('Categorías de Cursos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Edit') }} {{ __('Course Category') }}</u></h4>
+                    <h4><u>{{ __('Edit') }} {{ __('Categoría de Cursos') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -32,7 +32,7 @@
                         @method('PUT')
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="">{{ __('Name') }}</label>
+                                <label for="">{{ __('Nombre') }}</label>
                                 <input type="text" class="form-control border px-2 " name="name" value="{{ $category->name }}">
                                 @if ($errors->has('name'))
                                     <span class="help-block opacity-7">
@@ -43,7 +43,7 @@
                                 @endif
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Description') }}</label>
+                                <label for="">{{ __('Descripción') }}</label>
                                 <textarea name="description" cols="30" rows="5" class="form-control border px-2 ">{{ $category->description }}</textarea>
                                 @if ($errors->has('description'))
                                     <span class="help-block opacity-7">
@@ -56,7 +56,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="show" {{ $category->show == 1 ? 'checked':'' }}>
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ __('Hide/Show') }}</label>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ __('Esconder/Mostrar') }}</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -67,15 +67,15 @@
                             </div>
                             @if ($category->image)
                             <div class="col-md-12 mb-3">
-                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="Category Image">
+                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="Imagen">
                             </div>
                             @endif
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Change Image') }}</label>
+                                <label for="">{{ __('Cambiar Imagen') }}</label>
                                 <input type="file" name="image" class="form-control border">
                             </div>
                             <div class="col-md-12 mb-3" >
-                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-success"><i class="material-icons">save</i> {{ __('Grabar') }}</button>
                             </div>
                         </div>
                     </form>
