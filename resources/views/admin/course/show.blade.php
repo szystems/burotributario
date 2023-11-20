@@ -275,8 +275,8 @@
                         </div>
 
                         <div class="card-body p-4 pt-5">
-                            <a href="{{ url('add-video/'.$course->id) }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Video') }}
+                            <a href="{{ url('add-audio/'.$course->id) }}" class="btn btn-success">
+                                <i class="material-icons opacity-10">add</i> {{ __('Add') }} {{ __('Audio') }}
                             </a>
 
                         </div>

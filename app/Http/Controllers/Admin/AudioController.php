@@ -15,7 +15,7 @@ use Validator;
 
 class AudioController extends Controller
 {
-    public function insert(VideoFormRequest $request)
+    public function insert(AudioFormRequest $request)
     {
         $audio = new Audio();
         if($request->hasFile('file_audio'))
