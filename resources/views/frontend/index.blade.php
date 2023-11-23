@@ -46,6 +46,7 @@
     </div> --}}
     <!-- Carousel End -->
 
+
     <!-- Registration Start -->
     <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
         <div class="container py-5">
@@ -144,6 +145,99 @@
     </div>
     <!-- About End -->
 
+    <!--Popular Courses Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
+                <h1>{{ __('Cursos Poupulares') }}</h1>
+            </div>
+            <div class="row">
+
+                @foreach ($popularCourses as $popular)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="rounded overflow-hidden mb-2">
+                        @php
+                            $numVideos = \App\Models\Video::where('course_id', $popular->id)->count();
+                            $numAudios = \App\Models\Audio::where('course_id', $popular->id)->count();
+                            $catInfo = \App\Models\CategoryCourse::find($popular->category_course_id);
+                        @endphp
+                        <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}">
+                            <img class="img-fluid" src="{{ asset('assets/uploads/courses/'.$popular->image) }}" alt="">
+                        </a>
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
+                                <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
+                            </div>
+                            <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}">{{ $popular->name }}</a><br>
+                            <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>
+
+
+                            {{-- <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
+                                    <h5 class="m-0">$99</h5>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!--Popular Courses End -->
+
+    <!--Last Courses Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
+                <h1>{{ __('Ultimos Cursos Agregados') }}</h1>
+            </div>
+            <div class="row">
+
+                @foreach ($lastCourses as $last)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="rounded overflow-hidden mb-2">
+                        <a href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}">
+                            <img class="img-fluid" src="{{ asset('assets/uploads/courses/'.$last->image) }}" alt="">
+                        </a>
+
+                        <div class="bg-secondary p-4">
+                            <div class="d-flex justify-content-between mb-3">
+                                @php
+                                    $numVideos = \App\Models\Video::where('course_id', $last->id)->count();
+                                    $numAudios = \App\Models\Audio::where('course_id', $last->id)->count();
+                                    $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
+                                @endphp
+                                <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
+                                <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
+                            </div>
+                            <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}">{{ $last->name }}</a><br>
+                            <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>
+
+
+                            {{-- <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
+                                    <h5 class="m-0">$99</h5>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!--Last Courses End -->
+
 
     <!-- Category Start -->
     <div class="container-fluid py-5">
@@ -153,204 +247,27 @@
                 <h1>{{ __('Categorías') }}</h1>
             </div>
             <div class="row">
+                @foreach ($categories as $category)
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-1.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Web Design</h4>
-                            <span>100 Courses</span>
+                        <img class="img-fluid" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="{{ url('category/'.$category->slug) }}">
+                            <h4 class="text-white font-weight-medium">{{ $category->name }}</h4>
+                            @php
+                                $numCourses = \App\Models\Course::where('category_course_id', $category->id)->where('status', 1)->count();
+                            @endphp
+                            <span>{{ $numCourses }} Cursos</span>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-2.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Development</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-3.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Game Design</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-4.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Apps Design</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-5.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Marketing</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-6.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Research</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-7.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Content Writing</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/cat-8.jpg') }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">SEO</h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
     <!-- Category Start -->
 
 
-    <!-- Courses Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
-                <h1>{{ __('Ultimos Cursos Agregados') }}</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-1.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-2.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-3.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-4.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-5.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="rounded overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{ asset('elearning/img/course-6.jpg') }}" alt="">
-                        <div class="bg-secondary p-4">
-                            {{-- <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                            </div> --}}
-                            <a class="h5" href="">Web design & development courses for beginner</a>
-                            {{-- <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">$99</h5>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Courses End -->
+
 
 
 

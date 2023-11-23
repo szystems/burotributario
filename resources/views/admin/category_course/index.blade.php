@@ -33,7 +33,6 @@
 
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Imagen') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th>
@@ -42,14 +41,21 @@
                                     <tbody>
                                         @foreach ($categories as $category)
                                         <tr>
-
-                                            <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course-category/'.$category->id) }}">{{ $category->name }}</a></strong></td>
-                                            <td class="align-middle text-center text-sm">{{ $category->description }}</td>
-                                            <td class="align-middle text-center text-sm">
-                                                @if ($category->image)
-                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="{{ $category->name }} imagen">
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    @if ($category->image)
+                                                    <div>
+                                                        <img src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" class="avatar avatar-xl me-5">
+                                                    </div>
                                                 @endif
+                                                  <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-xs"><a href="{{ url('show-course-category/'.$category->id) }}">{{ $category->name }}</a></h6>
+                                                    {{-- <p class="text-xs text-secondary mb-0">Slug: {{ $course->slug }}</p> --}}
+                                                  </div>
+                                                </div>
                                             </td>
+                                            <td class="align-middle text-center text-sm">{{ $category->description }}</td>
+
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{
                                                 $category->show == '0' ? 'warning'

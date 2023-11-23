@@ -92,10 +92,12 @@
                                 <a href="" class="dropdown-item">jQuery</a>
                             </div>
                         </div> --}}
-                        <a href="" class="nav-item nav-link">SAT</a>
-                        <a href="" class="nav-item nav-link">Bancos</a>
-                        <a href="" class="nav-item nav-link">Defensa Fiscal</a>
-                        <a href="" class="nav-item nav-link">Comportamiento Tributario</a>
+                        @php
+                            $categoryCourses = \App\Models\CategoryCourse::where('status', 1)->where('show', 1)->get();
+                        @endphp
+                        @foreach ($categoryCourses as $category)
+                            <a href="{{ url('category/'.$category->slug) }}" class="nav-item nav-link">{{ $category->name }}</a>
+                        @endforeach
                     </div>
                 </nav>
             </div>
@@ -119,9 +121,9 @@
                                 $config=DB::table('configs')->first();
                             @endphp --}}
                             <a href="{{ url('/') }}" class="nav-item nav-link active">{{ __('Inicio') }}</a>
-                            <a href="about.html" class="nav-item nav-link">{{ __('Nosotros') }}</a>
-                            <a href="course.html" class="nav-item nav-link">{{ __('Cursos') }}</a>
-                            <a href="teacher.html" class="nav-item nav-link">{{ __('Instructores') }}</a>
+                            <a href="{{ url('about') }}" class="nav-item nav-link">{{ __('Nosotros') }}</a>
+                            <a href="{{ url('courses') }}" class="nav-item nav-link">{{ __('Cursos') }}</a>
+                            <a href="{{ url('teachers') }}" class="nav-item nav-link">{{ __('Instructores') }}</a>
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -129,12 +131,12 @@
                                     <a href="single.html" class="dropdown-item">Noticias</a>
                                 </div>
                             </div> --}}
-                            <a href="contact.html" class="nav-item nav-link">{{ __('Contacto') }}</a>
+                            <a href="{{ url('contact') }}" class="nav-item nav-link">{{ __('Contacto') }}</a>
 
                         </div>
 
 
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">{{ __('Suscribirse') }}</a>
+                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
 
 
 
@@ -161,6 +163,29 @@
                     </div>
                 </nav>
             </div>
+
+            <div class="col-lg-12 p-3">
+
+                <!-- Search Form -->
+                    @php
+                        if (!isset($queryCourse)) {
+                            $queryCourse = null;
+                        }
+                    @endphp
+                    <form action="{{ url('courses') }}" method="GET">
+                        @csrf
+                        <div class="input-group">
+
+                            <input type="text" name="fcourse" class="form-control form-control-lg" placeholder="Buscar curso" value="{{ $queryCourse }}">
+                            <div class="input-group-append">
+                                <button class="input-group-text bg-transparent text-primary"><i
+                                        class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+            </div>
+
         </div>
     </div>
     <!-- Navbar End -->
@@ -187,12 +212,12 @@
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Inicio') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Nosotros') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Cursos') }}</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructores') }}</a>
-                            {{-- <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Blog</a> --}}
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>{{ __('Contacto') }}</a>
+                            <a class="text-white mb-2" href="{{ url('/') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Inicio') }}</a>
+                            <a class="text-white mb-2" href="{{ url('about') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Nosotros') }}</a>
+                            <a class="text-white mb-2" href="{{ url('courses') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Cursos') }}</a>
+                            <a class="text-white mb-2" href="{{ url('teachers') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructores') }}</a>
+                            {{-- <a class="text-white mb-2" href="{{ url('subscribe') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('subscribe') }}</a> --}}
+                            <a class="text-white mb-2" href="{{ url('contact') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Contacto') }}</a>
                         </div>
                     </div>
                 </div>
@@ -206,7 +231,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary px-4">Sign Up</button>
                         </div> --}}
-                        <button class="btn btn-primary px-4">{{ __('Subscribe') }}</button>
+                        <a href="{{ url('subscribe') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
                     </div>
                 </div>
             </div>

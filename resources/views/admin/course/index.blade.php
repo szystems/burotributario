@@ -34,7 +34,7 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Nombre') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Imagen') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Medios') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th>
@@ -43,17 +43,28 @@
                                     <tbody>
                                         @foreach ($courses as $course)
                                         <tr>
-
-                                            <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course/'.$course->id) }}">{{ $course->name }}</a></strong></td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    @if ($course->image)
+                                                    <div>
+                                                        <img src="{{ asset('assets/uploads/courses/'.$course->image) }}" class="avatar avatar-xl me-5">
+                                                    </div>
+                                                @endif
+                                                  <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-xs"><a href="{{ url('show-course/'.$course->id) }}">{{ $course->name }}</a></h6>
+                                                    <p class="text-xs text-secondary mb-0">Slug: {{ $course->slug }}</p>
+                                                  </div>
+                                                </div>
+                                            </td>
                                             @php
                                                 $categoryinfo = \App\Models\CategoryCourse::find($course->category_course_id);
+                                                $numVideos = \App\Models\Video::where('course_id',$course->id)->count();
+                                                $numAudios = \App\Models\Audio::where('course_id',$course->id)->count();
                                             @endphp
                                             <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course-category/'.$course->category_course_id) }}">{{ $categoryinfo->name }}</a></strong></td>
                                             <td class="align-middle text-center text-sm">{{ $course->description }}</td>
                                             <td class="align-middle text-center text-sm">
-                                                @if ($course->image)
-                                                    <img class="border-radius-md w-10" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="{{ $course->name }} imagen">
-                                                @endif
+                                                <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }}</p>
                                             </td>
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{

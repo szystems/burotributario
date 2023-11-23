@@ -35,8 +35,14 @@ use App\Http\Controllers\Frontend\UserController;
 Route::get('/', [FrontendController::class, 'index']);
 
 //vistas
+Route::get('about', [FrontendController::class, 'about']);
+Route::get('courses', [FrontendController::class, 'courses']);
+Route::post('teachers', [FrontendController::class, 'teachers']);
+Route::get('subscribe', [FrontendController::class, 'subscribe']);
 Route::get('contact', [FrontendController::class, 'contact']);
-Route::post('send-contact', [FrontendController::class, 'sendcontact']);
+
+Route::get('category/{slug}', [FrontendController::class, 'showcategorycourses']);
+Route::get('show-course/{category_slug}/{course_slug}', [FrontendController::class, 'showcourse']);
 
 Auth::routes();
 

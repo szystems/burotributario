@@ -53,17 +53,7 @@ class CategoryCourseController extends Controller
         }
 
         $name_category = $request->input('name');
-        $palabras = explode(' ', trim($name_category));
-        $num_palabras = str_word_count($name_category);
-        $slug = $palabras[0];
-        for ($i = 1; $i <= $num_palabras-1; $i++) {
-            $slug = $slug."-".ucwords($palabras[$i]);
-            error_log("slug: ".$slug);
-        }
-        if(CategoryCourse::where('slug',$slug)->exists())
-        {
-            $slug = $slug.$category->id;
-        }
+        $slug = str_replace(' ', '-', $name_category);
 
         $category->name = $request->input('name');
         $category->slug = $slug;
@@ -72,6 +62,14 @@ class CategoryCourseController extends Controller
         $category->popular = $request->input('popular') == TRUE ? '1':'0';
         $category->status = 1;
         $category->save();
+
+        if(CategoryCourse::where('slug',$category->slug)->where('id','!=',$category->id)->exists())
+        {
+            $slug = $category->slug.'-'.$category->id;
+            $category->slug = $slug;
+            $category->update();
+
+        }
 
         return redirect('course-categories')->with('status', __('Curso de categoría agregado correctamente'));
     }
@@ -100,17 +98,7 @@ class CategoryCourseController extends Controller
         }
 
         $name_category = $request->input('name');
-        $palabras = explode(' ', trim($name_category));
-        $num_palabras = str_word_count($name_category);
-        $slug = $palabras[0];
-        for ($i = 1; $i <= $num_palabras-1; $i++) {
-            $slug = $slug."-".ucwords($palabras[$i]);
-            error_log("slug: ".$slug);
-        }
-        if(CategoryCourse::where('slug',$slug)->exists())
-        {
-            $slug = $slug.$category->id;
-        }
+        $slug = str_replace(' ', '-', $name_category);
 
         $category->name = $request->input('name');
         $category->slug = $slug;
@@ -118,6 +106,14 @@ class CategoryCourseController extends Controller
         $category->show = $request->input('show') == TRUE ? '1':'0';
         $category->popular = $request->input('popular') == TRUE ? '1':'0';
         $category->update();
+
+        if(CategoryCourse::where('slug',$category->slug)->where('id','!=',$category->id)->exists())
+        {
+            $slug = $category->slug.'-'.$category->id;
+            $category->slug = $slug;
+            $category->update();
+
+        }
 
         return redirect('course-categories')->with('status',__('Curso de categoría actualizado correctamente'));
     }

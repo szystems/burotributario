@@ -28,7 +28,7 @@ class CourseController extends Controller
             $courses=Course::where('status','=',1)
             ->where('name','LIKE','%'.$queryCourse.'%')
             ->where('category_course_id','LIKE',$queryCategory)
-            ->orderBy('updated_at','desc')
+            ->orderBy('category_course_id','asc')
             ->get();
             $filterCategories = CategoryCourse::where('status', 1)->get();
             $filterCourses = Course::Where('status', 1)->get();
@@ -39,8 +39,8 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
-        $videos = Video::all();
-        $audios = Audio::all();
+        $videos = Video::where('course_id',$id)->get();
+        $audios = Audio::where('course_id',$id)->get();
         return view('admin.course.show', compact('course','videos','audios'));
     }
 
@@ -72,17 +72,7 @@ class CourseController extends Controller
         }
 
         $name_course = $request->input('name');
-        $palabras = explode(' ', trim($name_course));
-        $num_palabras = str_word_count($name_course);
-        $slug = $palabras[0];
-        for ($i = 1; $i <= $num_palabras-1; $i++) {
-            $slug = $slug."-".ucwords($palabras[$i]);
-            error_log("slug: ".$slug);
-        }
-        if(Course::where('slug',$slug)->exists())
-        {
-            $slug = $slug.$course->id;
-        }
+        $slug = str_replace(' ', '-', $name_course);
 
         $course->category_course_id = $request->input('category_course_id');
         $course->name = $request->input('name');
@@ -92,6 +82,14 @@ class CourseController extends Controller
         $course->popular = $request->input('popular') == TRUE ? '1':'0';
         $course->status = 1;
         $course->save();
+
+        if(Course::where('slug',$course->slug)->where('id','!=',$course->id)->exists())
+        {
+            $slug = $course->slug.'-'.$course->id;
+            $course->slug = $slug;
+            $course->update();
+
+        }
 
         // return redirect('index-courses')->with('status', __('Course Added Successfully'));
         return redirect('show-course/'.$course->id)->with('status', __('Curso agregado correctamente'));
@@ -136,17 +134,7 @@ class CourseController extends Controller
         }
 
         $name_course = $request->input('name');
-        $palabras = explode(' ', trim($name_course));
-        $num_palabras = str_word_count($name_course);
-        $slug = $palabras[0];
-        for ($i = 1; $i <= $num_palabras-1; $i++) {
-            $slug = $slug."-".ucwords($palabras[$i]);
-            error_log("slug: ".$slug);
-        }
-        if(Course::where('slug',$slug)->exists())
-        {
-            $slug = $slug.$course->id;
-        }
+        $slug = str_replace(' ', '-', $name_course);
 
         $course->category_course_id = $request->input('category_course_id');
         $course->name = $request->input('name');
@@ -155,6 +143,14 @@ class CourseController extends Controller
         $course->show = $request->input('show') == TRUE ? '1':'0';
         $course->popular = $request->input('popular') == TRUE ? '1':'0';
         $course->update();
+
+        if(Course::where('slug',$course->slug)->where('id','!=',$course->id)->exists())
+        {
+            $slug = $course->slug.'-'.$course->id;
+            $course->slug = $slug;
+            $course->update();
+
+        }
 
         return redirect('index-courses')->with('status',__('Curso actualizado correctamente'));
     }
