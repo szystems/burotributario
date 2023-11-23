@@ -150,7 +150,7 @@
         <div class="container py-5">
             <div class="text-center mb-5">
                 <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
-                <h1>{{ __('Cursos Poupulares') }}</h1>
+                <h1>{{ __('Cursos Populares') }}</h1>
             </div>
             <div class="row">
 
