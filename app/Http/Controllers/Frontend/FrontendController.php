@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Config;
 use App\Models\CategoryCourse;
 use App\Models\Course;
+use App\Models\Video;
+use App\Models\Audio;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
@@ -66,6 +68,20 @@ class FrontendController extends Controller
 
     }
 
+    public function courses(Request $request)
+    {
+        if ($request)
+        {
+            $queryCourse=$request->input('fcourse');
+            $courses=Course::where('name','LIKE','%'.$queryCourse.'%')->where('show',1)->orderBy('name','asc')->paginate(12);
+            $filterCategories = CategoryCourse::where('status', 1)->where('show',1)->get();
+            $filterCourses = Course::Where('status', 1)->get();
+            $popularCourses = Course::where('status', 1)->where('show', 1)->where('popular', 1)->orderby('updated_at','desc')->take(10)->get();
+            $lastCourses = Course::where('status', 1)->where('show', 1)->orderby('updated_at','desc')->take(10)->get();
+            return view('frontend.courses', compact('courses','queryCourse','filterCategories','filterCourses','popularCourses','lastCourses'));
+        }
+    }
+
     public function showcourse($category_slug, $course_slug)
     {
         if(CategoryCourse::where('slug', $category_slug)->where('show',1)->exists())
@@ -73,8 +89,10 @@ class FrontendController extends Controller
             if(Course::where('slug', $course_slug)->where('show',1)->exists())
             {
                 $course = Course::where('slug', $course_slug)->first();
+                $videos = Video::where('course_id',$course->id)->get();
+                $audios = Audio::where('course_id',$course->id)->get();
                 $config = Config::first();
-                return view('frontend.course', compact('course','config'));
+                return view('frontend.course', compact('course','config','videos','audios'));
             }
             else
             {
@@ -87,17 +105,51 @@ class FrontendController extends Controller
         }
     }
 
-    public function courses(Request $request)
+    public function showvideo($course_slug, $video_id)
     {
-        if ($request)
+        if(Course::where('slug', $course_slug)->where('show',1)->exists())
         {
-            $queryCourse=$request->input('fcourse');
-            $courses=Course::where('name','LIKE','%'.$queryCourse.'%')->where('show',1)->orderBy('name','asc')->paginate(12);
-            $filterCategories = CategoryCourse::where('status', 1)->where('show',1)->get();
-            $filterCourses = Course::Where('status', 1)->get();
-            $popularCourses = Course::where('status', 1)->where('show', 1)->where('popular', 1)->orderby('updated_at','desc')->take(10)->get();
-            $lastCourses = Course::where('status', 1)->where('show', 1)->orderby('updated_at','desc')->take(10)->get();
-            return view('frontend.courses', compact('courses','queryCourse','filterCategories','filterCourses','popularCourses','lastCourses'));
+            if(Video::where('id', $video_id)->exists())
+            {
+                $course = Course::where('slug', $course_slug)->first();
+                $video = Video::find($video_id);
+                $videos = Video::where('course_id',$course->id)->get();
+                $audios = Audio::where('course_id',$course->id)->get();
+                $config = Config::first();
+                return view('frontend.video', compact('course','config','video','videos','audios'));
+            }
+            else
+            {
+                return redirect('/')->with('status',"Este video no existe.");
+            }
+        }
+        else
+        {
+            return redirect('/')->with('status',"Esta video no existe.");
+        }
+    }
+
+    public function showaudio($course_slug, $audio_id)
+    {
+        if(Course::where('slug', $course_slug)->where('show',1)->exists())
+        {
+            if(Audio::where('id', $audio_id)->exists())
+            {
+                $course = Course::where('slug', $course_slug)->first();
+                $audio = Audio::find($audio_id);
+                $videos = Video::where('course_id',$course->id)->get();
+                $audios = Audio::where('course_id',$course->id)->get();
+                $config = Config::first();
+                return view('frontend.audio', compact('course','config','audio','videos','audios'));
+            }
+            else
+            {
+                return redirect('/')->with('status',"Este audio no existe.");
+            }
+        }
+        else
+        {
+            return redirect('/')->with('status',"Esta audio no existe.");
         }
     }
 

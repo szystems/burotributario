@@ -33,7 +33,7 @@
 
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Nombre') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
+                                            {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th> --}}
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">{{ __('Medios') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
@@ -62,7 +62,7 @@
                                                 $numAudios = \App\Models\Audio::where('course_id',$course->id)->count();
                                             @endphp
                                             <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course-category/'.$course->category_course_id) }}">{{ $categoryinfo->name }}</a></strong></td>
-                                            <td class="align-middle text-center text-sm">{{ $course->description }}</td>
+                                            {{-- <td class="align-middle text-center text-sm">{{ $course->description }}</td> --}}
                                             <td class="align-middle text-center text-sm">
                                                 <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }}</p>
                                             </td>

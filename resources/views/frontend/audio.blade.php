@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+
 @section('content')
 
     <!-- Header Start -->
@@ -26,18 +27,32 @@
     <!-- Header End -->
 
     <!-- About Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-0">
         <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="">
-                </div>
-                <div class="col-lg-7">
+
+                <div class="col-lg-12">
                     <div class="text-left mb-4">
                         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"><a href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a></h5>
-                        <h1>{{ $course->name }}</h1>
+                        <h2><a href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a></h2>
+                        <h1 align="center"><u>{{ $audio->name }}</u></h1>
                     </div>
-                    <p>{{ $course->description }}</p>
+                </div>
+
+                <div class="col-lg-12 m-0">
+
+                    <div class="ratio ratio-21x3">
+                        <audio controls autoplay controlsList="nodownload">
+                            <source src="{{ asset('assets/uploads/audios/'.$audio->file_audio) }}" type="audio/ogg">
+                            <source src="{{ asset('assets/uploads/ausios/'.$audio->file_audio) }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                </div>
+                <div class="col-lg-12">
+
+                    <p>{{ $audio->description }}</p>
                     <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
                     <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
 
@@ -51,18 +66,18 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-video text-primary mr-2"></i> Videos ({{ $numVideos }})</h3>
+                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-video text-primary mr-2"></i> Videos ({{ $numVideos }}) </h3>
                         <ul class="list-group list-group-flush">
 
-                            @foreach ($videos as $video)
+                            @foreach ($videos as $videoP)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $videoP->name }}</a>
 
-                                    <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($video->description != null)
+                                @if ($videoP->description != null)
                                     <li>
-                                        <p>{{ substr($video->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}">... Ver mas</a></p>
+                                        <p>{{ substr($videoP->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}">... Ver mas</a></p>
                                     </li>
                                 @endif
                             @endforeach
@@ -77,15 +92,15 @@
                         <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-podcast text-primary mr-2"></i> Audios ({{ $numAudios }})</h3>
                         <ul class="list-group list-group-flush">
 
-                            @foreach ($audios as $audio)
+                            @foreach ($audios as $audioP)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $audio->name }}</a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $audioP->name }} @if ($audio->id == $audioP->id) <font color="fa9932">(Reproduciendo)</font> @endif</a>
 
-                                    <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($audio->description != null)
+                                @if ($audioP->description != null)
                                     <li>
-                                        <p>{{ substr($audio->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}">... Ver mas</a></p>
+                                        <p>{{ substr($audioP->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}">... Ver mas</a></p>
                                     </li>
                                 @endif
                             @endforeach

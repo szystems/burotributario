@@ -43,6 +43,10 @@ Route::get('contact', [FrontendController::class, 'contact']);
 
 Route::get('category/{slug}', [FrontendController::class, 'showcategorycourses']);
 Route::get('show-course/{category_slug}/{course_slug}', [FrontendController::class, 'showcourse']);
+Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
+Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+
+
 
 Auth::routes();
 

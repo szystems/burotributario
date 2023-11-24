@@ -29,6 +29,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('elearning/css/style.css" rel="stylesheet') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" /> --}}
 
 </head>
 
@@ -120,10 +121,10 @@
 
                                 $config=DB::table('configs')->first();
                             @endphp --}}
-                            <a href="{{ url('/') }}" class="nav-item nav-link active">{{ __('Inicio') }}</a>
-                            <a href="{{ url('about') }}" class="nav-item nav-link">{{ __('Nosotros') }}</a>
-                            <a href="{{ url('courses') }}" class="nav-item nav-link">{{ __('Cursos') }}</a>
-                            <a href="{{ url('teachers') }}" class="nav-item nav-link">{{ __('Instructores') }}</a>
+                            <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active':''  }}">{{ __('Inicio') }}</a>
+                            <a href="{{ url('about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active':''  }}">{{ __('Nosotros') }}</a>
+                            <a href="{{ url('courses') }}" class="nav-item nav-link {{ Request::is('courses') ? 'active':''  }}">{{ __('Cursos') }}</a>
+                            <a href="{{ url('teachers') }}" class="nav-item nav-link {{ Request::is('teachers') ? 'active':''  }}">{{ __('Instructores') }}</a>
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -131,7 +132,7 @@
                                     <a href="single.html" class="dropdown-item">Noticias</a>
                                 </div>
                             </div> --}}
-                            <a href="{{ url('contact') }}" class="nav-item nav-link">{{ __('Contacto') }}</a>
+                            <a href="{{ url('contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active':''  }}">{{ __('Contacto') }}</a>
 
                         </div>
 

@@ -32,7 +32,7 @@
                                         <tr>
 
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Categoría') }}</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th>
+                                            {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Descripción') }}</th> --}}
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Esconder/Mostrar') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Popular') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th>
@@ -54,7 +54,7 @@
                                                   </div>
                                                 </div>
                                             </td>
-                                            <td class="align-middle text-center text-sm">{{ $category->description }}</td>
+                                            {{-- <td class="align-middle text-center text-sm">{{ $category->description }}</td> --}}
 
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{

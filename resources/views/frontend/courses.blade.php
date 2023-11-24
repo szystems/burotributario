@@ -67,14 +67,17 @@
                                     <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>
 
 
-
-                                    <div class="border-top mt-4 pt-4">
-                                        <div class="d-flex justify-content-between">
-                                            {{-- <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                            <h5 class="m-0">$99</h5> --}}
-                                            <p>{{ $course->description }}</p>
+                                    @if ($course->description != null)
+                                        <div class="border-top mt-4 pt-4">
+                                            <div class="d-flex justify-content-between">
+                                                {{-- <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
+                                                <h5 class="m-0">$99</h5> --}}
+                                                <p>{{ substr($course->description, 0, 100) }}
+                                                    <a class="h7" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">... Ver mas</a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
