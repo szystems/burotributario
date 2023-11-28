@@ -54,6 +54,14 @@
                 </a>
             </li> --}}
             <li class="nav-item">
+                <a class="nav-link text-white {{ Request::is('instructors','show-instructor/*','add-instructor','edit-instructor/*') ? 'active bg-gradient-info':''  }}" href="{{ url('instructors') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">school</i>
+                    </div>
+                    <span class="nav-link-text ms-1">{{ __('Instructores') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white {{ Request::is('course-categories','show-course-category/*','add-course-category','edit-course-category/*') ? 'active bg-gradient-info':''  }}" href="{{ url('course-categories') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">category</i>

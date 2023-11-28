@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Config;
+use App\Models\Instructor;
 use App\Models\CategoryCourse;
 use App\Models\Course;
 use App\Models\Video;
@@ -25,6 +26,17 @@ class FrontendController extends Controller
         $popularCourses = Course::where('status', 1)->where('show', 1)->where('popular', 1)->orderby('updated_at','desc')->take(6)->get();
         $lastCourses = Course::where('status', 1)->where('show', 1)->orderby('updated_at','desc')->take(6)->get();
         return view('frontend.index', compact('config','categories','popularCourses','lastCourses'));
+    }
+
+    public function about()
+    {
+        return view('frontend.about');
+    }
+
+    public function teachers()
+    {
+        $teachers = Instructor::all();
+        return view('frontend.teachers', compact('teachers'));
     }
 
 
@@ -50,6 +62,12 @@ class FrontendController extends Controller
         Session::flash('alert-class', 'alert-success');
 
         return view('frontend.contact', compact('config'));
+    }
+
+    public function showcategories()
+    {
+        $categories=CategoryCourse::where('status',1)->where('show',1)->orderBy('name','asc')->paginate(12);
+        return view('frontend.categories', compact('categories'));
     }
 
     public function showcategorycourses($slug)
@@ -91,8 +109,9 @@ class FrontendController extends Controller
                 $course = Course::where('slug', $course_slug)->first();
                 $videos = Video::where('course_id',$course->id)->get();
                 $audios = Audio::where('course_id',$course->id)->get();
+                $instructors = Instructor::all();
                 $config = Config::first();
-                return view('frontend.course', compact('course','config','videos','audios'));
+                return view('frontend.course', compact('course','config','videos','audios','instructors'));
             }
             else
             {

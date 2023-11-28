@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="col-lg-12">
-
+                    <hr>
                     <p>{{ $audio->description }}</p>
                     <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
                     <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>

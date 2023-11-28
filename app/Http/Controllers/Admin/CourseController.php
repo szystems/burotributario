@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\CategoryCourse;
 use App\Models\Course;
+use App\Models\CourseInstructor;
 use App\Models\Video;
 use App\Models\Audio;
 use App\Http\Requests\CourseFormRequest;
@@ -41,7 +42,8 @@ class CourseController extends Controller
         $course = Course::find($id);
         $videos = Video::where('course_id',$id)->get();
         $audios = Audio::where('course_id',$id)->get();
-        return view('admin.course.show', compact('course','videos','audios'));
+        $instructors = CourseInstructor::where('course_id',$id)->get();
+        return view('admin.course.show', compact('course','videos','audios','instructors'));
     }
 
     public function add()

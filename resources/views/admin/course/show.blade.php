@@ -105,9 +105,125 @@
 
         </div>
 
+
         <div class="container-fluid py-4">
             <div class="row">
 
+                {{-- instructores --}}
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-warning shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3"><i class="material-icons opacity-10">school</i> {{ __('Instructores') }} ({{ $instructors->count() }})</h6>
+                            </div>
+                        </div>
+
+                        {{-- <div class="card-body p-4 pt-5">
+                            <a href="{{ url('add-video/'.$course->id) }}" class="btn btn-success">
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Video') }}
+                            </a>
+
+                        </div> --}}
+
+                        <div class="card-body p-4 pt-5">
+
+                            <p>
+                                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="material-icons opacity-10">add</i> {{ __('Agregar Instructor') }}
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    <form class="formvideo" action="{{ url('insert-course-instructor') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+
+                                            @php
+                                                $instructorsSelect = \App\Models\Instructor::all();
+                                            @endphp
+                                            <div class="col-md-12 mb-3">
+                                                <label for="">{{ __('Categoría del Curso') }}</label>
+                                                <select class="form-select px-2" aria-label="Default select example" name="instructor_id">
+                                                    <option value="">{{ __('Select Instructor') }}...</option>
+                                                    @foreach($instructorsSelect as $instructorSelect)
+                                                        <option value="{{ $instructorSelect->id }}">{{ $instructorSelect->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-12 mb-3" >
+                                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                                <button type="submit" class="btn btn-info float-end"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-body p-4 pt-5">
+                            @if ($instructors->count() == 0)
+                                <div class="card-header p-4 position-relative mt-n4 mx-3 z-index-2">
+                                    <div class="alert alert-primary text-white" role="alert">
+                                        <strong>{{ __('No se encontraron Instructores agregados!') }}</strong>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="table-responsive">
+                                    <table class="table table-sm align-products-center mb-0 table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{ __('Instructor') }}</th>
+                                                <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><i class="material-icons">format_list_bulleted</i></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($instructors as $instructor)
+                                            @php
+                                                $instructorInfo = \App\Models\Instructor::find($instructor->instructor_id);
+                                            @endphp
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            @if ($instructorInfo->image)
+                                                            <div>
+                                                                <img src="{{ asset('assets/uploads/instructors/'.$instructorInfo->image) }}" class="avatar avatar-xl me-5">
+                                                            </div>
+                                                        @endif
+                                                          <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-xs">{{ $instructorInfo->name }}</h6>
+                                                            {{-- <p class="text-xs text-secondary mb-0">Slug: {{ $course->slug }}</p> --}}
+                                                          </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle text-sm">
+                                                        <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#deleteModalInstructor-{{ $instructor->id }}">
+                                                            <i class="material-icons">delete</i>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            @include('admin.course.deletemodalinstructor')
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            @endif
+
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            {{-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p> --}}
+
+                        </div>
+                    </div>
+                </div>
+
+                {{-- videos --}}
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -266,6 +382,7 @@
                     </div>
                 </div>
 
+                {{-- audios --}}
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">

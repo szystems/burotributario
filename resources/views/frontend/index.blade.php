@@ -46,12 +46,71 @@
     </div> --}}
     <!-- Carousel End -->
 
-
     <!-- Registration Start -->
-    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+    <div class="container-fluid bg-registration py-5" style="margin: 15px 0;">
         <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-lg-4 mb-5 mb-lg-0">
+
+                <div class="col-lg-4">
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-2">
+                            <h1 class="m-0">Login</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-0">
+                            <form method="POST" action="{{ route('login') }}" class="billing-form ftco-bg-dark p-3 p-md-5">
+                                @csrf
+                                {{-- <h3 class="mb-4 billing-heading"> {{ __('Login') }}</h3> --}}
+                                <div class="row align-items-end">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="firstname" class="h6">{{ __('Email') }}</label>
+                                            <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="lastname" class="h6">{{ __('Password') }}</label>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <input type="checkbox" onclick="showpassword()"> <label for="" class="h6">{{ __('Mostrar Password') }}</label>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                            <label class="form-check-label h6" for="remember">
+                                                {{ __('Recordar mis datos') }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <p><button type="submit" class="btn btn-dark py-3 px-4 w-100"><font color="white"><strong>{{ __('Login') }}</strong></font></button></p>
+                                        </div>
+                                        <a class="h6" href="{{ route('register') }}">{{ __('Crear una cuenta') }}</a><br>
+                                        @if (Route::has('password.request'))
+                                            <a class="h6" href="{{ route('password.request') }}">{{ __('¿Olvidaste tu contraseña?') }}</a>
+                                        @endif
+
+
+                                    </div>
+
+
+                                </div>
+                            </form><!-- END -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0 m-3">
                     <div class="mb-4">
                         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Suscribirse</h5>
                         <h1 class="text-white">10% de descuento en suscripción anual</h1>
@@ -66,7 +125,7 @@
                 <div class="col-lg-4">
                     <div class="card border-0">
                         <div class="card-header bg-light text-center p-4">
-                            <h1 class="m-0">Mensual</h1>
+                            <h1 class="m-0">Suscripción</h1>
                         </div>
                         <div class="card-body rounded-bottom bg-primary p-5">
                             <form>
@@ -85,40 +144,18 @@
                                     </select>
                                 </div> --}}
                                 <div>
-                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">$.9.99</button>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Mensual $.9.99</button>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card border-0">
-                        <div class="card-header bg-light text-center p-4">
-                            <h1 class="m-0">Anual</h1>
-                        </div>
-                        <div class="card-body rounded-bottom bg-primary p-5">
-                            <form>
-                                {{-- <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Your name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select border-0 px-4" style="height: 47px;">
-                                        <option selected>Select a course</option>
-                                        <option value="1">Course 1</option>
-                                        <option value="2">Course 1</option>
-                                        <option value="3">Course 1</option>
-                                    </select>
-                                </div> --}}
+                                <br>
                                 <div>
-                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">$.99.99</button>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Anual $.99.99</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -130,7 +167,7 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{ asset('elearning/img/about.jpg') }}" alt="">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{ asset('elearning/img/logos/logo.png') }}" alt="">
                 </div>
                 <div class="col-lg-7">
                     <div class="text-left mb-4">
@@ -138,7 +175,7 @@
                         <h1>Expertos en consultoria Tributaria y defensa fiscal</h1>
                     </div>
                     <p>Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita, ipsum dolores amet voluptua duo dolores et sit ipsum rebum, sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus gubergren sit rebum clita amet, sea est sea vero sed et. Sadipscing labore tempor at sit dolor clita consetetur diam. Diam ut diam tempor no et, lorem dolore invidunt no nonumy stet ea labore, dolor justo et sit gubergren diam sed sed no ipsum. Sit tempor ut nonumy elitr dolores justo aliquyam ipsum stet</p>
-                    <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                    <a href="{{ url('about') }}" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Ver mas...</a>
                 </div>
             </div>
         </div>
@@ -267,7 +304,16 @@
     <!-- Category Start -->
 
 
-
+    <Script>
+        function showpassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+    </Script>
 
 
 

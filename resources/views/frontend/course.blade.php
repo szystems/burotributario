@@ -38,6 +38,23 @@
                         <h1>{{ $course->name }}</h1>
                     </div>
                     <p>{{ $course->description }}</p>
+                    @if ($instructors->count() != 0)
+                        <h4>Instructores</h4>
+                        <ul class="list-group">
+                            @foreach ($instructors as $instructor)
+                                <li class="list-group-item">
+                                    <a href="{{ url('teachers') }}">{{ $instructor->name }}</a>
+                                    <hr>
+                                    <div class="team-social">
+                                        @if ($instructor->facebook)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->facebook }}"><i class="fab fa-facebook-f"></i></a>@endif
+                                        @if ($instructor->twitter)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->twitter }}"><i class="fab fa-twitter"></i></a>@endif
+                                        @if ($instructor->instagram)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->instagram }}"><i class="fab fa-instagram"></i></a>@endif
+                                        @if ($instructor->linkedin)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->linkedin }}"><i class="fab fa-linkedin-in"></i></a>@endif
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
                     <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
 

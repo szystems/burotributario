@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\CourseInstructorController;
 use App\Http\Controllers\Admin\CategoryCourseController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\VideoController;
@@ -37,10 +39,11 @@ Route::get('/', [FrontendController::class, 'index']);
 //vistas
 Route::get('about', [FrontendController::class, 'about']);
 Route::get('courses', [FrontendController::class, 'courses']);
-Route::post('teachers', [FrontendController::class, 'teachers']);
+Route::get('teachers', [FrontendController::class, 'teachers']);
 Route::get('subscribe', [FrontendController::class, 'subscribe']);
 Route::get('contact', [FrontendController::class, 'contact']);
 
+Route::get('categories', [FrontendController::class, 'showcategories']);
 Route::get('category/{slug}', [FrontendController::class, 'showcategorycourses']);
 Route::get('show-course/{category_slug}/{course_slug}', [FrontendController::class, 'showcourse']);
 Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
@@ -77,6 +80,15 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('delete-user/{id}', [DashboardController::class, 'destroyuser']);
     Route::get('pdf-user', [DashboardController::class, 'pdf']);
 
+    //Admin Instructors
+    Route::get('instructors',[InstructorController::class, 'index']);
+    Route::get('show-instructor/{id}',[InstructorController::class, 'show']);
+    Route::get('add-instructor', [InstructorController::class, 'add']);
+    Route::post('insert-instructor', [InstructorController::class, 'insert']);
+    Route::get('edit-instructor/{id}',[InstructorController::class,'edit']);
+    Route::put('update-instructor/{id}', [InstructorController::class, 'update']);
+    Route::get('delete-instructor/{id}', [InstructorController::class, 'destroy']);
+
     //Admin Course Category
     Route::get('course-categories',[CategoryCourseController::class, 'index']);
     Route::get('show-course-category/{id}',[CategoryCourseController::class, 'show']);
@@ -94,6 +106,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-course/{id}',[CourseController::class,'edit']);
     Route::put('update-course/{id}', [CourseController::class, 'update']);
     Route::get('delete-course/{id}', [CourseController::class, 'destroy']);
+
+    //Admin Course Instructors
+    Route::post('insert-course-instructor',[CourseInstructorController::class, 'insert']);
+    Route::get('delete-course-instructor/{id}', [CourseInstructorController::class, 'destroy']);
 
     //Admin Video
     Route::get('add-video/{id}', [VideoController::class, 'add']);

@@ -2,24 +2,22 @@
 {{-- Contact View --}}
 @section('content')
 
-    <section class="home-slider owl-carousel">
-
-        <div class="slider-item" style="background-image: url({{ asset('bocacostacoffeeweb/images/varias/11.jpg')}});"
-            data-stellar-background-ratio="0.5">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text justify-content-center align-items-center">
-
-                    <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                        <h1 class="mb-3 mt-5 bread">{{ __('Contact') }}</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">{{ __('Home') }}</a></span> <span>{{ __('Contacto') }}</span>
-                        </p>
-                    </div>
-
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+                <h3 class="display-4 text-white text-uppercase">Contacto</h3>
+                {{-- <p class="h7" href=""><font color="white">{{ $category->description }}</font></p> --}}
+                {{-- <p class="h7" href=""><font color="fa9932">{{ $categoryCourses->count() }} Cursos</font></p> --}}
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="{{ url('/') }}">Inicio</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Contacto</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Header End -->
 
     <section class="ftco-section contact-section">
         <div class="container mt-5">

@@ -8,16 +8,16 @@
                 <div class="card-header p-3 pt-2">
                     <div
                         class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">category</i>
+                        <i class="material-icons opacity-10">school</i>
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Categorías de Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Instructores') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Agregar') }} {{ __('Categoría de Cursos') }}</u></h4>
+                    <h4><u>{{ __('Agregar') }} {{ __('Instructor') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -28,7 +28,7 @@
                         </div>
 
                     @endif
-                    <form action="{{ url('insert-course-category') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('insert-instructor') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -53,17 +53,49 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="show" >
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ __('Esconder/Mostrar') }}</label>
-                                </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="">{{ __('Facebook Link') }}</label>
+                                <input type="text" class="form-control border px-2 " name="facebook" value="{{ old('facebook') }}" >
+                                @if ($errors->has('facebook'))
+                                    <span class="help-block opacity-7">
+                                            <strong>
+                                                <font color="red">{{ $errors->first('facebook') }}</font>
+                                            </strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="popular" >
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Popular</label>
-                                </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="">{{ __('Twitter Link') }}</label>
+                                <input type="text" class="form-control border px-2 " name="twitter" value="{{ old('twitter') }}" >
+                                @if ($errors->has('twitter'))
+                                    <span class="help-block opacity-7">
+                                            <strong>
+                                                <font color="red">{{ $errors->first('twitter') }}</font>
+                                            </strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="">{{ __('Instagram Link') }}</label>
+                                <input type="text" class="form-control border px-2 " name="instagram" value="{{ old('instagram') }}" >
+                                @if ($errors->has('instagram'))
+                                    <span class="help-block opacity-7">
+                                            <strong>
+                                                <font color="red">{{ $errors->first('instagram') }}</font>
+                                            </strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="">{{ __('Linkedin Link') }}</label>
+                                <input type="text" class="form-control border px-2 " name="linkedin" value="{{ old('linkedin') }}" >
+                                @if ($errors->has('linkedin'))
+                                    <span class="help-block opacity-7">
+                                            <strong>
+                                                <font color="red">{{ $errors->first('linkedin') }}</font>
+                                            </strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="">Imagen</label>

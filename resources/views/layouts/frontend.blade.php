@@ -93,6 +93,7 @@
                                 <a href="" class="dropdown-item">jQuery</a>
                             </div>
                         </div> --}}
+                        <a href="{{ url('categories') }}" class="nav-item nav-link">Todas las Categorías</a>
                         @php
                             $categoryCourses = \App\Models\CategoryCourse::where('status', 1)->where('show', 1)->get();
                         @endphp
