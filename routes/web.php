@@ -53,7 +53,7 @@ Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::cl
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+ Route::get('/home', [FrontendController::class, 'index'])->name('home');
 
 //User Dashbord
 Route::middleware(['auth'])->group(function () {
