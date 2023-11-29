@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-5 mb-lg-0 m-3">
+                <div class="col-lg-3 mb-5 mb-lg-0 m-3">
                     <div class="mb-4">
                         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Suscribirse</h5>
                         <h1 class="text-white">10% de descuento en suscripción anual</h1>

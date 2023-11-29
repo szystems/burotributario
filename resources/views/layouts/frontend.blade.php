@@ -143,7 +143,17 @@
 
 
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-2x fa-user text-info mr-3"></i></a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-2x fa-user text-info mr-3"></i>
+                                @if (Auth::guest())
+                                    {{ __('Cuenta') }}
+                                @else
+                                    @php
+                                        $usuario = Auth::user()->name; $nombre = explode(' ',trim($usuario));
+                                    @endphp
+                                    {{ ucwords($nombre[0]) }}
+                                @endif
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right rounded-0 m-0">
                                 @if (Auth::guest())
                                     <a href="{{ route('login') }}" class="dropdown-item">{{ __('Login') }}</a>
@@ -331,6 +341,12 @@
 
 
     </script>
+    @if (session('status'))
+        <script>
+            swal("{{ session('status') }}");
+        </script>
+    @endif
+    @yield('scripts')
 
     {{-- modal --}}
     {{-- @if ($config->advertisement == 1 and Request::is('/'))

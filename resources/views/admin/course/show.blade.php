@@ -194,7 +194,7 @@
                                                             </div>
                                                         @endif
                                                           <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-xs">{{ $instructorInfo->name }}</h6>
+                                                            <h6 class="mb-0 text-xs"><a href="{{ url('show-instructor/'.$instructorInfo->id) }}">{{ $instructorInfo->name }}</a></h6>
                                                             {{-- <p class="text-xs text-secondary mb-0">Slug: {{ $course->slug }}</p> --}}
                                                           </div>
                                                         </div>
