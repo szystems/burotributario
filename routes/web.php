@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\AudioController;
 //user
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +48,7 @@ Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('categories', [FrontendController::class, 'showcategories']);
 Route::get('category/{slug}', [FrontendController::class, 'showcategorycourses']);
 Route::get('show-course/{category_slug}/{course_slug}', [FrontendController::class, 'showcourse']);
-Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
-Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+
 
 
 
@@ -63,6 +64,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user-details/{id}', [UserController::class, 'showuser']);
     Route::get('user-edit/{id}', [UserController::class, 'edituser']);
     Route::put('user-update/{id}', [UserController::class, 'updateuser']);
+
+    //video y audio
+    Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
+    Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+
+    //Payments
+    Route::get('checkout', [FrontendController::class, 'checkout'])->name('checkout');
+    Route::post('/payments/pay', [PaymentController::class, 'pay'])->name('pay');
+    Route::get('/payments/approval', [PaymentController::class, 'approval'])->name('approval');
+    Route::get('/payments/cancelled', [PaymentController::class, 'cancelled'])->name('cancelled');
+
+    //suscripciones
+    Route::prefix('subscribe')
+    ->name('subscribe.')
+    ->group(function() {
+        Route::get('/', [SubscriptionController::class, 'show'])->name('show');
+        Route::post('/', [SubscriptionController::class, 'store'])->name('store');
+        Route::get('/approval', [SubscriptionController::class, 'approval'])->name('approval');
+        Route::get('/cancelled', [SubscriptionController::class, 'cancelled'])->name('cancelled');
+    });
 
 });
 

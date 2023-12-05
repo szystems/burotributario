@@ -153,7 +153,7 @@
 
                                             <div class="col-md-12 mb-3" >
                                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-                                                <button type="submit" class="btn btn-info float-end"><i class="material-icons">save</i> {{ __('Save') }}</button>
+                                                <button type="submit" class="btn btn-info float-end"><i class="material-icons">add</i> {{ __('Agregar') }}</button>
                                             </div>
 
                                         </div>

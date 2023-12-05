@@ -11,6 +11,8 @@ use App\Models\CategoryCourse;
 use App\Models\Course;
 use App\Models\Video;
 use App\Models\Audio;
+use App\Models\Currency;
+use App\Models\PaymentPlatform;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
@@ -171,5 +173,15 @@ class FrontendController extends Controller
             return redirect('/')->with('status',"Esta audio no existe.");
         }
     }
+
+    public function checkout()
+    {
+        $currencies = Currency::all();
+        $paymentPlatforms = PaymentPlatform::all();
+        return view('frontend.checkout', compact('currencies','paymentPlatforms'));
+    }
+
+
+
 
 }

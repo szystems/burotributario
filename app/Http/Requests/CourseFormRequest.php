@@ -24,6 +24,7 @@ class CourseFormRequest extends FormRequest
     public function rules()
     {
         return [
+            'category_course_id'=>'required',
             'name'=>'required',
             'description'=>'nullable',
             'image'=>'mimes:jpg,jpeg,bmp,png|max:3000',

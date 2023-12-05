@@ -30,7 +30,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('elearning/css/style.css" rel="stylesheet') }}">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" /> --}}
-
+    @stack('styles')
 </head>
 
 <body>
@@ -137,8 +137,13 @@
 
                         </div>
 
-
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
+                        @if (Auth::guest())
+                            <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('login') }}">{{ __('Suscribirse') }}</a>
+                        @else
+                            @if (! optional(auth()->user())->hasActiveSubscription())
+                                <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
+                            @endif
+                        @endif
 
 
 
@@ -235,17 +240,30 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-12 mb-5">
-                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Subscribe') }}</h5>
-                <p>Escoge el plan que mas se adecue a tus necesidades</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        {{-- <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">Sign Up</button>
-                        </div> --}}
-                        <a href="{{ url('subscribe') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
+                @if (Auth::guest())
+                    <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Subscribe') }}</h5>
+                    <p>Escoge el plan que mas se adecue a tus necesidades</p>
+                    <div class="w-100">
+                        <div class="input-group">
+                            {{-- <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">Sign Up</button>
+                            </div> --}}
+                            <a href="{{ url('login') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
+                        </div>
                     </div>
-                </div>
+                @else
+                    @if (! optional(auth()->user())->hasActiveSubscription())
+                        <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Subscribe') }}</h5>
+                        <p>Escoge el plan que mas se adecue a tus necesidades</p>
+                        <div class="w-100">
+                            <div class="input-group">
+                                <a href="{{ url('subscribe') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
             </div>
         </div>
     </div>
@@ -363,7 +381,7 @@
     </script>
     @endif
     @yield('scripts') --}}
-
+    @stack('scripts')
 </body>
 
 </html>
