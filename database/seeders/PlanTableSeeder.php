@@ -15,6 +15,12 @@ class PlanTableSeeder extends Seeder
     public function run()
     {
         Plan::create([
+            'slug' => 'gratis',
+            'price' => 0, //99.99
+            'duration_in_days' => 90,
+        ]);
+
+        Plan::create([
             'slug' => 'mensual',
             'price' => 999, //12.00
             'duration_in_days' => 30,

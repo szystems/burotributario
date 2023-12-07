@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CategoryCourseController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\AudioController;
+use App\Http\Controllers\Admin\SubsController;
 
 //user
 use App\Http\Controllers\Frontend\FrontendController;
@@ -64,10 +65,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user-details/{id}', [UserController::class, 'showuser']);
     Route::get('user-edit/{id}', [UserController::class, 'edituser']);
     Route::put('user-update/{id}', [UserController::class, 'updateuser']);
+    Route::get('user-subscription/{id}', [UserController::class, 'showsubscription']);
 
     //video y audio
-    Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
-    Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+    Route::middleware(['subscribed'])->group(function () {
+        Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
+        Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+    });
 
     //Payments
     Route::get('checkout', [FrontendController::class, 'checkout'])->name('checkout');
@@ -100,6 +104,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::put('update-user/{id}', [DashboardController::class, 'updateuser']);
     Route::get('delete-user/{id}', [DashboardController::class, 'destroyuser']);
     Route::get('pdf-user', [DashboardController::class, 'pdf']);
+
+    //Admin Users
+    Route::get('index-subscriptions', [SubsController::class, 'index']);
+    Route::post('insert-subscription', [SubsController::class, 'insert']);
+    Route::put('update-subscription/{id}', [SubsController::class, 'update']);
+    Route::get('delete-subscription/{id}', [SubsController::class, 'destroy']);
 
     //Admin Instructors
     Route::get('instructors',[InstructorController::class, 'index']);

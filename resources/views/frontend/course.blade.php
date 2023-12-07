@@ -39,17 +39,20 @@
                     </div>
                     <p>{{ $course->description }}</p>
                     @if ($instructors->count() != 0)
-                        <h4>Instructores</h4>
+                        <h4>Instructores ({{ $instructors->count() }})</h4>
                         <ul class="list-group">
                             @foreach ($instructors as $instructor)
+                                @php
+                                    $instructorInfo = \App\Models\Instructor::where('id', $instructor->instructor_id)->first();
+                                @endphp
                                 <li class="list-group-item">
-                                    <a href="{{ url('teachers') }}">{{ $instructor->name }}</a>
+                                    <a href="{{ url('teachers') }}">{{ $instructorInfo->name }}</a>
                                     <hr>
                                     <div class="team-social">
-                                        @if ($instructor->facebook)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->facebook }}"><i class="fab fa-facebook-f"></i></a>@endif
-                                        @if ($instructor->twitter)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->twitter }}"><i class="fab fa-twitter"></i></a>@endif
-                                        @if ($instructor->instagram)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->instagram }}"><i class="fab fa-instagram"></i></a>@endif
-                                        @if ($instructor->linkedin)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructor->linkedin }}"><i class="fab fa-linkedin-in"></i></a>@endif
+                                        @if ($instructorInfo->facebook)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructorInfo->facebook }}"><i class="fab fa-facebook-f"></i></a>@endif
+                                        @if ($instructorInfo->twitter)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructorInfo->twitter }}"><i class="fab fa-twitter"></i></a>@endif
+                                        @if ($instructorInfo->instagram)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructorInfo->instagram }}"><i class="fab fa-instagram"></i></a>@endif
+                                        @if ($instructorInfo->linkedin)<a class="btn btn-outline-dark btn-square mx-1" href="{{ $instructorInfo->linkedin }}"><i class="fab fa-linkedin-in"></i></a>@endif
                                     </div>
                                 </li>
                             @endforeach
@@ -73,8 +76,19 @@
 
                             @foreach ($videos as $video)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    {{-- @if (Auth::guest())
+                                        <a href="{{ url('login') }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
+                                        <a href="{{ url('login') }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    @else
+                                        @if (! optional(auth()->user())->hasActiveSubscription())
+                                            <a href="{{ url('subscribe') }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
+                                            <a href="{{ url('subscribe') }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                        @else
+                                            <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
+                                            <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                        @endif
+                                    @endif --}}
                                     <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
-
                                     <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
                                 @if ($video->description != null)

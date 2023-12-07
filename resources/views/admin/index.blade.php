@@ -18,24 +18,8 @@
                 <div class="row mb-4">
                     <div class="col-xl-12">
                         <div class="row">
-                            <div class="col-md-2 col-6">
-                                <div class="card">
-                                    <a href="{{ url('show-user/'.Auth::id()) }}">
-                                        <div class="card-header mx-4 p-3 text-center">
-                                            <div
-                                                class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
-                                                <i class="material-icons opacity-10">person</i>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-0 p-3 text-center">
-                                            <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Mi Perfil') }}</h5>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
 
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6 p-2">
                                 <div class="card">
                                     <a href="{{ url('instructors') }}">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -52,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6 p-2">
                                 <div class="card">
                                     <a href="{{ url('course-categories') }}">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -68,7 +52,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6 p-2">
                                 <div class="card">
                                     <a href="{{ url('index-courses') }}">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -84,7 +68,23 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6 p-2">
+                                <div class="card">
+                                    <a href="{{ url('index-subscriptions') }}">
+                                        <div class="card-header mx-4 p-3 text-center">
+                                            <div
+                                                class="icon icon-shape icon-lg bg-gradient-info shadow text-center border-radius-lg">
+                                                <i class="material-icons opacity-10">workspace_premium</i>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 p-3 text-center">
+                                            <hr class="horizontal dark my-3">
+                                            <h5 class="mb-0">{{ __('Suscripciones') }}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 p-2">
                                 <div class="card">
                                     <a href="{{ url('users') }}">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -102,7 +102,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6  p-2">
                                 <div class="card">
                                     <a href="{{ url('config') }}">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -116,6 +116,22 @@
                                             <span class="text-xs">Freelance Payment</span> --}}
                                             <hr class="horizontal dark my-3">
                                             <h5 class="mb-0">{{ __('Configuración') }}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 p-2">
+                                <div class="card">
+                                    <a href="{{ url('show-user/'.Auth::id()) }}">
+                                        <div class="card-header mx-4 p-3 text-center">
+                                            <div
+                                                class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
+                                                <i class="material-icons opacity-10">person</i>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 p-3 text-center">
+                                            <hr class="horizontal dark my-3">
+                                            <h5 class="mb-0">{{ __('Mi Perfil') }}</h5>
                                         </div>
                                     </a>
                                 </div>

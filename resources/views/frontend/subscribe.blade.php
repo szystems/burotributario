@@ -39,23 +39,24 @@
                                 <div class="form-group">
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         @foreach ($plans as $plan)
-                                            <label
-                                                class="btn btn-outline-info rounded m-2 p-3"
-                                            >
-                                                <input
-                                                    type="radio"
-                                                    name="plan"
-                                                    value="{{ $plan->slug }}"
-                                                    required
-                                                >
-                                                <p class="h2 font-weight-bold text-capitalize">
-                                                    {{ $plan->slug }}
-                                                </p>
+                                            @if ($plan->slug != "gratis")
+                                                <label class="btn btn-outline-info rounded m-2 p-3">
+                                                    <input
+                                                        type="radio"
+                                                        name="plan"
+                                                        value="{{ $plan->slug }}"
+                                                        required
+                                                    >
+                                                    <p class="h2 font-weight-bold text-capitalize">
+                                                        {{ $plan->slug }}
+                                                    </p>
 
-                                                <p class="display-4 text-capitalize">
-                                                    {{ $plan->visual_price }}
-                                                </p>
-                                            </label>
+                                                    <p class="display-4 text-capitalize">
+                                                        {{ $plan->visual_price }}
+                                                    </p>
+                                                </label>
+                                            @endif
+
                                         @endforeach
                                     </div>
                                 </div>

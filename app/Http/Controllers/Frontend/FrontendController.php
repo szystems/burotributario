@@ -9,6 +9,7 @@ use App\Models\Config;
 use App\Models\Instructor;
 use App\Models\CategoryCourse;
 use App\Models\Course;
+use App\Models\CourseInstructor;
 use App\Models\Video;
 use App\Models\Audio;
 use App\Models\Currency;
@@ -111,7 +112,7 @@ class FrontendController extends Controller
                 $course = Course::where('slug', $course_slug)->first();
                 $videos = Video::where('course_id',$course->id)->get();
                 $audios = Audio::where('course_id',$course->id)->get();
-                $instructors = Instructor::all();
+                $instructors = CourseInstructor::where('course_id',$course->id)->get();
                 $config = Config::first();
                 return view('frontend.course', compact('course','config','videos','audios','instructors'));
             }

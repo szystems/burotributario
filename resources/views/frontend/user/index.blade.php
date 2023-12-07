@@ -20,6 +20,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item active"><a class="h4" href="{{ url('my-account') }}"><font color="white">{{ __('Mi Cuenta') }}</font></a></li>
                                 <li class="list-group-item"><a href="{{ url('user-details/'.Auth::id()) }}">- {{ __('Detalles de Cuenta') }}</a></li>
+                                <li class="list-group-item"><a href="{{ url('user-subscription/'.Auth::id()) }}">- {{ __('Suscripción') }}</a></li>
                                 <li class="list-group-item">
                                     <a href="javascript:; {{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"><span>{{ __('Cerrar Sesión') }}</span></a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Subscription;
+use App\Models\Plan;
 use App\Models\Config;
 use App\Http\Requests\UserFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -69,5 +71,13 @@ class UserController extends Controller
         $user->update();
 
         return redirect('my-account')->with('status',__('Usuario actualizado correctamente'));
+    }
+
+    public function showsubscription($id)
+    {
+        $config = Config::first();
+        $user = User::where('id', $id)->first();
+        $subscription = Subscription::where('user_id',$id)->first();
+        return view('frontend.user.subscription', compact('user','config','subscription'));
     }
 }

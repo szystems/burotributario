@@ -25,12 +25,12 @@ class AdminMiddleware
             }
             else
             {
-                return redirect('/dashboard')->with('status','¡Acceso denegado! ya que no eres administrador');
+                return redirect('home')->with('status','¡Acceso denegado! ya que no eres administrador');
             }
         }
         else
         {
-            return redirect('/dashboard')->with('status','Por favor inicia sesión');
+            return redirect('home')->with('status','Por favor inicia sesión');
         }
     }
 }

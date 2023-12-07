@@ -18,5 +18,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentPlatformsTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         $this->call(PlanTableSeeder::class);
+        $this->call(CategoryCourseTableSeeder::class);
+        $this->call(CourseTableSeeder::class);
+        $this->call(VideoTableSeeder::class);
+        $this->call(AudioTableSeeder::class);
+        $this->call(InstructorTableSeeder::class);
+        $this->call(CourseInstructorTableSeeder::class);
     }
 }

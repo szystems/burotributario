@@ -78,6 +78,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white {{ Request::is('index-subscriptions','show-subscription/*') ? 'active bg-gradient-info':''  }}" href="{{ url('index-subscriptions') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">workspace_premium</i>
+                    </div>
+                    <span class="nav-link-text ms-1">{{ __('Suscripciones') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white {{ Request::is('users','add-user') ? 'active bg-gradient-info':''  }}" href="{{ url('users') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">people_alt</i>
