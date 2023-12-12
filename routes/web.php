@@ -148,6 +148,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-video/{id}',[VideoController::class,'edit']);
     Route::put('update-video/{id}', [VideoController::class, 'update']);
     Route::get('delete-video/{id}', [VideoController::class, 'destroy']);
+    //Media Video
+    Route::post('add-media-video', [VideoController::class, 'addmedia']);
+    Route::post('reset-videos', [VideoController::class, 'resetvideo']);
 
     //Admin Audio
     Route::get('add-audio/{id}', [AudioController::class, 'add']);
@@ -155,6 +158,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-audio/{id}',[AudioController::class,'edit']);
     Route::put('update-audio/{id}', [AudioController::class, 'update']);
     Route::get('delete-audio/{id}', [AudioController::class, 'destroy']);
+    //Media Audio
+    Route::post('add-media-audio', [AudioController::class, 'addmedia']);
+    Route::post('reset-audios', [AudioController::class, 'resetaudio']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);

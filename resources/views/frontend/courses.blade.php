@@ -60,8 +60,23 @@
                                 </a>
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
-                                        <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
-                                        <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
+                                        <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
+                                            @if (Auth::check())
+                                                @php
+                                                    $mediaVideos = \App\Models\MediaVideo::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                                @endphp
+                                                <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
+                                            @endif
+                                            {{ $numVideos }}</small>
+                                        <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
+                                            @if (Auth::check())
+                                                @php
+                                                    $mediaAudios = \App\Models\MediaAudio::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                                @endphp
+                                                <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
+                                            @endif
+                                            {{ $numAudios }}
+                                        </small>
                                     </div>
                                     <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a><br>
                                     <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>

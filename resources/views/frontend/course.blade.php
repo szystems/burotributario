@@ -71,7 +71,25 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-video text-primary mr-2"></i> Videos ({{ $numVideos }})</h3>
+                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <i class="fas fa-video text-primary mr-2"></i>
+                            Videos
+                            (
+                            @if (Auth::check())
+                                @php
+                                    $mediaVideos = \App\Models\MediaVideo::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                @endphp
+                                <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
+                            @endif
+                            {{ $numVideos }}
+                            )
+                        </h3>
+                        @if (Auth::check())
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetVideoModal">
+                                <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Videos
+                            </button>
+                            @include('frontend.resetvideomodal')
+                        @endif
                         <ul class="list-group list-group-flush">
 
                             @foreach ($videos as $video)
@@ -88,7 +106,14 @@
                                             <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                         @endif
                                     @endif --}}
-                                    <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $video->name }}</a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="text-decoration-none h5 m-0">
+                                        <i class="fas fa-caret-right text-primary mr-2"></i>
+                                        {{ $video->name }}
+                                        @if (Auth::check() and \App\Models\MediaVideo::where('video_id',$video->id)->where('user_id',Auth::user()->id)->exists())
+                                            <i class="fa fa-check text-success mr-2"></i>
+                                        @endif
+                                    </a>
+
                                     <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
                                 @if ($video->description != null)
@@ -105,12 +130,35 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-podcast text-primary mr-2"></i> Audios ({{ $numAudios }})</h3>
+                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-podcast text-primary mr-2"></i>
+                            Audios
+                            (
+                            @if (Auth::check())
+                                @php
+                                    $mediaAudios = \App\Models\MediaAudio::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                @endphp
+                                <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
+                            @endif
+                            {{ $numAudios }}
+                            )
+                        </h3>
+                        @if (Auth::check())
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetAudioModal">
+                                <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Audios
+                            </button>
+                            @include('frontend.resetaudiomodal')
+                        @endif
                         <ul class="list-group list-group-flush">
 
                             @foreach ($audios as $audio)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $audio->name }}</a>
+                                    <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="text-decoration-none h5 m-0">
+                                        <i class="fas fa-caret-right text-primary mr-2"></i>
+                                        {{ $audio->name }}
+                                        @if (Auth::check() and \App\Models\MediaAudio::where('audio_id',$audio->id)->where('user_id',Auth::user()->id)->exists())
+                                            <i class="fa fa-check text-success mr-2"></i>
+                                        @endif
+                                    </a>
 
                                     <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>

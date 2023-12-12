@@ -2,7 +2,6 @@
 
 
 @section('content')
-
     <!-- Header Start -->
     @php
         $numVideos = \App\Models\Video::where('course_id', $course->id)->count();
@@ -33,27 +32,35 @@
 
                 <div class="col-lg-12">
                     <div class="text-left mb-4">
-                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"><a href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a></h5>
-                        <h2><a href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a></h2>
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"><a
+                                href="{{ url('category/' . $catInfo->slug) }}">{{ $catInfo->name }}</a></h5>
+                        <h2><a href="{{ url('show-course/' . $catInfo->slug . '/' . $course->slug) }}">{{ $course->name }}</a></h2>
                         <h1 align="center"><u>{{ $video->name }}</u></h1>
                     </div>
                 </div>
 
                 <div class="col-lg-12 m-0">
 
-                    <div class="ratio ratio-16x9">
-                        <video src="{{ asset('assets/uploads/videos/'.$video->file_video) }}" autoplay controlsList="nodownload" controls allowfullscreen></video>
+                    <div class="ratio ratio-16x9 video_data">
+                        <video id="myVideo" src="{{ asset('assets/uploads/videos/' . $video->file_video) }}" autoplay controlsList="nodownload" controls allowfullscreen></video>
+                        <input type="hidden" value="{{ $video->id }}" id="video_id" class="video_id">
+                        <input type="hidden" value="{{ $course->id }}" id="course_id" class="course_id">
+                        <input type="hidden" value="{{ Auth::user()->id }}" id="user_id" class="user_id">
                     </div>
 
                 </div>
                 <div class="col-lg-12">
                     <hr>
                     <p>{{ $video->description }}</p>
-                    <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
-                    <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
+                    <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
+                            class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
+                    <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
+                            class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
 
                     @if ($course->file_pdf)
-                        <a href="{{ asset('assets/uploads/courses_pdf/'.$course->file_pdf) }}" type="button" class="btn btn-danger py-md-2 px-md-4 font-weight-semi-bold mt-2" target="blank__"><i class="fas fa-download text-secondary mr-2"></i> PDF</a>
+                        <a href="{{ asset('assets/uploads/courses_pdf/' . $course->file_pdf) }}" type="button"
+                            class="btn btn-danger py-md-2 px-md-4 font-weight-semi-bold mt-2" target="blank__"><i
+                                class="fas fa-download text-secondary mr-2"></i> PDF</a>
                     @endif
 
 
@@ -62,18 +69,49 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-video text-primary mr-2"></i> Videos ({{ $numVideos }}) </h3>
+                        <h3 id="myVideo" class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <i class="fas fa-video text-primary mr-2"></i> Videos
+                            (
+                            @if (Auth::check())
+                                @php
+                                    $mediaVideos = \App\Models\MediaVideo::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                @endphp
+                                <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
+                            @endif
+                            {{ $numVideos }}
+                            )
+                        </h3>
+                        @if (Auth::check())
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetVideoModal">
+                                <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Videos
+                            </button>
+                            @include('frontend.resetvideomodal')
+                        @endif
+
                         <ul class="list-group list-group-flush">
 
                             @foreach ($videos as $videoP)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $videoP->name }} @if ($video->id == $videoP->id) <font color="fa9932">(Reproduciendo)</font> @endif</a>
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'video/' . $videoP->id) }}"
+                                        class="text-decoration-none h5 m-0"><i
+                                            class="fas fa-caret-right text-primary mr-2"></i>{{ $videoP->name }}
+                                        @if ($video->id == $videoP->id)
+                                            <font color="fa9932">(Reproduciendo)</font>
+                                        @endif
+                                        @if (Auth::check() and \App\Models\MediaVideo::where('video_id',$videoP->id)->where('user_id',Auth::user()->id)->exists())
+                                        <i class="fa fa-check text-success mr-2"></i>
+                                        @endif
+                                    </a>
 
-                                    <a href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'video/' . $videoP->id) }}"
+                                        class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
+                                            class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
                                 @if ($videoP->description != null)
                                     <li>
-                                        <p>{{ substr($videoP->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/'.'video/'.$videoP->id) }}">... Ver mas</a></p>
+                                        <p>{{ substr($videoP->description, 0, 200) }}<a class="h7"
+                                                href="{{ url('show-course/' . $course->slug . '/' . 'video/' . $videoP->id) }}">...
+                                                Ver mas</a></p>
                                     </li>
                                 @endif
                             @endforeach
@@ -85,18 +123,48 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-podcast text-primary mr-2"></i> Audios ({{ $numAudios }})</h3>
+                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <i class="fas fa-podcast text-primary mr-2"></i> Audios
+                            (
+                            @if (Auth::check())
+                                @php
+                                    $numAudios = \App\Models\MediaAudio::where('course_id', $course->id)
+                                        ->where('user_id', Auth::user()->id)
+                                        ->count();
+                                @endphp
+                                <font color="green"><b>{{ $numAudios }}&nbsp;</b></font>/
+                            @endif
+                            {{ $numAudios }}
+                            )
+                        </h3>
+                        @if (Auth::check())
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#resetAudioModal">
+                                <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Audios
+                            </button>
+                            @include('frontend.resetaudiomodal')
+                        @endif
                         <ul class="list-group list-group-flush">
 
                             @foreach ($audios as $audioP)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}" class="text-decoration-none h5 m-0"><i class="fas fa-caret-right text-primary mr-2"></i>{{ $audioP->name }}</a>
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'audio/' . $audioP->id) }}"
+                                        class="text-decoration-none h5 m-0"><i
+                                            class="fas fa-caret-right text-primary mr-2"></i>{{ $audioP->name }}
+                                        @if (Auth::check() and \App\Models\MediaAudio::where('audio_id',$audioP->id)->where('user_id',Auth::user()->id)->exists())
+                                            <i class="fa fa-check text-success mr-2"></i>
+                                        @endif
+                                    </a>
 
-                                    <a href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'audio/' . $audioP->id) }}"
+                                        class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
+                                            class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
                                 @if ($audioP->description != null)
                                     <li>
-                                        <p>{{ substr($audioP->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/'.'audio/'.$audioP->id) }}">... Ver mas</a></p>
+                                        <p>{{ substr($audioP->description, 0, 200) }}<a class="h7"
+                                                href="{{ url('show-course/' . $course->slug . '/' . 'audio/' . $audioP->id) }}">...
+                                                Ver mas</a></p>
                                     </li>
                                 @endif
                             @endforeach
@@ -108,8 +176,46 @@
         </div>
     </div>
     <!-- About End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        var video = document.getElementById("myVideo");
+        video.onended = function() {
 
+            var video_id = "{{ $video->id }}";
+            var course_id = "{{ $course->id }}";
+            var user_id = "{{ Auth::user()->id }}";
+            var cat_slug = "{{ $catInfo->slug }}";
+            var course_slug = "{{ $course->slug }}) }}";
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('add-media-video') }}",
+                data: {
+                    'video_id':video_id,
+                    'course_id':course_id,
+                    'user_id':user_id,
+                },
+                success: function(response) {
+                    swal("", response.status, "success");
+                    setTimeout(function() {
+                        window.location.href = "{{ url('show-course/' . $catInfo->slug . '/' . $course->slug) }}";
+                    }, 3000); // 5000 milliseconds = 5 seconds
+                },
+                error: function(data){
+                    var errors = data.responseJSON;
+                    console.log(errors);
+                }
+            });
+        };
+    });
+ </script>
 
 @endsection

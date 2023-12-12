@@ -305,6 +305,8 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('elearning/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('elearning/lib/owlcarousel/owl.carousel.min.js') }}"></script>
@@ -365,22 +367,6 @@
         </script>
     @endif
     @yield('scripts')
-
-    {{-- modal --}}
-    {{-- @if ($config->advertisement == 1 and Request::is('/'))
-    <script>
-        $(document).ready(function(){
-            $('#promoModal').modal('show')
-        })
-    </script>
-    @endif
-
-    @if (session('status'))
-    <script>
-        swal("{{ session('status') }}");
-    </script>
-    @endif
-    @yield('scripts') --}}
     @stack('scripts')
 </body>
 

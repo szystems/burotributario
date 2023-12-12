@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\CategoryCourse;
 use App\Models\Course;
 use App\Models\Video;
+use App\Models\Audio;
+use App\Models\MediaVideo;
 use App\Http\Requests\VideoFormRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -93,5 +96,50 @@ class VideoController extends Controller
             }
             $video->delete();
         return redirect('show-course/'.$course->id)->with('status', __('Video eliminado correctamente'));
+    }
+
+    public function addmedia(Request $request)
+    {
+        if(Auth::check())
+        {
+            $user_id = $request->input('user_id');
+            $course_id = $request->input('course_id');
+            $video_id = $request->input('video_id');
+
+
+            if(MediaVideo::where('video_id',$video_id)->where('user_id',$user_id)->exists())
+            {
+                return response()->json();
+            }else
+            {
+                $mediavideo = new MediaVideo();
+                $mediavideo->video_id = $video_id;
+                $mediavideo->course_id = $course_id;
+                $mediavideo->user_id = Auth::id();
+                $mediavideo->save();
+                return response()->json(['status' => "Felicidades terminaste de ver el video"]);
+            }
+        }else
+        {
+            return response()->json();
+        }
+    }
+
+    public function resetvideo(Request $request)
+    {
+        if(Auth::check())
+        {
+            $user_id = $request->input('user_id');
+            $course_id = $request->input('course_id');
+            $mediavideos =  MediaVideo::where('user_id', $user_id)->where('course_id',$course_id)->get();
+            if ($mediavideos->count() != 0) {
+                foreach ($mediavideos as $mediavideo) {
+                    $mediavideo->delete();
+                }
+            }
+            $course = Course::find($course_id);
+            $category = CategoryCourse::find($course->category_course_id);
+            return redirect('show-course/'.$category->slug.'/'.$course->slug)->with('status',"Se resetearon los videos vistos de este curso");
+        }
     }
 }
