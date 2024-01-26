@@ -9,6 +9,8 @@ use App\Models\PaymentPlatform;
 use App\Models\Plan;
 use App\Resolvers\PaymentPlatformResolver;
 use App\Models\Subscription;
+use App\Services\PayPalService;
+use Carbon\Carbon;
 
 class SubscriptionController extends Controller
 {
@@ -30,19 +32,25 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
-            'plan' => ['required', 'exists:plans,slug'],
-            'payment_platform' => ['required', 'exists:payment_platforms,id'],
-        ];
+        if (Subscription::where('user_id', $request->user_id)->exists()) {
+            return redirect('user-subscription/'.$request->user_id)->with('status',"Ya tienes una suscripción anterior que ya no está activa por falta de pago o inactiva. Puedes Eliminarla desde Suscripciones en tu cuenta para eliminarla e intenta de nuevo suscribirte.");
+        }else
+        {
+            $rules = [
+                'plan' => ['required', 'exists:plans,slug'],
+                'payment_platform' => ['required', 'exists:payment_platforms,id'],
+            ];
 
-        $request->validate($rules);
+            $request->validate($rules);
 
-        $paymentPlatform = $this->paymentPlatformResolver
-            ->resolveService($request->payment_platform);
+            $paymentPlatform = $this->paymentPlatformResolver
+                ->resolveService($request->payment_platform);
 
-        session()->put('subscriptionPlatformId', $request->payment_platform);
+            session()->put('subscriptionPlatformId', $request->payment_platform);
 
-        return $paymentPlatform->handleSubscription($request);
+            return $paymentPlatform->handleSubscription($request);
+        }
+
     }
 
     public function approval(Request $request)
@@ -61,11 +69,21 @@ class SubscriptionController extends Controller
                 $plan = Plan::where('slug', $request->plan)->firstOrFail();
                 $user = $request->user();
 
+                $today = now();
+                $addMonths = \Carbon\Carbon::parse($today)->addMonths(3);
+                $active_until = $addMonths->format($plan->duration_in_months);
+
+
+
                 $subscription = Subscription::create([
-                    'active_until' => now()->addDays($plan->duration_in_days),
                     'user_id' => $user->id,
                     'plan_id' => $plan->id,
+                    'subscription_id' => $request->subscription_id
                 ]);
+
+                $nextPayment = new PayPalService();
+                $nextPayment->getNextPayment($request->subscription_id);
+
 
                 return redirect()->route('home')->withSuccess(['payment' => "Gracias, {$user->name}. Tu suscripcion {$plan->slug} esta activa."]);
             }

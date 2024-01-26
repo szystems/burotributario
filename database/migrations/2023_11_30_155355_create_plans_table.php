@@ -17,7 +17,7 @@ class CreatePlansTable extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->integer('price')->unsigned(); //Without decimals
-            $table->integer('duration_in_days');
+            $table->integer('duration_in_months');
             $table->timestamps();
         });
     }

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\Subscription;
+use App\Services\PayPalService;
 
 class LoginController extends Controller
 {
@@ -29,6 +31,16 @@ class LoginController extends Controller
      */
     protected function authenticated()
     {
+        if (Subscription::where('user_id', Auth::user()->id)->where('plan_id', "!=", 1)->exists()) {
+            $subscription = Subscription::where('user_id', Auth::user()->id)->first();
+            if ($subscription->active_until < now()) {
+                $nextPayment = new PayPalService();
+                $nextPayment->getNextPayment($subscription->subscription_id);
+            }
+        }elseif (Subscription::where('user_id', Auth::user()->id)->where('plan_id', "=", 1)->where('active_until', '<', now())->exists()) {
+            $subscription = Subscription::where('user_id', Auth::user()->id)->first();
+            $subscription->delete();
+        }
         if(Auth::user()->role_as == '1') //1 = Admin Login
         {
             return redirect('dashboard')->with('status','Bienvenido a tu panel de control');

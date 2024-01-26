@@ -27,6 +27,7 @@ return [
         'class' => App\Services\PayPalService::class,
         'plans' => [
             'mensual' => env('PAYPAL_MONTHLY_PLAN'),
+            'semestral' => env('PAYPAL_SEMIANNUAL_PLAN'),
             'anual' => env('PAYPAL_YEARLY_PLAN'),
         ],
     ],

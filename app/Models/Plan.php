@@ -12,7 +12,7 @@ class Plan extends Model
     protected $fillable = [
         'slug',
         'price',
-        'duration_in_days',
+        'duration_in_months',
     ];
 
     public function subscriptions()

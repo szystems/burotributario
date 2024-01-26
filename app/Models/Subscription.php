@@ -16,6 +16,8 @@ class Subscription extends Model
         'active_until',
         'user_id',
         'plan_id',
+        'subscription_id',
+        'next_billing_time',
     ];
 
     protected $dates = [
@@ -34,6 +36,6 @@ class Subscription extends Model
 
     public function isActive()
     {
-        return $this->active_until->gt(now());
+        return $this->active_until->gte(now());
     }
 }

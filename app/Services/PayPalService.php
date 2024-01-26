@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Traits\ConsumesExternalServices;
+use App\Models\Subscription;
 
 class PayPalService
 {
@@ -186,5 +187,47 @@ class PayPalService
         }
 
         return 100;
+    }
+
+    public function getNextPayment($subscriptionId)
+    {
+        $response = $this->getSubscription($subscriptionId);
+        $subscriptionInfo = collect($response);
+
+        $status = $subscriptionInfo['status'];
+        if($status == "ACTIVE")
+        {
+            $nextBillingTime = $response->billing_info->next_billing_time;
+
+            $timestamp = strtotime($nextBillingTime);
+            $nextBillingTime = date("Y-m-d H:i:s", $timestamp);
+            $subscription = Subscription::where('subscription_id', $subscriptionId)->first();
+            $subscription->next_billing_time = $nextBillingTime;
+            $subscription->active_until = $nextBillingTime;
+            $subscription->update();
+        }
+        return;
+    }
+
+    public function getSubscriptionInfo($subscriptionId)
+    {
+        $response = $this->getSubscription($subscriptionId);
+        $subscriptionInfo = collect($response);
+        $nextBillingTime = $response->billing_info->next_billing_time;
+        return($subscriptionInfo);
+    }
+
+    public function getSubscription($subscriptionId)
+    {
+        return $this->makeRequest(
+            'GET',
+            "/v1/billing/subscriptions/{$subscriptionId}",
+            [],
+            [],
+            [
+                'Content-Type' => 'application/json',
+            ],
+            $isJsonRequest = true,
+        );
     }
 }

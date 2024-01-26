@@ -92,6 +92,7 @@
                         </div>
 
                         <div class="text-center mt-3">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <button type="submit" id="payButton" class="btn btn-primary btn-lg">Suscribirse</button>
                         </div>
                     </form>

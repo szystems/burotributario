@@ -169,6 +169,10 @@
                                     </div>
                                     <br>
                                     <div>
+                                        <a href="{{ url('login') }}" class="btn btn-dark btn-block border-0 py-3">Semestral $.53.99</a>
+                                    </div>
+                                    <br>
+                                    <div>
                                         <a href="{{ url('login') }}" class="btn btn-dark btn-block border-0 py-3" >Anual $.99.99</a>
                                     </div>
                                 </form>
@@ -224,6 +228,10 @@
                                         </div> --}}
                                         <div>
                                             <a href="{{ url('subscribe') }}" class="btn btn-dark btn-block border-0 py-3">Mensual $.9.99</a>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <a href="{{ url('subscribe') }}" class="btn btn-dark btn-block border-0 py-3">Semestral $.53.99</a>
                                         </div>
                                         <br>
                                         <div>

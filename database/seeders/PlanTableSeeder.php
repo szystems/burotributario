@@ -17,19 +17,25 @@ class PlanTableSeeder extends Seeder
         Plan::create([
             'slug' => 'gratis',
             'price' => 0, //99.99
-            'duration_in_days' => 90,
+            'duration_in_months' => 3,
         ]);
 
         Plan::create([
             'slug' => 'mensual',
             'price' => 999, //12.00
-            'duration_in_days' => 30,
+            'duration_in_months' => 1,
+        ]);
+
+        Plan::create([
+            'slug' => 'semestral',
+            'price' => 5399, //12.00
+            'duration_in_months' => 6,
         ]);
 
         Plan::create([
             'slug' => 'anual',
             'price' => 8999, //99.99
-            'duration_in_days' => 365,
+            'duration_in_months' => 12,
         ]);
     }
 }

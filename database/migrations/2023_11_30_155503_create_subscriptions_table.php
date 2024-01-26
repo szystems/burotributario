@@ -18,6 +18,8 @@ class CreateSubscriptionsTable extends Migration
             $table->timestamp('active_until');
             $table->bigInteger('user_id')->unsigned()->unique();
             $table->bigInteger('plan_id')->unsigned();
+            $table->string('subscription_id')->nullable();
+            $table->dateTime('next_billing_time')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
