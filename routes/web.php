@@ -80,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payments/cancelled', [PaymentController::class, 'cancelled'])->name('cancelled');
 
     //suscripciones
+    Route::post('update-status', [PaymentController::class, 'updatestatussub']);
+    Route::post('cancel-subscription', [PaymentController::class, 'cancelsub']);
+    Route::post('cancel-subscription-gratis', [PaymentController::class, 'cancelsubgratis']);
+
     Route::prefix('subscribe')
     ->name('subscribe.')
     ->group(function() {
@@ -87,7 +91,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [SubscriptionController::class, 'store'])->name('store');
         Route::get('/approval', [SubscriptionController::class, 'approval'])->name('approval');
         Route::get('/cancelled', [SubscriptionController::class, 'cancelled'])->name('cancelled');
+
     });
+
 
 });
 

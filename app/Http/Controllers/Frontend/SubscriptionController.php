@@ -103,4 +103,9 @@ class SubscriptionController extends Controller
             ->route('subscribe.show')
             ->withErrors('Has cancelado tu suscripcion. Regresa cuando estés listo :)');
     }
+
+    public function updatestatussub(Request $request)
+    {
+        dd($request->all());
+    }
 }

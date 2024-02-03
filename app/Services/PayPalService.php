@@ -193,17 +193,26 @@ class PayPalService
     {
         $response = $this->getSubscription($subscriptionId);
         $subscriptionInfo = collect($response);
+        // dd($response);
+        $status = $response->status;
+        if($status == 'SUSPENDED')
+        {
 
-        $status = $subscriptionInfo['status'];
-        if($status == "ACTIVE")
+            $subscription = Subscription::where('subscription_id', $subscriptionId)->first();
+            $subscription->status = $status;
+            $subscription->update();
+
+        }elseif($status == 'ACTIVE')
         {
             $nextBillingTime = $response->billing_info->next_billing_time;
+
 
             $timestamp = strtotime($nextBillingTime);
             $nextBillingTime = date("Y-m-d H:i:s", $timestamp);
             $subscription = Subscription::where('subscription_id', $subscriptionId)->first();
             $subscription->next_billing_time = $nextBillingTime;
             $subscription->active_until = $nextBillingTime;
+            $subscription->status = $status;
             $subscription->update();
         }
         return;
@@ -228,6 +237,116 @@ class PayPalService
                 'Content-Type' => 'application/json',
             ],
             $isJsonRequest = true,
+        );
+    }
+
+    public function handleSubscriptionStatus(Request $request)
+    {
+        //status
+        //0=Suspendida
+        //1=Activada
+        if ($request->status == 'SUSPENDED') {
+            $subscription = $this->activateSubscription(
+                $request->subscription_id
+            );
+
+            $response = $this->getSubscription($request->subscription_id);
+            $subscriptionInfo = collect($response);
+
+            $status = $response->status;
+            if($status == 'ACTIVE')
+            {
+                $nextBillingTime = $response->billing_info->next_billing_time;
+                $timestamp = strtotime($nextBillingTime);
+                $nextBillingTime = date("Y-m-d H:i:s", $timestamp);
+                $subscription = Subscription::where('subscription_id', $request->subscription_id)->first();
+                $subscription->next_billing_time = $nextBillingTime;
+                $subscription->active_until = $nextBillingTime;
+                $subscription->status = $status;
+                $subscription->update();
+            }
+
+            return redirect('my-account')->with('status',__('La suscripción se activó, se le cobrara automáticamente de acuerdo al plan al que esta suscrito.'));
+        }
+        if ($request->status == 'ACTIVE') {
+            $subscription = $this->suspendSubscription(
+                $request->subscription_id
+            );
+
+            $response = $this->getSubscription($request->subscription_id);
+            $subscriptionInfo = collect($response);
+
+            $status = $response->status;
+            if($status == 'SUSPENDED')
+            {
+                $subscription = Subscription::where('subscription_id', $request->subscription_id)->first();
+                $subscription->status = $status;
+                $subscription->update();
+            }
+
+            return redirect('my-account')->with('status',__('La suscripción se suspendió, puede activarla nuevamente si lo desea.'));
+        }
+
+    }
+
+    public function cancelsusbscriptionstatus(Request $request)
+    {
+
+        $subscription = $this->cancelSubscription(
+            $request->subscription_id
+        );
+        $subscription = Subscription::where('subscription_id', $request->subscription_id)->first();
+        $subscription->delete();
+
+        return redirect('my-account')->with('status',__('La suscripción se cancelo.'));
+
+    }
+
+    public function suspendSubscription($subscriptionId)
+    {
+        return $this->makeRequest(
+            'POST',
+            "/v1/billing/subscriptions/{$subscriptionId}/suspend",
+            [],
+            [
+                'reason' => "Suspendido por el usuario",
+            ],
+            [
+                'Content-Type' => 'application/json',
+            ],
+            true // No es necesario asignar a $isJsonRequest, ya que está implícito
+        );
+    }
+
+    public function activateSubscription($subscriptionId)
+    {
+        return $this->makeRequest(
+            'POST',
+            "/v1/billing/subscriptions/{$subscriptionId}/activate",
+            [],
+            [
+                'reason' => "Activado por el usuario",
+            ],
+            [
+                'Content-Type' => 'application/json',
+            ],
+            true // No es necesario asignar a $isJsonRequest, ya que está implícito
+        );
+    }
+
+    public function cancelSubscription($subscriptionId)
+    {
+        return $this->makeRequest(
+            'POST',
+            "/v1/billing/subscriptions/{$subscriptionId}/cancel",
+            [],
+            [
+                'reason' => "Cancelado por el usuario",
+            ],
+            [
+                'Content-Type' => 'application/json',
+            ],
+            true // No es necesario asignar a $isJsonRequest, ya que está implícito
         );
     }
 }

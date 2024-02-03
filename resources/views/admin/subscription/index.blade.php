@@ -40,6 +40,7 @@
                                         <tr>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Usuario') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Activo Hasta') }}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Status') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Plan') }}</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0">{{ __('Precio') }}</th>
                                             {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-0"><i class="material-icons">format_list_bulleted</i></th> --}}
@@ -65,13 +66,37 @@
 
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{
-                                                $subscription->active_until < now() ? 'warning'
-                                                : ($subscription->active_until >= now() ? 'success'
-                                                : ""
-                                                ) }}">
-                                                    {{ $active_until }}
+                                                    $subscription->active_until < now() ? 'warning'
+                                                    : ($subscription->active_until >= now() ? 'success'
+                                                    : ""
+                                                    ) }}">
+                                                        {{ $active_until }}
                                                 </span>
                                             </strong></td>
+                                            <td class="align-middle text-center text-sm"><strong>
+                                                @if ($subscription->plan_id != 1)
+                                                    <span class="badge badge-sm bg-gradient-{{
+                                                        $subscription->status == "ACTIVE" ? 'success'
+                                                        : ($subscription->status == "SUSPENDED" ? 'warning'
+                                                        : ""
+                                                        ) }}">{{ $subscription->status }}
+                                                    </span>
+                                                @endif
+                                                @if ($subscription->plan_id == 1)
+                                                    <span class="badge badge-sm bg-gradient-{{
+                                                        $subscription->active_until < now() ? 'danger'
+                                                        : ($subscription->active_until >= now() ? 'success'
+                                                        : ""
+                                                        ) }}">
+                                                        @if ($subscription->active_until < now())
+                                                            Finalizada
+                                                        @elseif ($subscription->active_until >= now())
+                                                            Activa
+                                                        @endif
+                                                    </span>
+                                                @endif
+
+                                                </strong></td>
                                             <td class="align-middle text-center text-sm"><strong>{{ $planInfo->slug }}</strong></td>
                                             <td class="align-middle text-center text-sm"><strong>{{ $planInfo->visual_price }}</strong></td>
                                             <td class="align-middle text-center text-sm">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\PayPalService;
+use App\Models\Subscription;
 use App\Resolvers\PaymentPlatformResolver;
 
 class PaymentController extends Controller
@@ -60,5 +61,48 @@ class PaymentController extends Controller
         return redirect()
             ->route('home')
             ->withErrors('Has cancelado el pago.');
+    }
+
+    public function updatestatussub(Request $request)
+    {
+        $rules = [
+            'subscription_id' => ['required'],
+            'payment_platform' => ['required', 'exists:payment_platforms,id'],
+            'status' => ['required'],
+        ];
+
+        $request->validate($rules);
+
+        $paymentPlatform = $this->paymentPlatformResolver
+            ->resolveService($request->payment_platform);
+
+        session()->put('subscriptionPlatformId', $request->payment_platform);
+
+        return $paymentPlatform->handleSubscriptionStatus($request);
+    }
+
+    public function cancelsub(Request $request)
+    {
+        $rules = [
+            'subscription_id' => ['required'],
+            'payment_platform' => ['required', 'exists:payment_platforms,id']
+        ];
+
+        $request->validate($rules);
+
+        $paymentPlatform = $this->paymentPlatformResolver
+            ->resolveService($request->payment_platform);
+
+        session()->put('subscriptionPlatformId', $request->payment_platform);
+
+        return $paymentPlatform->cancelsusbscriptionstatus($request);
+    }
+
+    public function cancelsubgratis(Request $request)
+    {
+        $subscription = Subscription::where('subscription_id', $request->subscription_id)->first();
+        $subscription->delete();
+
+        return redirect('my-account')->with('status',__('La suscripción se cancelo.'));
     }
 }
