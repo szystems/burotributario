@@ -71,9 +71,9 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="videos" class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                        <h4 id="videos" class="text-uppercase mb-4" style="letter: 5px;">
                             <i class="fas fa-video text-primary mr-2"></i>
-                            Videos
+                            <u>Videos</u>
                             (
                             @if (Auth::check())
                                 @php
@@ -83,7 +83,7 @@
                             @endif
                             {{ $numVideos }}
                             )
-                        </h3>
+                        </h4>
                         @if (Auth::check())
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetVideoModal">
                                 <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Videos
@@ -116,11 +116,11 @@
 
                                     <a href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($video->description != null)
+                                {{-- @if ($video->description != null)
                                     <li>
                                         <p>{{ substr($video->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/video/'.$video->id) }}">... Ver mas</a></p>
                                     </li>
-                                @endif
+                                @endif --}}
                             @endforeach
 
                         </ul>
@@ -130,18 +130,17 @@
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;"><i class="fas fa-podcast text-primary mr-2"></i>
-                            Audios
+                        <h4 id="audios" class="text-uppercase mb-4" style="letter: 5px;"><i class="fas fa-podcast text-primary mr-2"></i>
+                            <u>Audios</u>
                             (
                             @if (Auth::check())
                                 @php
                                     $mediaAudios = \App\Models\MediaAudio::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
                                 @endphp
                                 <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
-                            @endif
-                            {{ $numAudios }}
-                            )
-                        </h3>
+                                @endif
+                            {{ $numAudios }})
+                        </h4>
                         @if (Auth::check())
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetAudioModal">
                                 <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Audios
@@ -162,11 +161,11 @@
 
                                     <a href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($audio->description != null)
+                                {{-- @if ($audio->description != null)
                                     <li>
                                         <p>{{ substr($audio->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}">... Ver mas</a></p>
                                     </li>
-                                @endif
+                                @endif --}}
                             @endforeach
 
                         </ul>

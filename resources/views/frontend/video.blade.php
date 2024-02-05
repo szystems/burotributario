@@ -107,13 +107,13 @@
                                         class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
                                             class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($videoP->description != null)
+                                {{-- @if ($videoP->description != null)
                                     <li>
                                         <p>{{ substr($videoP->description, 0, 200) }}<a class="h7"
                                                 href="{{ url('show-course/' . $course->slug . '/' . 'video/' . $videoP->id) }}">...
                                                 Ver mas</a></p>
                                     </li>
-                                @endif
+                                @endif --}}
                             @endforeach
 
                         </ul>
@@ -160,13 +160,13 @@
                                         class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
                                             class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                @if ($audioP->description != null)
+                                {{-- @if ($audioP->description != null)
                                     <li>
                                         <p>{{ substr($audioP->description, 0, 200) }}<a class="h7"
                                                 href="{{ url('show-course/' . $course->slug . '/' . 'audio/' . $audioP->id) }}">...
                                                 Ver mas</a></p>
                                     </li>
-                                @endif
+                                @endif --}}
                             @endforeach
 
                         </ul>

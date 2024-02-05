@@ -134,16 +134,17 @@
                                 </div>
                             </div> --}}
                             <a href="{{ url('contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active':''  }}">{{ __('Contacto') }}</a>
+                            @if (Auth::guest())
+                                <a class="nav-item navbtn btn btn-primary m-1 py-3" href="{{ url('login') }}">{{ __('Suscribirse') }}</a>
+                            @else
+                                @if (! optional(auth()->user())->hasActiveSubscription())
+                                    <a class="nav-item navbtn btn btn-primary m-1 py-3" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
+                                @endif
+                            @endif
 
                         </div>
 
-                        @if (Auth::guest())
-                            <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('login') }}">{{ __('Suscribirse') }}</a>
-                        @else
-                            @if (! optional(auth()->user())->hasActiveSubscription())
-                                <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
-                            @endif
-                        @endif
+
 
 
 

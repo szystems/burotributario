@@ -36,8 +36,8 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <label>Selecciona un Plan:</label>
-                                <div class="form-group">
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <div class="form-group" align="center">
+                                    <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
                                         @foreach ($plans as $plan)
                                             @if ($plan->slug != "gratis")
                                                 <label class="btn btn-outline-info rounded m-2 p-3">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col">
+                            <div class="col" align="center">
                                 <label>Selecciona la plataforma de pago:</label>
 
 
