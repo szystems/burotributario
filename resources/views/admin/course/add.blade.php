@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Agregar') }} {{ __('Curso') }}</u></h4>
+                    <h4><u>{{ __('Agregar') }} {{ __('Contenido') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -32,7 +32,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Categoría del Curso') }}</label>
+                                <label for="">{{ __('Categoría del Contenido') }}</label>
                                 <select class="form-select px-2" aria-label="Default select example" name="category_course_id">
                                     <option value="">{{ __('Select a course Category') }}...</option>
                                     @foreach($filterCategories as $category)

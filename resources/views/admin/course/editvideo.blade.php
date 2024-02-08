@@ -31,7 +31,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Curso') }}</h4>
+                        <h4 class="mb-0">{{ __('Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>

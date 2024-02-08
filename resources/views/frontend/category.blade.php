@@ -25,7 +25,7 @@
 
             <div class="text-center mb-5">
                 {{-- <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Cursos</h5> --}}
-                <h1>Cursos ({{ $categoryCourses->count() }})</h1>
+                <h1>Contenido ({{ $categoryCourses->count() }})</h1>
             </div>
             <div class="row">
 
@@ -36,6 +36,7 @@
                         @php
                             $numVideos = \App\Models\Video::where('course_id', $course->id)->count();
                             $numAudios = \App\Models\Audio::where('course_id', $course->id)->count();
+                            $numDocuments = \App\Models\Document::where('course_id', $course->id)->count();
                             $catInfo = \App\Models\CategoryCourse::find($course->category_course_id);
                         @endphp
                         <a href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">
@@ -60,6 +61,15 @@
                                         <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
                                     @endif
                                     {{ $numAudios }}
+                                </small>
+                                <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
+                                    @if (Auth::check())
+                                        @php
+                                            $mediaDocuments = \App\Models\MediaDocument::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                        @endphp
+                                        <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
+                                    @endif
+                                    {{ $numDocuments }}
                                 </small>
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a><br>

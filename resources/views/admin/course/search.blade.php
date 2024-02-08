@@ -8,7 +8,7 @@
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for=""><strong>{{ __('Buscar') }} {{ __('Cusro') }}:</strong></label>
+                            <label for=""><strong>{{ __('Buscar') }} {{ __('Contenido') }}:</strong></label>
                             <input class="form-select px-2" list="courseListOptions" placeholder="{{ __('Buscar') }}..." name="fcourse" value="{{ $queryCourse }}">
                             <datalist id="courseListOptions">
                                 <option value="">{{ __('Todos') }}</option>
@@ -22,7 +22,7 @@
                             {{-- </select> --}}
                         </div>
                         <div class="col-md-2 mb-3">
-                            <label for="">{{ __('Categoría de Curso') }}</label>
+                            <label for="">{{ __('Categoría de Contenido') }}</label>
                             <select class="form-select px-2" aria-label="Default select example" name="fcategory">
                                     @if ($queryCategory != null)
                                         @php

@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Categorías de Cursos') }}</h5>
+                                            <h5 class="mb-0">{{ __('Categorías de Contenidos') }}</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
                                             <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{ __('Cursos') }}</h5>
+                                            <h5 class="mb-0">{{ __('Contenidos') }}</h5>
                                         </div>
                                     </a>
                                 </div>

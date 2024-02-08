@@ -6,12 +6,12 @@
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">Cursos </h3>
+                <h3 class="display-4 text-white text-uppercase">Contenido </h3>
                 {{-- <p class="h7" href=""><font color="fa9932">{{ $courses->count() }} Cursos</font></p> --}}
                 <div class="d-inline-flex text-white">
                     <p class="m-0 text-uppercase"><a class="text-white" href="{{ url('/') }}">Inicio</a></p>
                     <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">cursos</p>
+                    <p class="m-0 text-uppercase">contenido</p>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                             @csrf
                             <div class="input-group">
 
-                                <input type="text" name="fcourse" class="form-control form-control-lg" placeholder="Buscar curso" value="{{ $queryCourse }}">
+                                <input type="text" name="fcourse" class="form-control form-control-lg" placeholder="Buscar contenido" value="{{ $queryCourse }}">
                                 <div class="input-group-append">
                                     <button class="input-group-text bg-transparent text-primary"><i
                                             class="fa fa-search"></i></button>
@@ -53,6 +53,7 @@
                                 @php
                                     $numVideos = \App\Models\Video::where('course_id', $course->id)->count();
                                     $numAudios = \App\Models\Audio::where('course_id', $course->id)->count();
+                                    $numDocuments = \App\Models\Document::where('course_id', $course->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($course->category_course_id);
                                 @endphp
                                 <a href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">
@@ -67,7 +68,8 @@
                                                 @endphp
                                                 <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
                                             @endif
-                                            {{ $numVideos }}</small>
+                                            {{ $numVideos }}
+                                        </small>
                                         <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
                                             @if (Auth::check())
                                                 @php
@@ -76,6 +78,15 @@
                                                 <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
                                             @endif
                                             {{ $numAudios }}
+                                        </small>
+                                        <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
+                                            @if (Auth::check())
+                                                @php
+                                                    $mediaDocuments = \App\Models\MediaAudio::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                                @endphp
+                                                <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
+                                            @endif
+                                            {{ $numDocuments }}
                                         </small>
                                     </div>
                                     <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a><br>
@@ -117,7 +128,7 @@
                                     $numCourses = \App\Models\Course::where('show',1)->where('category_course_id',$category->id)->count();
                                 @endphp
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('category/'.$category->slug) }}" class="text-decoration-none h6 m-0">{{ $category->name }}</a>
+                                    <a href="{{ url('category/'.$category->slug) }}" class="text-decoration-none h6 m-0"><small>{{ $category->name }}</small></a>
                                     <span class="badge badge-primary badge-pill">{{ $numCourses }}</span>
                                 </li>
                             @endforeach
@@ -134,12 +145,14 @@
                                 @php
                                     $numVideos = \App\Models\Video::where('course_id', $popular->id)->count();
                                     $numAudios = \App\Models\Audio::where('course_id', $popular->id)->count();
+                                    $numDocuments = \App\Models\Document::where('course_id', $popular->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($popular->category_course_id);
                                 @endphp
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}" class="text-decoration-none h6 m-0">{{ $popular->name }}</a>
+                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}" class="text-decoration-none text-dark text-9xl m-0"><small>{{ $popular->name }}</small></a>
                                     <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
                                     <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
+                                    <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small>
                                 </li>
                             @endforeach
 
@@ -155,12 +168,14 @@
                                 @php
                                     $numVideos = \App\Models\Video::where('course_id', $last->id)->count();
                                     $numAudios = \App\Models\Audio::where('course_id', $last->id)->count();
+                                    $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
                                 @endphp
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}" class="text-decoration-none h6 m-0">{{ $last->name }}</a>
+                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}" class="text-decoration-none h6 m-0"><small>{{ $last->name }}</small></a>
                                     <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
                                     <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
+                                    <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small>
                                 </li>
                             @endforeach
 

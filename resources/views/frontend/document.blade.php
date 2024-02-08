@@ -36,28 +36,22 @@
                         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;"><a
                                 href="{{ url('category/' . $catInfo->slug) }}">{{ $catInfo->name }}</a></h5>
                         <h2><a href="{{ url('show-course/' . $catInfo->slug . '/' . $course->slug) }}">{{ $course->name }}</a></h2>
-                        <h1 align="center"><u>{{ $video->name }}</u></h1>
+                        <h1 align="center"><u>{{ $document->name }}</u></h1>
+                        <p>{{ $document->description }}</p>
                     </div>
                 </div>
 
-                <div class="col-lg-12 m-0">
-
-                    <div class="ratio ratio-16x9 video_data">
-                        <video id="myVideo" src="{{ asset('assets/uploads/videos/' . $video->file_video) }}" autoplay controlsList="nodownload" controls allowfullscreen></video>
-                        <input type="hidden" value="{{ $video->id }}" id="video_id" class="video_id">
-                        <input type="hidden" value="{{ $course->id }}" id="course_id" class="course_id">
-                        <input type="hidden" value="{{ Auth::user()->id }}" id="user_id" class="user_id">
-                    </div>
+                <div class="col-lg-12 m-0" style="height: 100vh;">
+                        {{-- documento --}}
+                        <embed src="{{ asset('assets/uploads/pdfs/' . $document->file_pdf) }}#zoom=100&toolbar=0&navpanes=0&scrollbar=0" frameborder="0" width="100%" height="100%">
 
                 </div>
                 <div class="col-lg-12">
                     <hr>
-                    <p>{{ $video->description }}</p>
+
                     <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
                     <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
-                    <a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fa fa-file-pdf text-secondary mr-2"></i>{{ $numDocuments }}</a>
-
-
+                    <a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numDocuments }}</a>
                     @if ($course->file_pdf)
                         <a href="{{ asset('assets/uploads/courses_pdf/' . $course->file_pdf) }}" type="button"
                             class="btn btn-danger py-md-2 px-md-4 font-weight-semi-bold mt-2" target="blank__"><i
@@ -75,7 +69,9 @@
                             (
                             @if (Auth::check())
                                 @php
-                                    $mediaVideos = \App\Models\MediaVideo::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                    $mediaVideos = \App\Models\MediaVideo::where('course_id', $course->id)
+                                        ->where('user_id', Auth::user()->id)
+                                        ->count();
                                 @endphp
                                 <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
                             @endif
@@ -83,7 +79,8 @@
                             )
                         </h3>
                         @if (Auth::check())
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetVideoModal">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#resetVideoModal">
                                 <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Videos
                             </button>
                             @include('frontend.resetvideomodal')
@@ -96,11 +93,9 @@
                                     <a href="{{ url('show-course/' . $course->slug . '/' . 'video/' . $videoP->id) }}"
                                         class="text-decoration-none h5 m-0"><i
                                             class="fas fa-caret-right text-primary mr-2"></i><small>{{ $videoP->name }}</small>
-                                        @if ($video->id == $videoP->id)
-                                            <font color="fa9932">(Reproduciendo)</font>
-                                        @endif
-                                        @if (Auth::check() and \App\Models\MediaVideo::where('video_id',$videoP->id)->where('user_id',Auth::user()->id)->exists())
-                                        <i class="fa fa-check text-success mr-2"></i>
+                                        @if (Auth::check() and
+                                                \App\Models\MediaVideo::where('video_id', $videoP->id)->where('user_id', Auth::user()->id)->exists())
+                                            <i class="fa fa-check text-success mr-2"></i>
                                         @endif
                                     </a>
 
@@ -177,40 +172,51 @@
                     <hr />
                     <!-- documents List -->
                     <div class="mb-5">
-                        <h4 id="documents" class="text-uppercase mb-4" style="letter: 5px;"><i class="fa fa-file-pdf text-primary mr-2"></i>
-                            <u>Documentos</u>
+                        <h3 id="documents" class="text-uppercase mb-4" style="letter-spacing: 5px;">
+                            <i class="fa fa-file-pdf text-primary mr-2"></i> Documentos
                             (
                             @if (Auth::check())
                                 @php
-                                    $mediaDocuments = \App\Models\MediaDocument::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
+                                    $numDocuments = \App\Models\MediaDocument::where('course_id', $course->id)
+                                        ->where('user_id', Auth::user()->id)
+                                        ->count();
                                 @endphp
-                                <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
-                                @endif
-                            {{ $numDocuments }})
-                        </h4>
+                                <font color="green"><b>{{ $numDocuments }}&nbsp;</b></font>/
+                            @endif
+                            {{ $numDocuments }}
+                            )
+                        </h3>
                         @if (Auth::check())
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resetDocumentModal">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#resetDocumentModal">
                                 <i class="fas fa-undo-alt text-secondary mr-2"></i> Resetear Documentos
                             </button>
                             @include('frontend.resetdocumentmodal')
                         @endif
                         <ul class="list-group list-group-flush">
 
-                            @foreach ($documents as $document)
+                            @foreach ($documents as $documentP)
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$course->slug.'/document/'.$document->id) }}" class="text-decoration-none h5 m-0">
-                                        <i class="fas fa-caret-right text-primary mr-2"></i>
-                                        <small>{{ $document->name }}</small>
-                                        @if (Auth::check() and \App\Models\MediaDocument::where('document_id',$document->id)->where('user_id',Auth::user()->id)->exists())
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'document/' . $documentP->id) }}"
+                                        class="text-decoration-none h5 m-0"><i
+                                            class="fas fa-caret-right text-primary mr-2"></i><small>{{ $documentP->name }}</small>
+                                        @if ($document->id == $documentP->id)
+                                            <font color="fa9932">(Viendo)</font>
+                                        @endif
+                                        @if (Auth::check() and \App\Models\MediaDocument::where('document_id',$documentP->id)->where('user_id',Auth::user()->id)->exists())
                                             <i class="fa fa-check text-success mr-2"></i>
                                         @endif
                                     </a>
 
-                                    <a href="{{ url('show-course/'.$course->slug.'/document/'.$document->id) }}" class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-play text-primary mr-2"></i></a>
+                                    <a href="{{ url('show-course/' . $course->slug . '/' . 'document/' . $documentP->id) }}"
+                                        class="btn btn-outline-secondary btn-sm py-md-2 px-md-4 font-weight-semi-bold mt-2"><i
+                                            class="fas fa-play text-primary mr-2"></i></a>
                                 </li>
-                                {{-- @if ($audio->description != null)
+                                {{-- @if ($audioP->description != null)
                                     <li>
-                                        <p>{{ substr($audio->description, 0, 200) }}<a class="h7" href="{{ url('show-course/'.$course->slug.'/audio/'.$audio->id) }}">... Ver mas</a></p>
+                                        <p>{{ substr($audioP->description, 0, 200) }}<a class="h7"
+                                                href="{{ url('show-course/' . $course->slug . '/' . 'audio/' . $audioP->id) }}">...
+                                                Ver mas</a></p>
                                     </li>
                                 @endif --}}
                             @endforeach
@@ -222,46 +228,4 @@
         </div>
     </div>
     <!-- About End -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script>
-    $(document).ready(function() {
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        var video = document.getElementById("myVideo");
-        video.onended = function() {
-
-            var video_id = "{{ $video->id }}";
-            var course_id = "{{ $course->id }}";
-            var user_id = "{{ Auth::user()->id }}";
-            var cat_slug = "{{ $catInfo->slug }}";
-            var course_slug = "{{ $course->slug }}) }}";
-
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-media-video') }}",
-                data: {
-                    'video_id':video_id,
-                    'course_id':course_id,
-                    'user_id':user_id,
-                },
-                success: function(response) {
-                    swal("", response.status, "success");
-                    setTimeout(function() {
-                        window.location.href = "{{ url('show-course/' . $catInfo->slug . '/' . $course->slug) }}";
-                    }, 3000); // 5000 milliseconds = 5 seconds
-                },
-                error: function(data){
-                    var errors = data.responseJSON;
-                    console.log(errors);
-                }
-            });
-        };
-    });
- </script>
-
 @endsection

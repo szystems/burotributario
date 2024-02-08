@@ -12,7 +12,7 @@
         <form action="{{ url('reset-videos') }}" method="POST">
             @csrf
             <div class="modal-body">
-                {{ __('¿Está seguro de resetear los videos de este curso?') }}
+                {{ __('¿Está seguro de resetear los videos de este contenido?') }}
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="course_id" value="{{ $course->id }}">
             </div>

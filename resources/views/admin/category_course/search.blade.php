@@ -4,7 +4,7 @@
                     <div class="row">
 
                         <div class="col-md-12 mb-0">
-                            <label for=""><strong>{{ __('Buscar') }} {{ __('Categoría de Cursos') }}:</strong></label>
+                            <label for=""><strong>{{ __('Buscar') }} {{ __('Categoría de Contenido') }}:</strong></label>
 
                         </div>
                         <div class="col-md-6 mb-3">

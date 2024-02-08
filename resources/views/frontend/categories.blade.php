@@ -40,7 +40,7 @@
                         </a>
                         <div class="bg-secondary p-4">
                             <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fas fa-book-reader text-primary mr-2"></i>Cursos: {{ $numCourses }}</small>
+                                <small class="m-0"><i class="fas fa-book-reader text-primary mr-2"></i>Contenido: {{ $numCourses }}</small>
                             </div>
                             <a class="h5" href="{{ url('category/'.$category->slug) }}">{{ $category->name }}</a>
 

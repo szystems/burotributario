@@ -28,10 +28,10 @@
                             <h2 class="h4">{{ __('Información de Contacto') }}</h2>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <p><span>{{ __('Direccion') }}:</span><strong> 7ª. Calle 3A-43 zona 11, Quetzaltenango.</strong></p>
+                            <p><span>{{ __('Email') }}:</span><a href="mailto:eventos.buro@hotmail.com"> eventos.buro@hotmail.com</a></p>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <p><span>{{ __('Teléfono') }}:</span> <a href="tel://59893119">+502 5989 3119</a></p>
+                            <p><span>{{ __('Teléfono') }}:</span> <a href="tel://50259893119">+502 5989 3119</a></p>
                         </div>
                         <!-- <div class="col-md-12 mb-3">
                             <p><span>Email:</span> <a href="mailto:info@yoursite.com">	info@bocacostacoffee.com</a></p>

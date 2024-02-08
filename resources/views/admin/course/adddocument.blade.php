@@ -1,24 +1,5 @@
 @extends('layouts.admin')
 
-<style>
-    .progress {
-        position:relative;
-        width:100%;
-        background-color: #c9cfc9
-    }
-    .bar {
-        background-color: #00ff00;
-        width:0%;
-        height:20px;
-    }
-    .percent {
-        position:absolute;
-        display:inline-block;
-        left:50%;
-        color: #040608;
-    }
-</style>
-
 @section('content')
     <div class="row">
 
@@ -27,7 +8,7 @@
                 <div class="card-header p-3 pt-2">
                     <div
                         class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">hearing</i>
+                        <i class="material-icons opacity-10">description</i>
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
@@ -37,7 +18,7 @@
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Agregar') }} {{ __('Audio') }}</u></h4>
+                    <h4><u>{{ __('Agregar') }} {{ __('Documento') }}</u></h4>
                     <p><strong><u>{{ __('Course') }}:</u></strong> {{ $course->name }}</p>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
@@ -49,7 +30,7 @@
                         </div>
 
                     @endif
-                    <form action="{{ url('insert-audio') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('insert-document') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
 
@@ -78,20 +59,16 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label for="">{{ __('Audio') }}</label>
-                                <input type="file" name="file_audio" class="form-control border" required>
-                                @if ($errors->has('file_audio'))
+                                <label for="">{{ __('Documento') }}</label>
+                                <input type="file" name="file_pdf" class="form-control border" required>
+                                @if ($errors->has('file_pdf'))
                                     <span class="help-block opacity-7">
                                             <strong>
-                                                <font color="red">{{ $errors->first('file_audio') }}</font>
+                                                <font color="red">{{ $errors->first('file_pdf') }}</font>
                                             </strong>
                                     </span>
                                 @endif
                                 <br>
-                                <div class="col-md-12 mb-3 progress">
-                                    <div class="bar"></div>
-                                    <div class="percent">0%</div>
-                                </div>
                             </div>
 
                             <div class="col-md-12 mb-3" >
@@ -110,33 +87,4 @@
         </div>
 
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
-
-    <script type="text/javascript">
-        var SITEURL = "{{URL('/')}}";
-        $(function () {
-            $(document).ready(function () {
-                var bar = $('.bar');
-                var percent = $('.percent');
-                $('form').ajaxForm({
-                    beforeSend: function () {
-                        var percentVal = '0%';
-                        bar.width(percentVal)
-                        percent.html(percentVal);
-                    },
-                    uploadProgress: function (event, position, total, percentComplete) {
-                        var percentVal = percentComplete + '%';
-                        bar.width(percentVal)
-                        percent.html(percentVal);
-                    },
-                    complete: function (xhr) {
-                        alert('File Has Been Uploaded Successfully');
-                        window.location.href = SITEURL + "/" + "show-course/" + {{ $course->id }};
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

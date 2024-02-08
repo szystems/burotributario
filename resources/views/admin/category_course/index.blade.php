@@ -12,7 +12,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Categorías de Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Categorías de Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <a href="{{ url('add-course-category') }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Categoría de Cursos') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Categoría de Contenidos') }}
                             </a>
 
                         </div>

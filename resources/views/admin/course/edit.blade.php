@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Curso') }}</h4>
+                        <h4 class="mb-0">{{ __('Contenido') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Editar') }} {{ __('Curso') }}</u></h4>
+                    <h4><u>{{ __('Editar') }} {{ __('Contenido') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
@@ -35,7 +35,7 @@
                                 @php
                                     $CourseCategory = \App\Models\CategoryCourse::find($course->category_course_id);
                                 @endphp
-                                <label for="">{{ __('Categoría de Curso') }}</label>
+                                <label for="">{{ __('Categoría de Contenido') }}</label>
                                 <select class="form-select px-2" aria-label="Default select example" name="category_course_id">
                                     <option value="{{ $CourseCategory->id }}">{{ $CourseCategory->name }}</option>
                                     @foreach($filterCategories as $category)
@@ -84,7 +84,7 @@
                             @if ($course->image)
                             <div class="col-md-9 mb-3">
                                 {{-- <label for="">{{ __('Image') }}</label> --}}
-                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="Curso Imagen">
+                                <img class="border-radius-md w-25" src="{{ asset('assets/uploads/courses/'.$course->image) }}" alt="Contenido Imagen">
                             </div>
                             @endif
                             <div class="col-md-3 mb-3">

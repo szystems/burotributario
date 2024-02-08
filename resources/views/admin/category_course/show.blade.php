@@ -13,12 +13,12 @@
 
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Categorias de Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Categorias de Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Ver') }} {{ __('Categoría de Cursos') }}</u></h4>
+                    <h4><u>{{ __('Ver') }} {{ __('Categoría de Contenidos') }}</u></h4>
                     <div>
                         <a href="{{ url('edit-course-category/'.$category->id) }}" type="button" class="btn btn-warning"><i class="material-icons">edit</i></a>
                         <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $category->id }}">
@@ -56,7 +56,7 @@
                         @if ($category->image)
                             <div class="col-md-12 mb-3">
                                 <img class="border-radius-md w-25"
-                                    src="{{ asset('assets/uploads/category_courses/' . $category->image) }}" alt="Imagen de categoría de curso">
+                                    src="{{ asset('assets/uploads/category_courses/' . $category->image) }}" alt="Imagen de categoría de Contenido">
                             </div>
                         @endif
                     </div>

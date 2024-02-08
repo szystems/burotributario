@@ -66,7 +66,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">category</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Categorías de Cursos') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Categorías') }}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -74,7 +74,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">local_library</i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ __('Cursos') }}</span>
+                    <span class="nav-link-text ms-1">{{ __('Contenido') }}</span>
                 </a>
             </li>
             <li class="nav-item">

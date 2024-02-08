@@ -12,7 +12,7 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <a href="{{ url('add-course') }}" class="btn btn-success">
-                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Curso') }}
+                                <i class="material-icons opacity-10">add</i> {{ __('Agregar') }} {{ __('Contenido') }}
                             </a>
 
                         </div>
@@ -60,11 +60,12 @@
                                                 $categoryinfo = \App\Models\CategoryCourse::find($course->category_course_id);
                                                 $numVideos = \App\Models\Video::where('course_id',$course->id)->count();
                                                 $numAudios = \App\Models\Audio::where('course_id',$course->id)->count();
+                                                $numDocuments = \App\Models\Document::where('course_id',$course->id)->count();
                                             @endphp
                                             <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course-category/'.$course->category_course_id) }}">{{ $categoryinfo->name }}</a></strong></td>
                                             {{-- <td class="align-middle text-center text-sm">{{ $course->description }}</td> --}}
                                             <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }}</p>
+                                                <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }} / <i class="fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }}</p>
                                             </td>
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{

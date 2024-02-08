@@ -10,9 +10,11 @@ use App\Models\Course;
 use App\Models\CourseInstructor;
 use App\Models\Video;
 use App\Models\Audio;
+use App\Models\Document;
 use App\Http\Requests\CourseFormRequest;
 use App\Http\Requests\VideoFormRequest;
 use App\Http\Requests\AudioFormRequest;
+use App\Http\Requests\DocumentFormRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -42,8 +44,9 @@ class CourseController extends Controller
         $course = Course::find($id);
         $videos = Video::where('course_id',$id)->get();
         $audios = Audio::where('course_id',$id)->get();
+        $documents = Document::where('course_id',$id)->get();
         $instructors = CourseInstructor::where('course_id',$id)->get();
-        return view('admin.course.show', compact('course','videos','audios','instructors'));
+        return view('admin.course.show', compact('course','videos','audios','documents','instructors'));
     }
 
     public function add()

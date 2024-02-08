@@ -12,8 +12,10 @@ use App\Models\Course;
 use App\Models\CourseInstructor;
 use App\Models\Video;
 use App\Models\Audio;
+use App\Models\Document;
 use App\Models\Currency;
 use App\Models\PaymentPlatform;
+use App\Models\MediaDocument;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
@@ -112,9 +114,10 @@ class FrontendController extends Controller
                 $course = Course::where('slug', $course_slug)->first();
                 $videos = Video::where('course_id',$course->id)->get();
                 $audios = Audio::where('course_id',$course->id)->get();
+                $documents = Document::where('course_id',$course->id)->get();
                 $instructors = CourseInstructor::where('course_id',$course->id)->get();
                 $config = Config::first();
-                return view('frontend.course', compact('course','config','videos','audios','instructors'));
+                return view('frontend.course', compact('course','config','videos','audios','documents','instructors'));
             }
             else
             {
@@ -137,8 +140,9 @@ class FrontendController extends Controller
                 $video = Video::find($video_id);
                 $videos = Video::where('course_id',$course->id)->get();
                 $audios = Audio::where('course_id',$course->id)->get();
+                $documents = Document::where('course_id',$course->id)->get();
                 $config = Config::first();
-                return view('frontend.video', compact('course','config','video','videos','audios'));
+                return view('frontend.video', compact('course','config','video','videos','audios','documents'));
             }
             else
             {
@@ -161,8 +165,53 @@ class FrontendController extends Controller
                 $audio = Audio::find($audio_id);
                 $videos = Video::where('course_id',$course->id)->get();
                 $audios = Audio::where('course_id',$course->id)->get();
+                $documents = Document::where('course_id',$course->id)->get();
                 $config = Config::first();
-                return view('frontend.audio', compact('course','config','audio','videos','audios'));
+                return view('frontend.audio', compact('course','config','audio','videos','audios','documents'));
+            }
+            else
+            {
+                return redirect('/')->with('status',"Este audio no existe.");
+            }
+        }
+        else
+        {
+            return redirect('/')->with('status',"Esta audio no existe.");
+        }
+    }
+
+    public function showdocument($course_slug, $document_id)
+    {
+        if(Course::where('slug', $course_slug)->where('show',1)->exists())
+        {
+            if(Document::where('id', $document_id)->exists())
+            {
+                $course = Course::where('slug', $course_slug)->first();
+                $document = Document::find($document_id);
+                $videos = Video::where('course_id',$course->id)->get();
+                $audios = Audio::where('course_id',$course->id)->get();
+                $documents = Document::where('course_id',$course->id)->get();
+                $config = Config::first();
+
+                if(Auth::check())
+                {
+                    $user_id = Auth::id();
+                    $course_id = $course->id;
+
+                    if(MediaDocument::where('document_id',$document_id)->where('user_id',$user_id)->exists())
+                    {
+
+                    }else
+                    {
+                        $mediadocument = new MediaDocument();
+                        $mediadocument->document_id = $document_id;
+                        $mediadocument->course_id = $course_id;
+                        $mediadocument->user_id = Auth::id();
+                        $mediadocument->save();
+                    }
+                }
+
+                return view('frontend.document', compact('course','config','document','videos','audios','documents'));
             }
             else
             {

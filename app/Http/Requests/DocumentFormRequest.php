@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AudioFormRequest extends FormRequest
+class DocumentFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class AudioFormRequest extends FormRequest
         return [
             'name'=>'required',
             'description'=>'nullable',
-            'file_audio'=>'mimetypes:audio/mp3,audio/mpeg,audio/mpeg4,audio/aac,audio/wav,video/mp4',
+            'file_pdf'=>'mimetypes:application/pdf|max:50000',
         ];
     }
 }

@@ -139,7 +139,7 @@
                         <p class="text-white">Escoge el plan que mas se adecue a tus necesidades</p>
                         <ul class="list-inline text-white m-0">
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso sin limites</li>
-                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso a todos los cursos</li>
+                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso a todos los contenidos</li>
                             <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Aprendizaje comprobado</li>
                         </ul>
                     </div>
@@ -165,15 +165,15 @@
                                         </select>
                                     </div> --}}
                                     <div>
-                                        <a href="{{ url('login') }}" class="btn btn-dark btn-block border-0 py-3">Mensual $.9.99</a>
+                                        <a href="{{ url('register') }}" class="btn btn-dark btn-block border-0 py-3">Mensual $.9.99</a>
                                     </div>
                                     <br>
                                     <div>
-                                        <a href="{{ url('login') }}" class="btn btn-dark btn-block border-0 py-3">Semestral $.53.99</a>
+                                        <a href="{{ url('register') }}" class="btn btn-dark btn-block border-0 py-3">Semestral $.53.99</a>
                                     </div>
                                     <br>
                                     <div>
-                                        <a href="{{ url('login') }}" class="btn btn-dark btn-block border-0 py-3" >Anual $.99.99</a>
+                                        <a href="{{ url('register') }}" class="btn btn-dark btn-block border-0 py-3" >Anual $.99.99</a>
                                     </div>
                                 </form>
                             </div>
@@ -201,7 +201,7 @@
                             <p class="text-white">Escoge el plan que mas se adecue a tus necesidades</p>
                             <ul class="list-inline text-white m-0">
                                 <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso sin limites</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso a todos los cursos</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Acceso a todos los contenidos</li>
                                 <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Aprendizaje comprobado</li>
                             </ul>
                         </div>
@@ -272,13 +272,45 @@
         <!-- About End -->
     @endif
 
+    <!-- Category Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Contenido') }}</h5>
+                <h1>{{ __('Categorías') }}</h1>
+            </div>
+            <div class="row">
+                @foreach ($categories as $category)
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                        <img class="img-fluid" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="{{ url('category/'.$category->slug) }}">
+                            <h4 class="text-white font-weight-medium">{{ $category->name }}</h4>
+                            @php
+                                $numCourses = \App\Models\Course::where('category_course_id', $category->id)->where('status', 1)->count();
+                            @endphp
+                            <span>{{ $numCourses }}
+                                @if ($numCourses > 1)
+                                    Temas
+                                @else
+                                    Tema
+                                @endif</span>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Category Start -->
+
 
     <!--Popular Courses Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
-                <h1>{{ __('Cursos Populares') }}</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Contenido') }}</h5>
+                <h1>{{ __('Contenido Popular') }}</h1>
             </div>
             <div class="row">
 
@@ -288,6 +320,7 @@
                         @php
                             $numVideos = \App\Models\Video::where('course_id', $popular->id)->count();
                             $numAudios = \App\Models\Audio::where('course_id', $popular->id)->count();
+                            $numDocuments = \App\Models\Document::where('course_id', $popular->id)->count();
                             $catInfo = \App\Models\CategoryCourse::find($popular->category_course_id);
                         @endphp
                         <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}">
@@ -312,6 +345,15 @@
                                         <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
                                     @endif
                                     {{ $numAudios }}
+                                </small>
+                                <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
+                                    @if (Auth::check())
+                                        @php
+                                            $mediaDocuments = \App\Models\MediaDocument::where('course_id', $popular->id)->where('user_id', Auth::user()->id)->count()
+                                        @endphp
+                                        <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
+                                    @endif
+                                    {{ $numDocuments }}
                                 </small>
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}">{{ $popular->name }}</a><br>
@@ -339,8 +381,8 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
-                <h1>{{ __('Ultimos Cursos Agregados') }}</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Contenido') }}</h5>
+                <h1>{{ __('Ultimos Contenidos Agregados') }}</h1>
             </div>
             <div class="row">
 
@@ -356,6 +398,7 @@
                                 @php
                                     $numVideos = \App\Models\Video::where('course_id', $last->id)->count();
                                     $numAudios = \App\Models\Audio::where('course_id', $last->id)->count();
+                                    $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
                                 @endphp
                                 <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
@@ -375,6 +418,15 @@
                                         <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
                                     @endif
                                     {{ $numAudios }}
+                                </small>
+                                <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
+                                    @if (Auth::check())
+                                        @php
+                                            $mediaDocuments = \App\Models\MediaDocument::where('course_id', $popular->id)->where('user_id', Auth::user()->id)->count()
+                                        @endphp
+                                        <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
+                                    @endif
+                                    {{ $numDocuments }}
                                 </small>
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}">{{ $last->name }}</a><br>
@@ -397,34 +449,6 @@
         </div>
     </div>
     <!--Last Courses End -->
-
-
-    <!-- Category Start -->
-    <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">{{ __('Cursos') }}</h5>
-                <h1>{{ __('Categorías') }}</h1>
-            </div>
-            <div class="row">
-                @foreach ($categories as $category)
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="{{ asset('assets/uploads/category_courses/'.$category->image) }}" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="{{ url('category/'.$category->slug) }}">
-                            <h4 class="text-white font-weight-medium">{{ $category->name }}</h4>
-                            @php
-                                $numCourses = \App\Models\Course::where('category_course_id', $category->id)->where('status', 1)->count();
-                            @endphp
-                            <span>{{ $numCourses }} Cursos</span>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <!-- Category Start -->
 
 
     <Script>

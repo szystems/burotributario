@@ -43,7 +43,7 @@
                     <img src="{{ asset('elearning/img/logos/logohorizontal.png') }}" height="75px" alt="">
                 </a>
             </div>
-            <div class="col-lg-3 text-right">
+            {{-- <div class="col-lg-3 text-right">
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                     <div class="text-left">
@@ -69,7 +69,7 @@
                         <small>+502 5989 3119</small>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Topbar End -->
@@ -123,9 +123,9 @@
                                 $config=DB::table('configs')->first();
                             @endphp --}}
                             <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active':''  }}">{{ __('Inicio') }}</a>
-                            <a href="{{ url('about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active':''  }}">{{ __('Nosotros') }}</a>
-                            <a href="{{ url('courses') }}" class="nav-item nav-link {{ Request::is('courses') ? 'active':''  }}">{{ __('Cursos') }}</a>
-                            <a href="{{ url('teachers') }}" class="nav-item nav-link {{ Request::is('teachers') ? 'active':''  }}">{{ __('Instructores') }}</a>
+                            {{-- <a href="{{ url('about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active':''  }}">{{ __('Nosotros') }}</a> --}}
+                            <a href="{{ url('courses') }}" class="nav-item nav-link {{ Request::is('courses') ? 'active':''  }}">{{ __('Contenido') }}</a>
+                            {{-- <a href="{{ url('teachers') }}" class="nav-item nav-link {{ Request::is('teachers') ? 'active':''  }}">{{ __('Instructores') }}</a> --}}
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -135,7 +135,7 @@
                             </div> --}}
                             <a href="{{ url('contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active':''  }}">{{ __('Contacto') }}</a>
                             @if (Auth::guest())
-                                <a class="nav-item navbtn btn btn-primary m-1 py-3" href="{{ url('login') }}">{{ __('Suscribirse') }}</a>
+                                <a class="nav-item navbtn btn btn-primary m-1 py-3" href="{{ url('register') }}">{{ __('Suscribirse') }}</a>
                             @else
                                 @if (! optional(auth()->user())->hasActiveSubscription())
                                     <a class="nav-item navbtn btn btn-primary m-1 py-3" href="{{ url('subscribe') }}">{{ __('Suscribirse') }}</a>
@@ -194,7 +194,7 @@
                         @csrf
                         <div class="input-group">
 
-                            <input type="text" name="fcourse" class="form-control form-control-lg" placeholder="Buscar curso" value="{{ $queryCourse }}">
+                            <input type="text" name="fcourse" class="form-control form-control-lg" placeholder="Buscar contenido" value="{{ $queryCourse }}">
                             <div class="input-group-append">
                                 <button class="input-group-text bg-transparent text-primary"><i
                                         class="fa fa-search"></i></button>
@@ -217,9 +217,9 @@
                 <div class="row">
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">{{ __('Contacto') }}</h5>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>7ª. Calle 3A-43 zona 11, Quetzaltenango.</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i>+502 5989 3119</p>
-                        <p><i class="fa fa-envelope mr-2"></i>eventos.buro@hotmail.com</p>
+                        {{-- <p><i class="fa fa-map-marker-alt mr-2"></i>7ª. Calle 3A-43 zona 11, Quetzaltenango.</p> --}}
+                        <p><i class="fa fa-phone-alt mr-2"></i><a href="tel://50259893119">+502 5989 3119</a></p>
+                        <p><i class="fa fa-envelope mr-2"></i><a href="mailto:eventos.buro@hotmail.com"> eventos.buro@hotmail.com</a></p>
                         <div class="d-flex justify-content-start mt-4">
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-square mr-2" href="https://www.facebook.com/BurodeAuditores"><i class="fab fa-facebook-f"></i></a>
@@ -232,8 +232,8 @@
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-white mb-2" href="{{ url('/') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Inicio') }}</a>
                             <a class="text-white mb-2" href="{{ url('about') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Nosotros') }}</a>
-                            <a class="text-white mb-2" href="{{ url('courses') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Cursos') }}</a>
-                            <a class="text-white mb-2" href="{{ url('teachers') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructores') }}</a>
+                            <a class="text-white mb-2" href="{{ url('courses') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Contenido') }}</a>
+                            {{-- <a class="text-white mb-2" href="{{ url('teachers') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Instructores') }}</a> --}}
                             {{-- <a class="text-white mb-2" href="{{ url('subscribe') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('subscribe') }}</a> --}}
                             <a class="text-white mb-2" href="{{ url('contact') }}"><i class="fa fa-angle-right mr-2"></i>{{ __('Contacto') }}</a>
                         </div>
@@ -250,7 +250,7 @@
                             <div class="input-group-append">
                                 <button class="btn btn-primary px-4">Sign Up</button>
                             </div> --}}
-                            <a href="{{ url('login') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
+                            <a href="{{ url('register') }}" class="btn btn-primary px-4">{{ __('Suscribirse') }}</a>
                         </div>
                     </div>
                 @else

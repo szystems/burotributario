@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CategoryCourseController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\AudioController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\SubsController;
 
 //user
@@ -71,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['subscribed'])->group(function () {
         Route::get('show-course/{course_slug}/video/{video_id}', [FrontendController::class, 'showvideo']);
         Route::get('show-course/{course_slug}/audio/{audio_id}', [FrontendController::class, 'showaudio']);
+        Route::get('show-course/{course_slug}/document/{document_id}', [FrontendController::class, 'showdocument']);
     });
 
     //Payments
@@ -167,6 +169,15 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     //Media Audio
     Route::post('add-media-audio', [AudioController::class, 'addmedia']);
     Route::post('reset-audios', [AudioController::class, 'resetaudio']);
+
+    //Admin Document
+    Route::get('add-document/{id}', [DocumentController::class, 'add']);
+    Route::post('insert-document', [DocumentController::class, 'insert']);
+    Route::get('edit-document/{id}',[DocumentController::class,'edit']);
+    Route::put('update-document/{id}', [DocumentController::class, 'update']);
+    Route::get('delete-document/{id}', [DocumentController::class, 'destroy']);
+    //Media Video
+    Route::post('reset-documents', [DocumentController::class, 'resetdocument']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);

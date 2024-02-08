@@ -12,12 +12,12 @@
                     </div>
                     <div class="text-center pt-1">
                         {{-- <p class="text-sm mb-0 text-capitalize">Today's Money</p> --}}
-                        <h4 class="mb-0">{{ __('Categorías de Cursos') }}</h4>
+                        <h4 class="mb-0">{{ __('Categorías de Contenidos') }}</h4>
                     </div>
                     <hr class="dark horizontal my-0">
                 </div>
                 <div class="card-body p-3 pt-2">
-                    <h4><u>{{ __('Edit') }} {{ __('Categoría de Cursos') }}</u></h4>
+                    <h4><u>{{ __('Edit') }} {{ __('Categoría de Contenidos') }}</u></h4>
                     @if (count($errors)>0)
                         <div class="alert alert-danger text-white" role="alert">
                             <ul>
