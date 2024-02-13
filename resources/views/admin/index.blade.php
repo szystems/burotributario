@@ -139,9 +139,319 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="horizontal dark my-3">
+
                 <div class="row mb-12">
 
+                    <div class="card-header p-3 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-info shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3"><i class="material-icons opacity-10">bar_chart</i> {{ __('Estadisticas') }}</h6>
+                        </div>
+                    </div>
 
+                    {{-- Suscripciones Activas --}}
+                    <div class="col-lg-2 col-md-6 mb-md-3 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Suscripciones') }} ({{ $totalSuscripciones->count() }})</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Tipo') }} (Total)
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">Gratis ({{ $totalSuscripcionesGratis->count() }})</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">Mensual ({{ $totalSuscripcionesMensuales->count() }})</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">Semestral ({{ $totalSuscripcionesSemestrales->count() }})</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">Anual ({{ $totalSuscripcionesAnuales->count() }})</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Categoria mas vistos --}}
+                    <div class="col-lg-2 col-md-6 mb-md-3 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Categorías mas vistas') }}</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Categoria') }} (Vistas)
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($categoryCourses as $categoryCourse)
+                                                @if ($categoryCourse->total_views  > 0 )
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    <h6 class="mb-0 text-sm"><a href="{{ url('show-course-category/'.$categoryCourse->id) }}">{{ $categoryCourse->name }} ({{ $categoryCourse->total_views }})</a></h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Cursos mas vistos --}}
+                    <div class="col-lg-2 col-md-6 mb-md-0 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Cursos mas vistos') }}</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Curso') }} (vistas)
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($cursosMasVistos as $curso)
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$curso->course_id) }}">{{ $curso->name }} ({{ $curso->total }})</a></h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {{-- Videos mas vistos --}}
+                    <div class="col-lg-2 col-md-6 mb-md-0 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Videos mas vistos') }}</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Video') }} / {{ __('Curso') }}
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($videosMasVistos as $vistos)
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                @php
+                                                                    $video = \App\Models\Video::find($vistos->video_id);
+                                                                    $curso = \App\Models\Course::find($vistos->course_id);
+                                                                @endphp
+                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $video->name }} ({{ $vistos->total_visualizaciones }})</a></h6>
+
+                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $curso->name }}</a> </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Audios mas escuchados --}}
+                    <div class="col-lg-2 col-md-6 mb-md-0 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Audios mas escuchados') }}</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Audio') }} / {{ __('Curso') }}
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($audiosMasEscuchados as $escuchados)
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                @php
+                                                                    $audio = \App\Models\Audio::find($escuchados->audio_id);
+                                                                    $curso = \App\Models\Course::find($escuchados->course_id);
+                                                                @endphp
+                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$escuchados->course_id) }}">{{ $audio->name }}</a></h6>
+
+                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$escuchados->course_id) }}">{{ $curso->name }} ({{ $escuchados->total_escuchas }})</a> </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Documentos mas vistos --}}
+                    <div class="col-lg-2 col-md-6 mb-md-0 mb-4 py-3">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-12 col-7">
+                                        <h5>{{ __('Documentos mas vistos') }}</h5>
+                                        <hr class="horizontal dark my-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ __('Documento') }} / {{ __('Curso') }}
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($documentosMasVistos as $docsvistos)
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                @php
+                                                                    $documento = \App\Models\Document::find($docsvistos->document_id);
+                                                                    $curso = \App\Models\Course::find($docsvistos->course_id);
+                                                                @endphp
+                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$docsvistos->course_id) }}">{{ $documento->name }}</a></h6>
+
+                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$docsvistos->course_id) }}">{{ $curso->name }} ({{ $docsvistos->total_vistas }})</a> </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
