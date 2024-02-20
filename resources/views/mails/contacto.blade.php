@@ -1,18 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Mensaje desde aplicacion Buro Tributario</title>
-</head>
-<body>
-    <p>Estos son los datos del remitente: </p>
-    <ul>
-        <li><b>Nombre:</b> {{ $name }}</li>
-        <li><b>Email:</b> {{ $email }})</li>
-        <li><b>Asunto:</b> {{ $subject }}</li>
-        <li><b>Mensaje:</b><br>{{ $mensaje }}</li>
-    </ul>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
 
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #868686;
+            border-radius: 4px;
+        }
+
+        .contact-info {
+            color: #fa9a33;
+        }
+    </style>
+
+    <title>Mensaje de Contacto Buro Tributario</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="contact-info">Mensaje de Contacto Buro Tributario</h1>
+        <p>Este es el mensaje y el remitente:</p>
+        <br>
+        <p><strong>Name:</strong> {{ $name }}</p>
+        <p><strong>Email:</strong> {{ $email }}</p>
+        <p><strong>Subject:</strong> {{ $subject }}</p>
+        <p><strong>Message:</strong> {{ $mensaje }}</p> <a type="button" href="{{ url('/') }}" class="button">Ir a Buro Tributario...</a>
+    </div>
 </body>
+
 </html>
