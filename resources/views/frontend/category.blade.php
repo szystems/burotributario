@@ -44,6 +44,7 @@
                         </a>
                         <div class="bg-secondary p-4">
                             <div class="d-flex justify-content-between mb-3">
+                                @if ($numVideos > 0)
                                 <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -53,6 +54,8 @@
                                     @endif
                                     {{ $numVideos }}
                                 </small>
+                                @endif
+                                @if ($numAudios > 0)
                                 <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -62,6 +65,8 @@
                                     @endif
                                     {{ $numAudios }}
                                 </small>
+                                @endif
+                                @if ($numDocuments > 0)
                                 <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -71,6 +76,7 @@
                                     @endif
                                     {{ $numDocuments }}
                                 </small>
+                                @endif
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a><br>
                             <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>

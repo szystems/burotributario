@@ -62,14 +62,15 @@
                             @endforeach
                         </ul>
                     @endif
-                    <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
-                    <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
-                    <a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fa fa-file-pdf text-secondary mr-2"></i>{{ $numDocuments }}</a>
+                    @if ($numVideos > 0) <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a> @endif
+                    @if ($numAudios > 0) <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a> @endif
+                    @if ($numDocuments > 0) <a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fa fa-file-pdf text-secondary mr-2"></i>{{ $numDocuments }}</a> @endif
 
 
 
 
                 </div>
+                @if ($numVideos > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- video List -->
@@ -129,6 +130,8 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+                @if ($numAudios > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- video List -->
@@ -174,6 +177,8 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+                @if ($numDocuments > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- documents List -->
@@ -219,6 +224,8 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+
             </div>
         </div>
     </div>

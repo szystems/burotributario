@@ -61,6 +61,7 @@
                                 </a>
                                 <div class="bg-secondary p-4">
                                     <div class="d-flex justify-content-between mb-3">
+                                        @if ($numVideos > 0)
                                         <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
                                             @if (Auth::check())
                                                 @php
@@ -70,6 +71,8 @@
                                             @endif
                                             {{ $numVideos }}
                                         </small>
+                                        @endif
+                                        @if ($numAudios > 0)
                                         <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
                                             @if (Auth::check())
                                                 @php
@@ -79,6 +82,8 @@
                                             @endif
                                             {{ $numAudios }}
                                         </small>
+                                        @endif
+                                        @if ($numDocuments > 0)
                                         <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
                                             @if (Auth::check())
                                                 @php
@@ -88,6 +93,8 @@
                                             @endif
                                             {{ $numDocuments }}
                                         </small>
+                                        @endif
+
                                     </div>
                                     <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$course->slug) }}">{{ $course->name }}</a><br>
                                     <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>
@@ -148,11 +155,15 @@
                                     $numDocuments = \App\Models\Document::where('course_id', $popular->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($popular->category_course_id);
                                 @endphp
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}" class="text-decoration-none text-dark text-9xl m-0"><small>{{ $popular->name }}</small></a>
-                                    <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
-                                    <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
-                                    <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small>
+                                <li class="list-group-item d-flex justify-content-between px-0">
+                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}" class="text-decoration-none text-dark text-9xl m-0">
+                                        <small>{{ $popular->name }}</small>
+                                    </a>
+                                    <div class="d-flex">
+                                        @if ($numVideos > 0) <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}&nbsp;</small> @endif
+                                        @if ($numAudios > 0) <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}&nbsp;</small> @endif
+                                        @if ($numDocuments > 0) <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small> @endif
+                                    </div>
                                 </li>
                             @endforeach
 
@@ -171,11 +182,15 @@
                                     $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
                                 @endphp
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}" class="text-decoration-none h6 m-0"><small>{{ $last->name }}</small></a>
-                                    <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}</small>
-                                    <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}</small>
-                                    <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small>
+                                <li class="list-group-item d-flex justify-content-between px-0">
+                                    <a href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}" class="text-decoration-none text-dark text-9xl m-0">
+                                        <small>{{ $popular->name }}</small>
+                                    </a>
+                                    <div class="d-flex">
+                                        @if ($numVideos > 0) <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>{{ $numVideos }}&nbsp;</small> @endif
+                                        @if ($numAudios > 0) <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>{{ $numAudios }}&nbsp;</small> @endif
+                                        @if ($numDocuments > 0) <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>{{ $numDocuments }}</small> @endif
+                                    </div>
                                 </li>
                             @endforeach
 

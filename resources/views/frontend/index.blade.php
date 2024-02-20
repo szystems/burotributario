@@ -328,6 +328,7 @@
                         </a>
                         <div class="bg-secondary p-4">
                             <div class="d-flex justify-content-between mb-3">
+                                @if ($numVideos > 0)
                                 <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -337,6 +338,8 @@
                                     @endif
                                     {{ $numVideos }}
                                 </small>
+                                @endif
+                                @if ($numAudios > 0)
                                 <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -346,6 +349,8 @@
                                     @endif
                                     {{ $numAudios }}
                                 </small>
+                                @endif
+                                @if ($numDocuments > 0)
                                 <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
                                     @if (Auth::check())
                                         @php
@@ -355,6 +360,7 @@
                                     @endif
                                     {{ $numDocuments }}
                                 </small>
+                                @endif
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$popular->slug) }}">{{ $popular->name }}</a><br>
                             <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>
@@ -401,33 +407,39 @@
                                     $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
                                     $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
                                 @endphp
-                                <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
-                                    @if (Auth::check())
-                                        @php
-                                            $mediaVideos = \App\Models\MediaVideo::where('course_id', $last->id)->where('user_id', Auth::user()->id)->count()
-                                        @endphp
-                                        <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
-                                    @endif
-                                    {{ $numVideos }}
-                                </small>
-                                <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
-                                    @if (Auth::check())
-                                        @php
-                                            $mediaAudios = \App\Models\MediaAudio::where('course_id', $last->id)->where('user_id', Auth::user()->id)->count()
-                                        @endphp
-                                        <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
-                                    @endif
-                                    {{ $numAudios }}
-                                </small>
-                                <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
-                                    @if (Auth::check())
-                                        @php
-                                            $mediaDocuments = \App\Models\MediaDocument::where('course_id', $popular->id)->where('user_id', Auth::user()->id)->count()
-                                        @endphp
-                                        <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
-                                    @endif
-                                    {{ $numDocuments }}
-                                </small>
+                                @if ($numVideos > 0)
+                                    <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
+                                        @if (Auth::check())
+                                            @php
+                                                $mediaVideos = \App\Models\MediaVideo::where('course_id', $last->id)->where('user_id', Auth::user()->id)->count()
+                                            @endphp
+                                            <font color="green"><b>{{ $mediaVideos }}&nbsp;</b></font>/
+                                        @endif
+                                        {{ $numVideos }}
+                                    </small>
+                                @endif
+                                @if ($numAudios > 0)
+                                    <small class="m-0"><i class="fas fa-podcast text-primary mr-2"></i>
+                                        @if (Auth::check())
+                                            @php
+                                                $mediaAudios = \App\Models\MediaAudio::where('course_id', $last->id)->where('user_id', Auth::user()->id)->count()
+                                            @endphp
+                                            <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
+                                        @endif
+                                        {{ $numAudios }}
+                                    </small>
+                                @endif
+                                @if ($numDocuments > 0)
+                                    <small class="m-0"><i class="fa fa-file-pdf text-primary mr-2"></i>
+                                        @if (Auth::check())
+                                            @php
+                                                $mediaDocuments = \App\Models\MediaDocument::where('course_id', $popular->id)->where('user_id', Auth::user()->id)->count()
+                                            @endphp
+                                            <font color="green"><b>{{ $mediaDocuments }}&nbsp;</b></font>/
+                                        @endif
+                                        {{ $numDocuments }}
+                                    </small>
+                                @endif
                             </div>
                             <a class="h5" href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}">{{ $last->name }}</a><br>
                             <a class="h8" href="{{ url('category/'.$catInfo->slug) }}">{{ $catInfo->name }}</a>

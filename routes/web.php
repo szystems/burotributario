@@ -96,6 +96,14 @@ Route::middleware(['auth'])->group(function () {
 
     });
 
+    //Media Video
+    Route::post('add-media-video', [VideoController::class, 'addmedia']);
+    Route::post('reset-videos', [VideoController::class, 'resetvideo']);
+    //Media Audio
+    Route::post('add-media-audio', [AudioController::class, 'addmedia']);
+    Route::post('reset-audios', [AudioController::class, 'resetaudio']);
+    //Media Document
+    Route::post('reset-documents', [DocumentController::class, 'resetdocument']);
 
 });
 
@@ -156,9 +164,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-video/{id}',[VideoController::class,'edit']);
     Route::put('update-video/{id}', [VideoController::class, 'update']);
     Route::get('delete-video/{id}', [VideoController::class, 'destroy']);
-    //Media Video
-    Route::post('add-media-video', [VideoController::class, 'addmedia']);
-    Route::post('reset-videos', [VideoController::class, 'resetvideo']);
+
 
     //Admin Audio
     Route::get('add-audio/{id}', [AudioController::class, 'add']);
@@ -166,9 +172,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-audio/{id}',[AudioController::class,'edit']);
     Route::put('update-audio/{id}', [AudioController::class, 'update']);
     Route::get('delete-audio/{id}', [AudioController::class, 'destroy']);
-    //Media Audio
-    Route::post('add-media-audio', [AudioController::class, 'addmedia']);
-    Route::post('reset-audios', [AudioController::class, 'resetaudio']);
+
 
     //Admin Document
     Route::get('add-document/{id}', [DocumentController::class, 'add']);
@@ -176,14 +180,17 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('edit-document/{id}',[DocumentController::class,'edit']);
     Route::put('update-document/{id}', [DocumentController::class, 'update']);
     Route::get('delete-document/{id}', [DocumentController::class, 'destroy']);
-    //Media Video
-    Route::post('reset-documents', [DocumentController::class, 'resetdocument']);
+
 
     //config
     Route::get('config', [ConfigController::class, 'index']);
     Route::put('update-config', [ConfigController::class, 'update']);
 
  });
+
+ Route::fallback(function () {
+    return response()->view('frontend.404');
+});
 
 
 
