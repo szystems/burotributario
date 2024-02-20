@@ -6,7 +6,7 @@
     <title>Mensaje desde aplicacion Buro Tributario</title>
 </head>
 <body>
-    <p>$</p>
+    <p>Estos son los datos del remitente: </p>
     <ul>
         <li><b>Nombre:</b> {{ $name }}</li>
         <li><b>Email:</b> {{ $email }})</li>
