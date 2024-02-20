@@ -18,7 +18,7 @@ use App\Models\PaymentPlatform;
 use App\Models\MediaDocument;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Contact;
+use App\Mail\Contacto;
 use Session;
 use DB;
 
@@ -57,16 +57,17 @@ class FrontendController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $subject = $request->input('subject');
-        $contact_message = $request->input('contact_message');
-        $mail_to = 'info@bocacostacoffee.com';
+        $mensaje = $request->input('mensaje');
+
         $config = Config::first();
+        $mail_to = $config->email;
 
-        Mail::to($mail_to)->send(new Contact($name,$email,$subject,$contact_message,$mail_to,$config));
+        Mail::to($mail_to)->send(new Contacto($name,$email,$subject,$mensaje,$mail_to,$config));
 
-        Session::flash('message', 'Thank you for contacting us. We will be in touch soon.');
+        Session::flash('message', 'Gracias por contactarte, pronto nos comunicaremos contigo.');
         Session::flash('alert-class', 'alert-success');
 
-        return view('frontend.contact', compact('config'));
+        return view('frontend.contact', compact('config'))->with('status',"Mensaje enviado.");
     }
 
     public function showcategories()

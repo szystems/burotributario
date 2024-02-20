@@ -66,7 +66,7 @@
                             <input type="text" class="form-control" placeholder="{{ __('Asunto') }}" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="contact_message" cols="30" rows="7" class="form-control" placeholder="{{ __('Mensaje') }}" required></textarea>
+                            <textarea name="mensaje" cols="30" rows="7" class="form-control" placeholder="{{ __('Mensaje') }}" required></textarea>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="{{ __('Enviar Mensaje') }}" class="btn btn-primary py-3 px-5">

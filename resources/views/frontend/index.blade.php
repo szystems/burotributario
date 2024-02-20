@@ -263,7 +263,8 @@
                             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Nosotros</h5>
                             <h1>Expertos en consultoria Tributaria y defensa fiscal</h1>
                         </div>
-                        <p>Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita, ipsum dolores amet voluptua duo dolores et sit ipsum rebum, sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus gubergren sit rebum clita amet, sea est sea vero sed et. Sadipscing labore tempor at sit dolor clita consetetur diam. Diam ut diam tempor no et, lorem dolore invidunt no nonumy stet ea labore, dolor justo et sit gubergren diam sed sed no ipsum. Sit tempor ut nonumy elitr dolores justo aliquyam ipsum stet</p>
+                        <p>Consultores de empresas con más de 10 años de experiencia en el mercado de servicios relacionados con: consultoría tributaria, defensa fiscal, auditoría y otros; atendiendo a clientes de diversas actividades económicas.</p>
+                        <p>La experiencia adquirida nos permite prestar un servicio de primer orden y calidad de los trabajos que realizamos, cuyo objetivo es el oportuno consejo profesional.</p>
                         <a href="{{ url('about') }}" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Ver mas...</a>
                     </div>
                 </div>

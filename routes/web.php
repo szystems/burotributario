@@ -46,6 +46,7 @@ Route::get('courses', [FrontendController::class, 'courses']);
 Route::get('teachers', [FrontendController::class, 'teachers']);
 Route::get('subscribe', [FrontendController::class, 'subscribe']);
 Route::get('contact', [FrontendController::class, 'contact']);
+Route::post('send-contact', [FrontendController::class, 'sendcontact']);
 
 Route::get('categories', [FrontendController::class, 'showcategories']);
 Route::get('category/{slug}', [FrontendController::class, 'showcategorycourses']);
