@@ -646,6 +646,12 @@
                                                                 @include('admin.course.pdfmodal')
                                                             @endif
                                                         </div>
+                                                        <div class="d-flex px-2 py-1">
+                                                            @if ($document->file_pdf)
+
+                                                                <a href="{{ asset('assets/uploads/pdfs/'.$document->file_pdf) }}" type="button" class="btn btn-primary" target="blank__"><i class="material-icons opacity-10">download</i> {{ __('Descargar') }} {{ __('PDF') }}</a>
+                                                            @endif
+                                                        </div>
 
                                                     </td>
                                                     <td class="align-middle text-center text-sm"><strong><textarea readonly class="form-control border px-2" rows="5">{{ $document->description }}</textarea></strong></td>

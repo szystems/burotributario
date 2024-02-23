@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Contacto;
 use Session;
 use DB;
+use Agent;
 
 class FrontendController extends Controller
 {
@@ -181,7 +182,7 @@ class FrontendController extends Controller
         }
     }
 
-    public function showdocument($course_slug, $document_id)
+    public function showdocument(Request $request, $course_slug, $document_id)
     {
         if(Course::where('slug', $course_slug)->where('show',1)->exists())
         {

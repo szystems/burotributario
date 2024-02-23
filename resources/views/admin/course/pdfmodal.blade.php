@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <embed src="{{ asset('assets/uploads/pdfs/'.$document->file_pdf) }}#zoom=100" frameborder="0" width="100%" height="600px">
+                <div id="pdf-container" style="height: calc(100vh - 250px);"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cerrar') }}</button>
@@ -15,3 +15,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.6/pdfobject.min.js"></script>
+<script>
+PDFObject.embed("{{ asset('assets/uploads/pdfs/'.$document->file_pdf.'#zoom=100&toolbar=0&navpanes=0&scrollbar=0') }}", "#pdf-container");
+</script>

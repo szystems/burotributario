@@ -53,9 +53,9 @@
                 <div class="col-lg-12">
                     <hr>
                     <p>{{ $video->description }}</p>
-                    <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a>
-                    <a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a>
-                    <a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fa fa-file-pdf text-secondary mr-2"></i>{{ $numDocuments }}</a>
+                    @if ($numVideos > 0) <a href="#videos" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-video text-secondary mr-2"></i>{{ $numVideos }}</a> @endif
+                    @if ($numAudios > 0)<a href="#audios" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fas fa-podcast text-secondary mr-2"></i>{{ $numAudios }}</a> @endif
+                    @if ($numDocuments > 0)<a href="#documents" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2"><i class="fa fa-file-pdf text-secondary mr-2"></i>{{ $numDocuments }}</a> @endif
 
 
                     @if ($course->file_pdf)
@@ -66,12 +66,13 @@
 
 
                 </div>
+                @if ($numVideos > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- video List -->
                     <div class="mb-5">
-                        <h3 id="myVideo" class="text-uppercase mb-4" style="letter-spacing: 5px;">
-                            <i class="fas fa-video text-primary mr-2"></i> Videos
+                        <h4 id="documents" class="text-uppercase mb-4" style="letter: 5px;"><i class="fas fa-video text-primary mr-2"></i>
+                            <u>Videos</u>
                             (
                             @if (Auth::check())
                                 @php
@@ -120,20 +121,20 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+                @if ($numAudios > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- audio List -->
                     <div class="mb-5">
-                        <h3 id="audios" class="text-uppercase mb-4" style="letter-spacing: 5px;">
-                            <i class="fas fa-podcast text-primary mr-2"></i> Audios
+                        <h4 id="documents" class="text-uppercase mb-4" style="letter: 5px;"><i class="fas fa-podcast text-primary mr-2"></i>
+                            <u>Audios</u>
                             (
                             @if (Auth::check())
                                 @php
-                                    $numAudios = \App\Models\MediaAudio::where('course_id', $course->id)
-                                        ->where('user_id', Auth::user()->id)
-                                        ->count();
+                                    $mediaAudios = \App\Models\MediaAudio::where('course_id', $course->id)->where('user_id', Auth::user()->id)->count()
                                 @endphp
-                                <font color="green"><b>{{ $numAudios }}&nbsp;</b></font>/
+                                <font color="green"><b>{{ $mediaAudios }}&nbsp;</b></font>/
                             @endif
                             {{ $numAudios }}
                             )
@@ -173,6 +174,8 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+                @if ($numDocuments > 0)
                 <div class="col-lg-12">
                     <hr />
                     <!-- documents List -->
@@ -218,6 +221,8 @@
                         </ul>
                     </div>
                 </div>
+                @endif
+
             </div>
         </div>
     </div>

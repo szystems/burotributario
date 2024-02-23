@@ -65,7 +65,7 @@
                                             <td class="align-middle text-center text-sm"><strong><a href="{{ url('show-course-category/'.$course->category_course_id) }}">{{ $categoryinfo->name }}</a></strong></td>
                                             {{-- <td class="align-middle text-center text-sm">{{ $course->description }}</td> --}}
                                             <td class="align-middle text-center text-sm">
-                                                <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }} / <i class="fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }}</p>
+                                                <p class="text-xs text-secondary mb-0"><i class="fas fa-video me-1" aria-hidden="true"></i> {{ $numVideos }} / <i class="	fas fa-podcast me-1" aria-hidden="true"></i> {{ $numAudios }} / <i class="fa fa-file-pdf me-1" aria-hidden="true"></i> {{ $numDocuments }}</p>
                                             </td>
                                             <td class="align-middle text-center text-sm"><strong>
                                                 <span class="badge badge-sm bg-gradient-{{
