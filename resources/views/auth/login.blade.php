@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <!-- Registration End -->
+
 @endsection
 
 <Script>

@@ -273,6 +273,7 @@
         <!-- About End -->
     @endif
 
+    @if ($categories->count() >= 1)
     <!-- Category Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
@@ -304,8 +305,10 @@
         </div>
     </div>
     <!-- Category Start -->
+    @endif
 
 
+    @if ($popularCourses->count() >= 1)
     <!--Popular Courses Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
@@ -383,7 +386,9 @@
         </div>
     </div>
     <!--Popular Courses End -->
+    @endif
 
+    @if ($lastCourses->count() >= 1)
     <!--Last Courses Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
@@ -396,18 +401,19 @@
                 @foreach ($lastCourses as $last)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="rounded overflow-hidden mb-2">
+                        @php
+                            $numVideos = \App\Models\Video::where('course_id', $last->id)->count();
+                            $numAudios = \App\Models\Audio::where('course_id', $last->id)->count();
+                            $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
+                            $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
+                        @endphp
                         <a href="{{ url('show-course/'.$catInfo->slug.'/'.$last->slug) }}">
                             <img class="img-fluid" src="{{ asset('assets/uploads/courses/'.$last->image) }}" alt="">
                         </a>
 
                         <div class="bg-secondary p-4">
                             <div class="d-flex justify-content-between mb-3">
-                                @php
-                                    $numVideos = \App\Models\Video::where('course_id', $last->id)->count();
-                                    $numAudios = \App\Models\Audio::where('course_id', $last->id)->count();
-                                    $numDocuments = \App\Models\Document::where('course_id', $last->id)->count();
-                                    $catInfo = \App\Models\CategoryCourse::find($last->category_course_id);
-                                @endphp
+
                                 @if ($numVideos > 0)
                                     <small class="m-0"><i class="fas fa-video text-primary mr-2"></i>
                                         @if (Auth::check())
@@ -462,6 +468,8 @@
         </div>
     </div>
     <!--Last Courses End -->
+    @endif
+
 
 
     <Script>

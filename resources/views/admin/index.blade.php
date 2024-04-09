@@ -312,7 +312,7 @@
                             <div class="card-header pb-0">
                                 <div class="row">
                                     <div class="col-lg-12 col-7">
-                                        <h5>{{ __('Videos mas vistos') }}</h5>
+                                        <h5>{{ __('Videos mas vistos') }} ({{ $videosMasVistos->count() }})</h5>
                                         <hr class="horizontal dark my-3">
                                     </div>
                                 </div>
@@ -330,24 +330,38 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach ($videosMasVistos as $vistos)
-                                                <tr>
-
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                @php
-                                                                    $video = \App\Models\Video::find($vistos->video_id);
-                                                                    $curso = \App\Models\Course::find($vistos->course_id);
-                                                                @endphp
-                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $video->name }} ({{ $vistos->total_visualizaciones }})</a></h6>
-
-                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $curso->name }}</a> </span>
+                                            @if ($videosMasVistos->count() > 0)
+                                                @foreach ($videosMasVistos as $vistos)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    @php
+                                                                        $video = \App\Models\Video::find($vistos->video_id);
+                                                                        $curso = \App\Models\Course::find($vistos->course_id);
+                                                                    @endphp
+                                                                    @if ($video && $curso)
+                                                                        <h6 class="mb-0 text-sm">
+                                                                            <a href="{{ url('show-course/'.$vistos->course_id) }}">
+                                                                                {{ $video->name }} ({{ $vistos->total_visualizaciones }})
+                                                                            </a>
+                                                                        </h6>
+                                                                        <span class="text-xs font-weight">
+                                                                            <a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $curso->name }}</a>
+                                                                        </span>
+                                                                    @else
+                                                                        <!-- Manejo de caso cuando no se encuentran los objetos -->
+                                                                        <!-- Puedes mostrar un mensaje de error o simplemente omitir esta fila -->
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr><td>No se encontraron resultados.</td></tr>
+                                            @endif
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -379,24 +393,39 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach ($audiosMasEscuchados as $escuchados)
-                                                <tr>
-
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                @php
-                                                                    $audio = \App\Models\Audio::find($escuchados->audio_id);
-                                                                    $curso = \App\Models\Course::find($escuchados->course_id);
-                                                                @endphp
-                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$escuchados->course_id) }}">{{ $audio->name }}</a></h6>
-
-                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$escuchados->course_id) }}">{{ $curso->name }} ({{ $escuchados->total_escuchas }})</a> </span>
+                                            @if ($audiosMasEscuchados->count() > 0)
+                                                @foreach ($audiosMasEscuchados as $escuchados)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    @php
+                                                                        $audio = \App\Models\Audio::find($escuchados->audio_id);
+                                                                        $curso = \App\Models\Course::find($escuchados->course_id);
+                                                                    @endphp
+                                                                    @if ($audio && $curso)
+                                                                        <h6 class="mb-0 text-sm">
+                                                                            <a href="{{ url('show-course/'.$escuchados->course_id) }}">
+                                                                                {{ $audio->name }} ({{ $escuchados->total_visualizaciones }})
+                                                                            </a>
+                                                                        </h6>
+                                                                        <span class="text-xs font-weight">
+                                                                            <a href="{{ url('show-course/'.$vistos->course_id) }}">{{ $curso->name }}</a>
+                                                                        </span>
+                                                                    @else
+                                                                        <!-- Manejo de caso cuando no se encuentran los objetos -->
+                                                                        <!-- Puedes mostrar un mensaje de error o simplemente omitir esta fila -->
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr><td>No se encontraron resultados.</td></tr>
+                                            @endif
+
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -428,24 +457,40 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach ($documentosMasVistos as $docsvistos)
-                                                <tr>
-
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                @php
-                                                                    $documento = \App\Models\Document::find($docsvistos->document_id);
-                                                                    $curso = \App\Models\Course::find($docsvistos->course_id);
-                                                                @endphp
-                                                                <h6 class="mb-0 text-sm"><a href="{{ url('show-course/'.$docsvistos->course_id) }}">{{ $documento->name }}</a></h6>
-
-                                                                <span class="text-xs font-weight"> <a href="{{ url('show-course/'.$docsvistos->course_id) }}">{{ $curso->name }} ({{ $docsvistos->total_vistas }})</a> </span>
+                                            @if ($documentosMasVistos->count() > 0)
+                                                @foreach ($documentosMasVistos as $docsvistos)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                    @php
+                                                                        $documento = \App\Models\Document::find($docsvistos->document_id);
+                                                                        $curso = \App\Models\Course::find($docsvistos->course_id);
+                                                                    @endphp
+                                                                    @if ($documento && $curso)
+                                                                        <h6 class="mb-0 text-sm">
+                                                                            <a href="{{ url('show-course/'.$docsvistos->course_id) }}">
+                                                                                {{ $documento->name }} ({{ $docsvistos->total_visualizaciones }})
+                                                                            </a>
+                                                                        </h6>
+                                                                        <span class="text-xs font-weight">
+                                                                            <a href="{{ url('show-course/'.$docsvistos->course_id) }}">{{ $curso->name }}</a>
+                                                                        </span>
+                                                                    @else
+                                                                        <!-- Manejo de caso cuando no se encuentran los objetos -->
+                                                                        <!-- Puedes mostrar un mensaje de error o simplemente omitir esta fila -->
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr><td>No se encontraron resultados.</td></tr>
+                                            @endif
+
+                                            
+                                            
                                         </tbody>
                                     </table>
                                 </div>
